@@ -20,8 +20,7 @@ public class DAOCliente {
     public DAOCliente() {
         entityManager = getEntityManager();
     }
-    
- 
+     
     /**
      * Verificando se já existe a conexão com o banco
      * @return
@@ -41,6 +40,7 @@ public class DAOCliente {
      * @param id
      * @return
      */
+  
     public Cliente getById(final Integer id) {
         return entityManager.find(Cliente.class, id);
     }
@@ -105,6 +105,7 @@ public class DAOCliente {
      * Removendo pelo ID
      * @param id
      */
+    
     public void removeById(final Integer id) {
         try {
             Cliente Cliente = getById(id);
