@@ -1,5 +1,7 @@
 package com.vendas.fachada;
 
+import java.util.List;
+
 import com.vendas.basicas.Cliente;
 import com.vendas.basicas.Endereco;
 import com.vendas.negocio.NCliente;
@@ -18,4 +20,19 @@ public class FCliente {
 		return nc.consultar(id);
 		
 	}
+	
+	public void excluir(Cliente cliente){
+		nc.excluir(cliente);
+	}
+	
+	public List<Cliente> listar() {
+	
+		return nc.listar();
+	}
+	
+	public void alterar(Cliente cliente){
+		
+		nc.alterar(cliente);		
+	}
+	
 }

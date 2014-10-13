@@ -34,7 +34,7 @@ public class Main {
 		Cliente c1 = new Cliente();
 		c1.setCpf("174.477.122-98");
 		c1.setEmail("c1@gmail.com");
-		c1.setNome("Primeiro Cliente");
+		c1.setNome("Alterado 3 Cliente");
 		c1.setTelefone("8288-6633");
 		
 		//Cadastrar Endere�o
@@ -106,17 +106,34 @@ public class Main {
 			 * Cadastrar Cliente
 			 */
 			
-			 fcliente.cadastrar(c1); 
+			// fcliente.cadastrar(c1); 
 			
 			/**
 			   * Cadastrar Endere�o
 			  */
-			 fendereco.cadastrar(e1);
+			// fendereco.cadastrar(e1);
+		   
 			
+			Cliente cliente_excluir = new Cliente();
+			/*cliente_excluir.setId(1);
+			fcliente.excluir(cliente_excluir);
+			*/
+			
+			//Listando os clientes -- ok
+			for(Cliente pe : fcliente.listar()){
+	            System.out.println(pe.getId());
+	            System.out.println(pe.getNome());
+	            System.out.println();
+	        }
+			//Consultando por Id -- ok
+			System.out.println(fcliente.consultar(3).getEmail());
+			
+			//Alterar Cliente -- Inserindo 2 endereços
+			fcliente.alterar(c1);
 			
 			
 			/**
-			 * Consultar Cliente	
+			 * Consultar Cliente  -- ok	
 			 */
 			//Cliente cliConsulta = fcliente.consultar(1);
 			//System.out.println(cliConsulta.getNome());
