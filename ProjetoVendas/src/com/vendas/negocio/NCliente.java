@@ -14,12 +14,13 @@ public class NCliente {
 	public void cadastrar(Cliente cliente) throws Exception{
 		
 		
-		daoc.persist(cliente);
+		daoc.cadastrar(cliente);
+	
 	}
 
 	public Cliente consultar(Integer id) {
 		
-		return daoc.getById(id);
+		return daoc.consultarPorId(id);
 	}
 	
 }
