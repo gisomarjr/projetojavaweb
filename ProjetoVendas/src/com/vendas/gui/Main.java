@@ -11,12 +11,14 @@ import javax.persistence.Persistence;
 import com.vendas.basicas.Cliente;
 import com.vendas.basicas.Endereco;
 import com.vendas.basicas.Fornecedor;
+import com.vendas.basicas.Funcionario;
 import com.vendas.basicas.Loja;
 import com.vendas.basicas.Pessoa;
 import com.vendas.basicas.Produto;
 import com.vendas.fachada.FCliente;
 import com.vendas.fachada.FEndereco;
 import com.vendas.fachada.FFornecedor;
+import com.vendas.fachada.FFuncionario;
 import com.vendas.fachada.FLoja;
 
 public class Main {
@@ -35,6 +37,15 @@ public class Main {
 		c1.setEmail("c1@gmail.com");
 		c1.setNome("Alterado 3 Cliente");
 		c1.setTelefone("8288-6633");
+		
+		//Cadastrar Funcionario
+		Funcionario func = new Funcionario();
+		func.setCpf("878987987987");
+		func.setEmail("meu email@mdfasd.com");
+		func.setMatricula("1414");
+		func.setNome("Nome do Funcionario");
+		func.setTelefone("8748787878");
+		
 		
 		//Cadastrar Endere�o
 		Endereco e1 = new Endereco();
@@ -56,7 +67,11 @@ public class Main {
 		
 		 e1.setClientes(c1);
 		 e2.setClientes(c1);
-			
+		 
+		
+		 e2.setFuncionario(func);
+		 func.setEndereco(e2);	
+		 
 		catalogo_endereco.add(e1);
 		catalogo_endereco.add(e2);
 		
@@ -68,19 +83,26 @@ public class Main {
 		FFornecedor ffornecedor = new FFornecedor();
 		FLoja floja = new FLoja();
 		FEndereco fendereco = new FEndereco();
+		FFuncionario ffuncionario = new FFuncionario();
 		try {
 			
 			/**
 			 * Cadastrar Cliente
 			 */
 			
-			fcliente.cadastrar(c1);
+			//fcliente.cadastrar(c1);
 			
 			/**
-			   * Cadastrar Endere�o
-			  */
+			 * Cadastrar Funcionario
+			 */
 			
+			
+			ffuncionario.cadastrar(func);
+			/**
+			  * Cadastrar Endere�o
+			  */
 			fendereco.cadastrar(e1);
+			
 			
 			Cliente cliente_excluir = new Cliente();
 			/*cliente_excluir.setId(1);
