@@ -63,34 +63,6 @@ public class Main {
 	    c1.setEndereco(catalogo_endereco);
 		
 		
-		//Cadastro de Fornecedor
-		
-		Fornecedor f1 = new Fornecedor();
-		f1.setCnpj("24.566.440/0001-79");
-		f1.setNomeFantasia("FACEPE");
-		f1.setRazaoSocial("Funda��o de ci�ncia e Tecnologia");
-		
-		//Cadastro de Produtos
-		Produto p1 = new Produto();
-		p1.setFornecedor(f1);
-		p1.setData_vencimento(null);
-		p1.setDescricao("Computador Pessoal");
-		p1.setNome("Computaador ACER");
-		p1.setPreco_produto(987.00);
-		
-		f1.setProdutos(lista_produtos);
-		
-		//Cadastrar Loja
-		Loja l1 = new Loja();
-		l1.setCnpj("89989898989");
-		l1.setEmail("loja@gmail.com");
-		
-		l1.setNome("Loja");
-		l1.setRazao_social("lojas minha");
-		l1.setTelefone_comercial("818777-9855");
-		
-		//Erro no endere�o -- Ele n�o leva o id_endereco
-		l1.setEndereco(e1);
 		
 		FCliente fcliente = new FCliente();
 		FFornecedor ffornecedor = new FFornecedor();
