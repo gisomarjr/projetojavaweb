@@ -25,8 +25,7 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		
+				
 		Collection<Endereco> catalogo_endereco = new ArrayList<Endereco>();
 		Collection<Produto> lista_produtos = new ArrayList<Produto>();
 	
@@ -57,8 +56,6 @@ public class Main {
 		
 		catalogo_endereco.add(e1);
 		catalogo_endereco.add(e2);
-		
-		
 		
 		
 		e1.setClientes(c1);
@@ -106,13 +103,13 @@ public class Main {
 			 * Cadastrar Cliente
 			 */
 			
-			// fcliente.cadastrar(c1); 
+			 
 			
 			/**
 			   * Cadastrar Endere�o
 			  */
-			// fendereco.cadastrar(e1);
-		   
+			 fendereco.cadastrar(e1);
+			 fcliente.cadastrar(c1);
 			
 			Cliente cliente_excluir = new Cliente();
 			/*cliente_excluir.setId(1);
@@ -120,7 +117,7 @@ public class Main {
 			*/
 			
 			//Listando os clientes -- ok
-			for(Cliente pe : fcliente.listar()){
+		/*	for(Cliente pe : fcliente.listar()){
 	            System.out.println(pe.getId());
 	            System.out.println(pe.getNome());
 	            System.out.println();
