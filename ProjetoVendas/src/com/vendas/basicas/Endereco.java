@@ -58,8 +58,7 @@ public class Endereco {
 	}
 
 	// dominante
-	@ManyToOne(fetch = FetchType.EAGER)
-	@Cascade(CascadeType.PERSIST)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_cliente", insertable = true, updatable = true)
 	@Fetch(FetchMode.JOIN)
 	Cliente cliente;

@@ -59,8 +59,8 @@ public class DAOCliente implements ICliente{
             entityManager.persist(cliente);
             entityManager.getTransaction().commit();
         } catch (Exception ex) {
-            ex.printStackTrace();
-            entityManager.getTransaction().rollback();
+            //ex.printStackTrace();
+           // entityManager.getTransaction().rollback();
         }
 		
 	}

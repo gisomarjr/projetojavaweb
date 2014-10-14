@@ -19,7 +19,7 @@ import org.hibernate.annotations.FetchMode;
 @DiscriminatorValue("CLI")
 public class Cliente extends Pessoa {
 
-	@OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "cliente", fetch = FetchType.EAGER)
 	@Cascade(CascadeType.PERSIST)
 	Collection<Endereco> endereco;
 

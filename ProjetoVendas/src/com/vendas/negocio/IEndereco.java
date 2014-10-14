@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 
 
+import java.util.List;
+
 import com.vendas.basicas.Cliente;
 import com.vendas.basicas.Endereco;
 
@@ -14,6 +16,6 @@ public interface IEndereco {
 	public void editar(Endereco endereco);
 	public void excluir(Endereco endereco);
 	public Endereco consultarPorId(Integer id);
-	public ArrayList<Endereco> listar();
+	public List<Endereco> listar();
 	
 }

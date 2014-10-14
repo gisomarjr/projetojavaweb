@@ -1,6 +1,7 @@
 package com.vendas.dao;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -16,43 +17,91 @@ import com.vendas.negocio.IFornecedor;
 
 public class DAOEndereco implements IEndereco  {
 
-	EntityManagerFactory emf = Persistence.createEntityManagerFactory("mysql");
-	
-	EntityManager em = emf.createEntityManager();
+	protected EntityManager entityManager;
+	 
+	/**
+	 * Construtor para pegar o EntityManager
+	 */
+    public DAOEndereco() {
+        entityManager = getEntityManager();
+    }
 
-	EntityTransaction et = em.getTransaction();
-
+    /**
+     * Verificando se já existe a conexão com o banco
+     * @return
+     */
+    private EntityManager getEntityManager() {
+        EntityManagerFactory factory = Persistence
+                .createEntityManagerFactory("mysql");
+        if (entityManager == null) {
+            entityManager = factory.createEntityManager();
+        }
+ 
+        return entityManager;
+    }
+    
+    /**
+     * Removendo pelo ID
+     * @param id
+     */
+    
+    public void removeById(final Integer id) {
+        try {
+            Endereco endereco = consultarPorId(id);
+            excluir(endereco);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+    
 	public void cadastrar(Endereco endereco) throws Exception {
-		try{	
-			et.begin();
-			em.persist(endereco);
-			et.commit();
-			emf.close();
-			em.close(); 
-			
-		}catch(Exception e){
-			throw new Exception("N�o foi poss�vel Inserir os dados (Endereco)");
-		}
+		
+		try {
+            entityManager.getTransaction().begin();
+            entityManager.persist(endereco);
+            entityManager.getTransaction().commit();
+        } catch (Exception ex) {
+          //  ex.printStackTrace();
+           // entityManager.getTransaction().rollback();
+        }
 	}
 
 	public void editar(Endereco endereco) {
-		// TODO Auto-generated method stub
+		 try {
+	            entityManager.getTransaction().begin();
+	            entityManager.merge(endereco);
+	            entityManager.getTransaction().commit();
+	        } catch (Exception ex) {
+	            ex.printStackTrace();
+	            entityManager.getTransaction().rollback();
+	        }
 		
 	}
 
 	public void excluir(Endereco endereco) {
-		// TODO Auto-generated method stub
+
+		 try {
+	            entityManager.getTransaction().begin();
+	            endereco = entityManager.find(Endereco.class, endereco.getId());
+	            entityManager.remove(endereco);
+	            entityManager.getTransaction().commit();
+	        } catch (Exception ex) {
+	            ex.printStackTrace();
+	            entityManager.getTransaction().rollback();
+	        }
 		
 	}
 
 	public Endereco consultarPorId(Integer id) {
 		
-		return em.find(Endereco.class, id);
+		return entityManager.find(Endereco.class, id);
+		
 	}
 
-	public ArrayList<Endereco> listar() {
-		// TODO Auto-generated method stub
-		return null;
+	@SuppressWarnings("unchecked")
+	public List<Endereco> listar() {
+		return (ArrayList<Endereco>) entityManager.createQuery("FROM " + Endereco.class.getName()).getResultList();
+
 	}
 
 	

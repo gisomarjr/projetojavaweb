@@ -54,14 +54,13 @@ public class Main {
 		e2.setLogradouro("Não é minha casa");
 		e2.setNumero(85);
 		
+		 e1.setClientes(c1);
+		 e2.setClientes(c1);
+			
 		catalogo_endereco.add(e1);
 		catalogo_endereco.add(e2);
 		
-		
-		e1.setClientes(c1);
-		e2.setClientes(c1);
-		
-		c1.setEndereco(catalogo_endereco);
+	    c1.setEndereco(catalogo_endereco);
 		
 		
 		//Cadastro de Fornecedor
@@ -103,13 +102,13 @@ public class Main {
 			 * Cadastrar Cliente
 			 */
 			
-			 
+			fcliente.cadastrar(c1);
 			
 			/**
 			   * Cadastrar Endere�o
 			  */
-			 fendereco.cadastrar(e1);
-			 fcliente.cadastrar(c1);
+			
+			fendereco.cadastrar(e1);
 			
 			Cliente cliente_excluir = new Cliente();
 			/*cliente_excluir.setId(1);
