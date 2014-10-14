@@ -24,7 +24,6 @@ public class Endereco {
 
 	@Id
 	@GeneratedValue
-	@Column(name = "id_endereco")
 	Integer id;
 
 	String logradouro;

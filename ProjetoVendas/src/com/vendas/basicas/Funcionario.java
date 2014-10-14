@@ -20,7 +20,7 @@ public class Funcionario extends Pessoa {
 	String matricula;
 	
 	@OneToOne
-	@JoinColumn(name="id_endereco")
+	@JoinColumn(name="id_endereco_fun")
 	Endereco endereco;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
