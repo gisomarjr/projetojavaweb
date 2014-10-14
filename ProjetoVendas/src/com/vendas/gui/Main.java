@@ -129,7 +129,7 @@ public class Main {
 			System.out.println(fcliente.consultar(3).getEmail());
 			
 			//Alterar Cliente -- Inserindo 2 endereços
-			fcliente.alterar(c1);
+			//fcliente.alterar(c1);
 			
 			
 			/**
