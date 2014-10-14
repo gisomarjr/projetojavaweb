@@ -61,8 +61,7 @@ public class DAOEndereco implements IEndereco  {
             entityManager.persist(endereco);
             entityManager.getTransaction().commit();
         } catch (Exception ex) {
-          //  ex.printStackTrace();
-           // entityManager.getTransaction().rollback();
+           
         }
 	}
 

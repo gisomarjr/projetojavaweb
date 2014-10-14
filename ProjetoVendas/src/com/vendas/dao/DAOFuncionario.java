@@ -61,8 +61,7 @@ public class DAOFuncionario implements IFuncionario {
             entityManager.persist(funcionario);
             entityManager.getTransaction().commit();
         } catch (Exception ex) {
-        	ex.printStackTrace();
-            entityManager.getTransaction().rollback();
+        	
         }
 	}
 

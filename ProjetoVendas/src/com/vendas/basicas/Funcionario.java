@@ -21,8 +21,8 @@ public class Funcionario extends Pessoa {
 
 	String matricula;
 	
-	@OneToOne
-	@JoinColumn(name="id_endereco_fun")
+	@OneToOne(mappedBy="funcionario")
+	@Cascade(CascadeType.ALL)
 	Endereco endereco;
 	
 	@ManyToOne(fetch = FetchType.EAGER)

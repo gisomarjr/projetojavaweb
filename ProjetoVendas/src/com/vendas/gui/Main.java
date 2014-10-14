@@ -66,7 +66,7 @@ public class Main {
 		e2.setNumero(85);
 		
 		 e1.setClientes(c1);
-		 e2.setClientes(c1);
+		// e2.setClientes(c1);
 		 
 		
 		 e2.setFuncionario(func);
@@ -102,7 +102,7 @@ public class Main {
 			  * Cadastrar Endere�o
 			  */
 			fendereco.cadastrar(e1);
-			
+
 			
 			Cliente cliente_excluir = new Cliente();
 			/*cliente_excluir.setId(1);
