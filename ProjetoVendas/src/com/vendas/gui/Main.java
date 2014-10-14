@@ -66,11 +66,13 @@ public class Main {
 		e2.setNumero(85);
 		
 		 e1.setClientes(c1);
-		// e2.setClientes(c1);
+		 e2.setClientes(c1);
 		 
 		
-		 e2.setFuncionario(func);
-		 func.setEndereco(e2);	
+		// e2.setFuncionario(func);
+		
+		// func.setEndereco(e2);	
+		 
 		 
 		catalogo_endereco.add(e1);
 		catalogo_endereco.add(e2);
@@ -90,22 +92,22 @@ public class Main {
 			 * Cadastrar Cliente
 			 */
 			
-			//fcliente.cadastrar(c1);
+			fcliente.cadastrar(c1);
 			
 			/**
 			 * Cadastrar Funcionario
 			 */
 			
 			
-			ffuncionario.cadastrar(func);
+			//ffuncionario.cadastrar(func);
 			/**
 			  * Cadastrar Endere�o
 			  */
 			fendereco.cadastrar(e1);
 
 			
-			Cliente cliente_excluir = new Cliente();
-			/*cliente_excluir.setId(1);
+		/*	Cliente cliente_excluir = new Cliente();
+			cliente_excluir.setId(1);
 			fcliente.excluir(cliente_excluir);
 			*/
 			

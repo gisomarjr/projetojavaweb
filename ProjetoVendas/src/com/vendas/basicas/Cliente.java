@@ -20,7 +20,7 @@ import org.hibernate.annotations.FetchMode;
 public class Cliente extends Pessoa {
 
 	@OneToMany(mappedBy = "cliente", fetch = FetchType.EAGER)
-	@Cascade(CascadeType.PERSIST)
+	@Cascade(CascadeType.ALL)
 	Collection<Endereco> endereco;
 
 	@OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY)
