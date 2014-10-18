@@ -6,6 +6,8 @@ import java.util.ArrayList;
 
 
 
+import java.util.List;
+
 import com.vendas.basicas.Cliente;
 import com.vendas.basicas.Endereco;
 import com.vendas.basicas.Fornecedor;
@@ -16,6 +18,6 @@ public interface IFornecedor {
 	public void editar(Fornecedor fornecedor);
 	public void excluir(Fornecedor fornecedor);
 	public Fornecedor consultarPorId(Integer id);
-	public ArrayList<Fornecedor> listar();
+	public List<Fornecedor> listar();
 	
 }
