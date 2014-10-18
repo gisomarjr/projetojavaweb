@@ -13,15 +13,17 @@ import com.vendas.basicas.Endereco;
 import com.vendas.basicas.Fornecedor;
 import com.vendas.negocio.ICliente;
 import com.vendas.negocio.IFornecedor;
+import com.vendas.negocio.IPedido;
+import com.vendas.basicas.Pedido;
 
-public class DAOFornecedor implements IFornecedor  {
+public class DAOPedido implements IPedido  {
 
 	protected EntityManager entityManager;
 	 
 	/**
 	 * Construtor para pegar o EntityManager
 	 */
-    public DAOFornecedor() {
+    public DAOPedido() {
         entityManager = getEntityManager();
     }
      
@@ -47,18 +49,18 @@ public class DAOFornecedor implements IFornecedor  {
     
     public void removeById(final Integer id) {
         try {
-            Fornecedor fornecedor = consultarPorId(id);
-            excluir(fornecedor);
+        	Pedido pedido = consultarPorId(id);
+            excluir(pedido);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
 
 	@Override
-	public void cadastrar(Fornecedor fornecedor) throws Exception {
+	public void cadastrar(Pedido pedido) throws Exception {
 		try {
             entityManager.getTransaction().begin();
-            entityManager.persist(fornecedor);
+            entityManager.persist(pedido);
             entityManager.getTransaction().commit();
         } catch (Exception ex) {
             //ex.printStackTrace();
@@ -68,10 +70,10 @@ public class DAOFornecedor implements IFornecedor  {
 	}
 
 	@Override
-	public void editar(Fornecedor fornecedor) {
+	public void editar(Pedido pedido) {
 		  try {
 	            entityManager.getTransaction().begin();
-	            entityManager.merge(fornecedor);
+	            entityManager.merge(pedido);
 	            entityManager.getTransaction().commit();
 	        } catch (Exception ex) {
 	            ex.printStackTrace();
@@ -81,11 +83,11 @@ public class DAOFornecedor implements IFornecedor  {
 	}
 
 	@Override
-	public void excluir(Fornecedor fornecedor) {
+	public void excluir(Pedido pedido) {
 		 try {
 	            entityManager.getTransaction().begin();
-	            fornecedor = entityManager.find(Fornecedor.class, fornecedor.getId());
-	            entityManager.remove(fornecedor);
+	            pedido = entityManager.find(Pedido.class, pedido.getId());
+	            entityManager.remove(pedido);
 	            entityManager.getTransaction().commit();
 	        } catch (Exception ex) {
 	            ex.printStackTrace();
@@ -95,13 +97,13 @@ public class DAOFornecedor implements IFornecedor  {
 	}
 
 	@Override
-	public Fornecedor consultarPorId(Integer id) {
-		  return entityManager.find(Fornecedor.class, id);
+	public Pedido consultarPorId(Integer id) {
+		  return entityManager.find(Pedido.class, id);
 	}
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public List<Fornecedor> listar() {
-		return entityManager.createQuery("FROM " + Fornecedor.class.getName()).getResultList();
+	public List<Pedido> listar() {
+		return entityManager.createQuery("FROM " + Pedido.class.getName()).getResultList();
 	}
 }
