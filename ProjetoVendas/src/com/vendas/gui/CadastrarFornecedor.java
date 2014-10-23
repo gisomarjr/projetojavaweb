@@ -8,10 +8,12 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextPane;
 import javax.swing.JTextField;
 import javax.swing.JFormattedTextField;
 import javax.swing.JButton;
+import javax.swing.SwingUtilities;
 
 import com.vendas.basicas.Fornecedor;
 import com.vendas.fachada.FFornecedor;
@@ -19,13 +21,19 @@ import com.vendas.fachada.FFornecedor;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+import javax.swing.JProgressBar;
+
 public class CadastrarFornecedor extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textRazaoSocial;
 	private JTextField textNomeFantasia;
 	ImageIcon loading = new ImageIcon("loading.gif");
-	JLabel lblNewLabel = new JLabel("Loading... ", loading, JLabel.CENTER);
+	JLabel lblCarregando = new JLabel("Loading... ", loading, JLabel.CENTER);
+	JProgressBar progressBar = new JProgressBar();
+	final JButton btnSalvar = new JButton("Salvar");
+	final JFormattedTextField cnpj = new JFormattedTextField();
+	
 	
 	/**
 	 * Launch the application.
@@ -44,7 +52,7 @@ public class CadastrarFornecedor extends JFrame {
 		});
 	}
 	 
-	 final JLabel label = new JLabel("Loading... ", loading, JLabel.CENTER);
+	 final JLabel label = new JLabel("Validando Fornecedor... ", loading, JLabel.CENTER);
 	/**
 	 * Create the frame.
 	 */
@@ -82,21 +90,30 @@ public class CadastrarFornecedor extends JFrame {
 		lblCnpj.setBounds(61, 132, 34, 29);
 		contentPane.add(lblCnpj);
 		
-		final JFormattedTextField cnpj = new JFormattedTextField();
+		
 		cnpj.setBounds(105, 136, 124, 20);
 		contentPane.add(cnpj);
 		
-		JButton btnSalvar = new JButton("Salvar");
+		
 		
 		btnSalvar.setBounds(294, 222, 130, 29);
 		contentPane.add(btnSalvar);
 		
 		
-		lblNewLabel.setBounds(71, 173, 55, 16);
-		contentPane.add(lblNewLabel);
-		lblNewLabel.setVisible(false);
+		lblCarregando.setBounds(46, 173, 378, 16);
+		contentPane.add(lblCarregando);
+		
+		
+		progressBar.setBounds(168, 201, 148, 14);
+		progressBar.setIndeterminate(true);
+		progressBar.setVisible(false);
+		contentPane.add(progressBar);
+		
+		lblCarregando.setVisible(false);
+		
+		
+		
 		btnSalvar.addActionListener(new ActionListener() {
-			
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -105,7 +122,9 @@ public class CadastrarFornecedor extends JFrame {
 				new Thread(){
 					@Override
 					public void run() {
-						lblNewLabel.setVisible(true);
+						lblCarregando.setVisible(true);
+						progressBar.setVisible(true);
+						btnSalvar.setEnabled(false);
 						Fornecedor fornecedor = new Fornecedor();
 						fornecedor.setCnpj(cnpj.getText());
 						fornecedor.setNomeFantasia(textNomeFantasia.getText());
@@ -115,22 +134,33 @@ public class CadastrarFornecedor extends JFrame {
 						try {
 							
 							fachada_fornecedor.cadastrar(fornecedor);
-							
+							updateProgress();
+							JOptionPane.showMessageDialog(null,"Fornecedor Cadastrado com Sucesso!");
 						} catch (Exception e) {
-							System.out.println(e.getMessage());
+							JOptionPane.showMessageDialog(null,e.getMessage());
 						}
 						
 					}
 				}.start();
 				
-				
-				
 			}
-			
-			
 		});
-		
-		lblNewLabel.setVisible(false);
-		
 	}
+	
+	private void updateProgress() {
+		  SwingUtilities.invokeLater(new Runnable() {
+		    public void run() {
+		      // Here, we can safely update the GUI
+		      // because we'll be called from the
+		      // event dispatch thread
+		    	lblCarregando.setVisible(false);
+				progressBar.setVisible(false);
+				btnSalvar.setEnabled(true);
+				cnpj.setText("");
+				textNomeFantasia.setText("");
+				textRazaoSocial.setText("");
+				
+		    }
+		  });
+		}
 }
