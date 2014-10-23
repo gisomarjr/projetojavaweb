@@ -11,12 +11,19 @@ public class FFornecedor {
 	
 	public void cadastrar(Fornecedor fornecedor) throws Exception{
 		
-		nf.cadastrar(fornecedor);
+		
+		   nf.cadastrar(fornecedor);
+		
 	}
 
 	public Fornecedor consultar(Integer id) {
 		
 		return nf.consultar(id);
 		
+	}
+	
+	public String validaCampo(Fornecedor fornecedor){
+		
+		return nf.validaCampos(fornecedor);
 	}
 }

@@ -29,10 +29,11 @@ public class CadastrarFornecedor extends JFrame {
 	private JTextField textRazaoSocial;
 	private JTextField textNomeFantasia;
 	ImageIcon loading = new ImageIcon("loading.gif");
-	JLabel lblCarregando = new JLabel("Loading... ", loading, JLabel.CENTER);
+	JLabel lblCarregando = new JLabel("Validando Fornecedor... ", loading, JLabel.CENTER);
 	JProgressBar progressBar = new JProgressBar();
 	final JButton btnSalvar = new JButton("Salvar");
 	final JFormattedTextField cnpj = new JFormattedTextField();
+	String status;
 	
 	
 	/**
@@ -132,10 +133,22 @@ public class CadastrarFornecedor extends JFrame {
 						
 						FFornecedor fachada_fornecedor = new FFornecedor();
 						try {
+							status = fachada_fornecedor.validaCampo(fornecedor);
 							
-							fachada_fornecedor.cadastrar(fornecedor);
+							if(status == ""){
+					         fachada_fornecedor.cadastrar(fornecedor);
+					         status = "Fornecedor Cadastrado com Sucesso!";
+					         JOptionPane.showMessageDialog(null,status);
+					         cnpj.setText("");
+							 textNomeFantasia.setText("");
+							 textRazaoSocial.setText("");
+							 
+							}else{
+								JOptionPane.showMessageDialog(null,status);
+								
+							}
 							updateProgress();
-							JOptionPane.showMessageDialog(null,"Fornecedor Cadastrado com Sucesso!");
+							
 						} catch (Exception e) {
 							JOptionPane.showMessageDialog(null,e.getMessage());
 						}
@@ -156,9 +169,7 @@ public class CadastrarFornecedor extends JFrame {
 		    	lblCarregando.setVisible(false);
 				progressBar.setVisible(false);
 				btnSalvar.setEnabled(true);
-				cnpj.setText("");
-				textNomeFantasia.setText("");
-				textRazaoSocial.setText("");
+				
 				
 		    }
 		  });
