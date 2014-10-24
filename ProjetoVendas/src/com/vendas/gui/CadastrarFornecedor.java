@@ -69,7 +69,7 @@ public class CadastrarFornecedor extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		  setLocation((tela.width-this.getSize().width)/2,   
                   (tela.height-this.getSize().height)/2);
-		  
+		   
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
