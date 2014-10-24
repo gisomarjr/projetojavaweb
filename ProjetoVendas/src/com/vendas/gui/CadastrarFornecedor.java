@@ -1,7 +1,9 @@
 package com.vendas.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -61,7 +63,13 @@ public class CadastrarFornecedor extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
+		
+		//Tela centralizada
+		Dimension tela = Toolkit.getDefaultToolkit().getScreenSize();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		  setLocation((tela.width-this.getSize().width)/2,   
+                  (tela.height-this.getSize().height)/2);
+		  
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
@@ -101,11 +109,11 @@ public class CadastrarFornecedor extends JFrame {
 		contentPane.add(btnSalvar);
 		
 		
-		lblCarregando.setBounds(46, 173, 378, 16);
+		lblCarregando.setBounds(32, 168, 378, 16);
 		contentPane.add(lblCarregando);
 		
 		
-		progressBar.setBounds(168, 201, 148, 14);
+		progressBar.setBounds(154, 196, 148, 14);
 		progressBar.setIndeterminate(true);
 		progressBar.setVisible(false);
 		contentPane.add(progressBar);
