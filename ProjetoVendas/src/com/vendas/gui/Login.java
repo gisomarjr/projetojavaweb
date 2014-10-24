@@ -14,12 +14,16 @@ import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
 public class Login extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
 	private JPasswordField passwordField;
 
+	static Login login;
 	/**
 	 * Launch the application.
 	 */
@@ -32,6 +36,7 @@ public class Login extends JFrame {
 					//desabilitando o botão maximizar
 					frame.setResizable(false);
 					frame.setTitle("Realizar Login");
+				    login = frame;
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -77,6 +82,15 @@ public class Login extends JFrame {
 		contentPane.add(passwordField);
 		
 		JButton btnEfetuarLogin = new JButton("Efetuar Login");
+		btnEfetuarLogin.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent arg0) {
+				Interno interno = new Interno();
+				interno.setVisible(true);
+				login.setVisible(false);
+				
+			}
+		});
 		btnEfetuarLogin.setBounds(169, 227, 132, 23);
 		contentPane.add(btnEfetuarLogin);
 		

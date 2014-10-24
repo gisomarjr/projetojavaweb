@@ -1,5 +1,7 @@
 package com.vendas.negocio;
 
+import java.util.List;
+
 import com.vendas.basicas.Fornecedor;
 import com.vendas.dao.DAOFornecedor;
 
@@ -34,5 +36,9 @@ public class NFornecedor {
 		
 				
 		return "";
+	}
+	
+	public List<Fornecedor> listar() {
+		return daof.listar();
 	}
 }
