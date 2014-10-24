@@ -27,7 +27,7 @@ public class NFornecedor {
 		if(fornecedor.getNomeFantasia().equals("") || fornecedor.getNomeFantasia() == null){
 			return "Atenção NOME FANTASIA em branco";
 		}
-		if(fornecedor.getCnpj().equals("") || fornecedor.getCnpj() == null){
+		if(fornecedor.getCnpj().equals("") || fornecedor.getCnpj() == null || fornecedor.getCnpj().equals("  .   .   /    -  ") ){
 			return "Atenção CNPJ em branco";
 		}
 		

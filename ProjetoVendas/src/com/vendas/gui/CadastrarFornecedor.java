@@ -53,6 +53,7 @@ public class CadastrarFornecedor extends JFrame {
 					frame.setVisible(true);
 					//desabilitando o botão maximizar
 					frame.setResizable(false);
+					frame.setTitle("Cadastro de Fornecedor");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
