@@ -8,6 +8,8 @@ import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.MaskFormatter;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -22,6 +24,7 @@ import com.vendas.fachada.FFornecedor;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.text.ParseException;
 
 import javax.swing.JProgressBar;
 
@@ -36,7 +39,7 @@ public class CadastrarFornecedor extends JFrame {
 	final JButton btnSalvar = new JButton("Salvar");
 	final JFormattedTextField cnpj = new JFormattedTextField();
 	String status;
-	
+	MaskFormatter cnpj_format;
 	
 	/**
 	 * Launch the application.
@@ -48,6 +51,8 @@ public class CadastrarFornecedor extends JFrame {
 				try {
 					CadastrarFornecedor frame = new CadastrarFornecedor();
 					frame.setVisible(true);
+					//desabilitando o botão maximizar
+					frame.setResizable(false);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -96,11 +101,17 @@ public class CadastrarFornecedor extends JFrame {
 		textNomeFantasia.setColumns(10);
 		
 		JLabel lblCnpj = new JLabel("CNPJ:");
-		lblCnpj.setBounds(61, 132, 34, 29);
+		lblCnpj.setBounds(61, 132, 34, 29);   
 		contentPane.add(lblCnpj);
 		
 		
 		cnpj.setBounds(105, 136, 124, 20);
+		try {
+			cnpj_format = new MaskFormatter("##.###.###/####-##");
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}  
+        cnpj.setFormatterFactory(new DefaultFormatterFactory(cnpj_format));
 		contentPane.add(cnpj);
 		
 		
