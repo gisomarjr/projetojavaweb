@@ -1,11 +1,15 @@
 package com.vendas.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.MaskFormatter;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -20,6 +24,7 @@ import com.vendas.fachada.FFornecedor;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.text.ParseException;
 
 import javax.swing.JProgressBar;
 
@@ -29,11 +34,12 @@ public class CadastrarFornecedor extends JFrame {
 	private JTextField textRazaoSocial;
 	private JTextField textNomeFantasia;
 	ImageIcon loading = new ImageIcon("loading.gif");
-	JLabel lblCarregando = new JLabel("Loading... ", loading, JLabel.CENTER);
+	JLabel lblCarregando = new JLabel("Validando Fornecedor... ", loading, JLabel.CENTER);
 	JProgressBar progressBar = new JProgressBar();
 	final JButton btnSalvar = new JButton("Salvar");
 	final JFormattedTextField cnpj = new JFormattedTextField();
-	
+	String status;
+	MaskFormatter cnpj_format;
 	
 	/**
 	 * Launch the application.
@@ -45,6 +51,9 @@ public class CadastrarFornecedor extends JFrame {
 				try {
 					CadastrarFornecedor frame = new CadastrarFornecedor();
 					frame.setVisible(true);
+					//desabilitando o botão maximizar
+					frame.setResizable(false);
+					frame.setTitle("Cadastro de Fornecedor");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -57,10 +66,16 @@ public class CadastrarFornecedor extends JFrame {
 	 * Create the frame.
 	 */
 	public CadastrarFornecedor() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
+		
+		//Tela centralizada
+		Dimension tela = Toolkit.getDefaultToolkit().getScreenSize();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		  setLocation((tela.width-this.getSize().width)/2,   
+                  (tela.height-this.getSize().height)/2);
+		   
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
@@ -87,11 +102,17 @@ public class CadastrarFornecedor extends JFrame {
 		textNomeFantasia.setColumns(10);
 		
 		JLabel lblCnpj = new JLabel("CNPJ:");
-		lblCnpj.setBounds(61, 132, 34, 29);
+		lblCnpj.setBounds(61, 132, 34, 29);   
 		contentPane.add(lblCnpj);
 		
 		
 		cnpj.setBounds(105, 136, 124, 20);
+		try {
+			cnpj_format = new MaskFormatter("##.###.###/####-##");
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}  
+        cnpj.setFormatterFactory(new DefaultFormatterFactory(cnpj_format));
 		contentPane.add(cnpj);
 		
 		
@@ -100,11 +121,11 @@ public class CadastrarFornecedor extends JFrame {
 		contentPane.add(btnSalvar);
 		
 		
-		lblCarregando.setBounds(46, 173, 378, 16);
+		lblCarregando.setBounds(32, 168, 378, 16);
 		contentPane.add(lblCarregando);
 		
 		
-		progressBar.setBounds(168, 201, 148, 14);
+		progressBar.setBounds(154, 196, 148, 14);
 		progressBar.setIndeterminate(true);
 		progressBar.setVisible(false);
 		contentPane.add(progressBar);
@@ -132,10 +153,22 @@ public class CadastrarFornecedor extends JFrame {
 						
 						FFornecedor fachada_fornecedor = new FFornecedor();
 						try {
+							status = fachada_fornecedor.validaCampo(fornecedor);
 							
-							fachada_fornecedor.cadastrar(fornecedor);
+							if(status == ""){
+					         fachada_fornecedor.cadastrar(fornecedor);
+					         status = "Fornecedor Cadastrado com Sucesso!";
+					         JOptionPane.showMessageDialog(null,status);
+					         cnpj.setText("");
+							 textNomeFantasia.setText("");
+							 textRazaoSocial.setText("");
+							 
+							}else{
+								JOptionPane.showMessageDialog(null,status);
+								
+							}
 							updateProgress();
-							JOptionPane.showMessageDialog(null,"Fornecedor Cadastrado com Sucesso!");
+							
 						} catch (Exception e) {
 							JOptionPane.showMessageDialog(null,e.getMessage());
 						}
@@ -156,9 +189,7 @@ public class CadastrarFornecedor extends JFrame {
 		    	lblCarregando.setVisible(false);
 				progressBar.setVisible(false);
 				btnSalvar.setEnabled(true);
-				cnpj.setText("");
-				textNomeFantasia.setText("");
-				textRazaoSocial.setText("");
+				
 				
 		    }
 		  });

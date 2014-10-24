@@ -61,8 +61,8 @@ public class DAOFornecedor implements IFornecedor  {
             entityManager.persist(fornecedor);
             entityManager.getTransaction().commit();
         } catch (Exception ex) {
-            //ex.printStackTrace();
-           // entityManager.getTransaction().rollback();
+            ex.printStackTrace();
+            entityManager.getTransaction().rollback();
         }
 		
 	}
