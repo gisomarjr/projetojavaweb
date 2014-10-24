@@ -22,8 +22,7 @@ public class ConsultarFornecedor extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
-	private DefaultTableModel modeloTable;
-
+	
 	/**
 	 * Launch the application.
 	 */
@@ -63,38 +62,27 @@ public class ConsultarFornecedor extends JFrame {
 				JLabel lblConsultarFornecedores = new JLabel("Consultar Fornecedores");
 				lblConsultarFornecedores.setBounds(293, 11, 267, 14);
 				contentPane.add(lblConsultarFornecedores);
-				
-				String [] colunas = {"ID", "Razão Social", "Nome Fantasia", "CNPJ"};
-				
-				Object [][] dados = null;//{ {"Ana Monteiro", "48 9923-7898", "ana.monteiro@gmail.com", "" }};
-				//ArrayList<Fornecedor> lista_fornecedor = new ArrayList<Fornecedor>();
-				
-				//Object [][] dados = {{fornecedor.getId().toString() , fornecedor.getRazaoSocial(), fornecedor.getNomeFantasia(),fornecedor.getCnpj()}};
-				//for (Fornecedor fornecedor : lista_fornecedor){
-					//lista_fornecedor.add(fornecedor);
-					//
-					//dadoss = dados;
-				//}
-				
+							
 				
 				FFornecedor fachada_fornecedor = new FFornecedor();
+				ArrayList<Fornecedor> lista_fornecedor = new ArrayList<Fornecedor>(fachada_fornecedor.listar());
 				
+				 DefaultTableModel model = new DefaultTableModel(new Object[][]{}, new Object[]{"ID", "Razão", "Nome Fantasia", "CNPJ" });   
+				 
+				    
+                 for (Fornecedor fornecedor : lista_fornecedor) {    
+                     model.addRow(new String[]{fornecedor.getId().toString(), 
+                    		      			   fornecedor.getRazaoSocial(),
+                    		      			   fornecedor.getNomeFantasia(),
+                    		      			   fornecedor.getCnpj()
+                    		 		});    
+                 }
+               
 				
-				for (Fornecedor fornecedor : fachada_fornecedor.listar()){
-					
-					Object [][] dado = {{fornecedor.getId(), 
-										 fornecedor.getRazaoSocial(), 
-										 fornecedor.getNomeFantasia(), 
-										 fornecedor.getCnpj()}};
-					dados = dado;
-										
-					//JOptionPane.showMessageDialog(null,fornecedor.getRazaoSocial());
-				} 
-				
-				
-				table = new JTable(dados, colunas);
+				table = new JTable(model);
 				table.setBounds(10, 71, 688, 296);
 				contentPane.add(table);
-
+				
+				
 	}
 }
