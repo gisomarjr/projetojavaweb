@@ -21,6 +21,10 @@ public class NFornecedor {
 		return daof.consultarPorId(id);
 	}
 	
+	public void excluir(int id){
+		daof.removeById(id);
+	}
+	
 	public String validaCampos(Fornecedor fornecedor){
 		
 		if(fornecedor.getRazaoSocial().equals("") || fornecedor.getRazaoSocial() == null){

@@ -17,6 +17,10 @@ public class FFornecedor {
 		   nf.cadastrar(fornecedor);
 		
 	}
+	
+	public void excluir(int id){
+		nf.excluir(id);
+	}
 
 	public Fornecedor consultar(Integer id) {
 		

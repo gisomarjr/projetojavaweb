@@ -18,19 +18,32 @@ import javax.swing.JTable;
 
 import com.vendas.basicas.Fornecedor;
 import com.vendas.fachada.FFornecedor;
+
 import javax.swing.JScrollBar;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
+import javax.xml.bind.ParseConversionEvent;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ConsultarFornecedor extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
+	Fornecedor fornecedor = new Fornecedor();
+	final FFornecedor fachada_fornecedor = new FFornecedor();
+	
+	
+	 DefaultTableModel model = new DefaultTableModel(new Object[][]{}, new Object[]{"ID", "Razão", "Nome Fantasia", "CNPJ" });   
+	 
 
 	/**
 	 * Launch the application.
 	 */
 	
+	 
+	 
 	public static void main(String[] args) {
 		
 		EventQueue.invokeLater(new Runnable() {
@@ -70,21 +83,8 @@ public class ConsultarFornecedor extends JFrame {
 				lblConsultarFornecedores.setBounds(293, 11, 267, 14);
 				contentPane.add(lblConsultarFornecedores);
 							
-				
-				FFornecedor fachada_fornecedor = new FFornecedor();
-				ArrayList<Fornecedor> lista_fornecedor = new ArrayList<Fornecedor>(fachada_fornecedor.listar());
-				
-				 DefaultTableModel model = new DefaultTableModel(new Object[][]{}, new Object[]{"ID", "Razão", "Nome Fantasia", "CNPJ" });   
-				 
-				    
-                 for (Fornecedor fornecedor : lista_fornecedor) {    
-                     model.addRow(new String[]{fornecedor.getId().toString(), 
-                    		      			   fornecedor.getRazaoSocial(),
-                    		      			   fornecedor.getNomeFantasia(),
-                    		      			   fornecedor.getCnpj()
-                    		 		});    
-                 }
-               
+                //atualiza a tabela
+				atualizaTabela();
                  
 				table = new JTable(model);
 				table.setBounds(10, 71, 688, 296);
@@ -97,10 +97,36 @@ public class ConsultarFornecedor extends JFrame {
 				contentPane.add(scrollPane);
 				
 				JButton btnEditar = new JButton("Editar");
+				btnEditar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						
+					}
+				});
 				btnEditar.setBounds(498, 53, 89, 23);
 				contentPane.add(btnEditar);
 				
 				JButton btnExcluir = new JButton("Excluir");
+				btnExcluir.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						
+					int linha =	table.getSelectedRow(); //retorna um inteiro  
+					Object valor = table.getValueAt(linha,0);   
+					//retorna o objeto correspondente ao tipo determinado no momento da criação da coluna da tabela
+					//JOptionPane.showMessageDialog(null,valor);
+					
+					String valor_string = (String)valor;
+				try{
+					
+					fachada_fornecedor.excluir(Integer.parseInt(valor_string));
+					
+					
+					JOptionPane.showMessageDialog(null,"Fornecedor Excluído com Sucesso!");
+					
+				}catch(Exception erro){
+					JOptionPane.showMessageDialog(null,erro.getMessage());
+				}
+					}
+				});
 				btnExcluir.setBounds(597, 53, 89, 23);
 				contentPane.add(btnExcluir);
 				
@@ -113,8 +139,24 @@ public class ConsultarFornecedor extends JFrame {
 				contentPane.add(formattedTextField);
 				
 				JButton btnPesquisar = new JButton("Pesquisar");
+				btnPesquisar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						
+					}
+				});
 				btnPesquisar.setBounds(292, 53, 108, 23);
 				contentPane.add(btnPesquisar);
 				
+	}
+	
+	public void atualizaTabela(){
+		ArrayList<Fornecedor> lista_fornecedor = new ArrayList<Fornecedor>(fachada_fornecedor.listar());
+		 for (Fornecedor fornecedor : lista_fornecedor) {    
+             model.addRow(new String[]{fornecedor.getId().toString(), 
+            		      			   fornecedor.getRazaoSocial(),
+            		      			   fornecedor.getNomeFantasia(),
+            		      			   fornecedor.getCnpj()
+            		 		});    
+         }
 	}
 }
