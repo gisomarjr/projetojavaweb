@@ -17,6 +17,10 @@ public class FFornecedor {
 		   nf.cadastrar(fornecedor);
 		
 	}
+	
+	public void excluir(int id){
+		nf.excluir(id);
+	}
 
 	public Fornecedor consultar(Integer id) {
 		
@@ -31,5 +35,13 @@ public class FFornecedor {
 	
 	public List<Fornecedor> listar() {
 		return nf.listar();
+	}
+
+	public void atualizar(Fornecedor fornecedor) {
+		nf.atualizar(fornecedor);
+		
+	}
+	public Fornecedor consultarID(Integer id){
+		return nf.consultarID(id);
 	}
 }

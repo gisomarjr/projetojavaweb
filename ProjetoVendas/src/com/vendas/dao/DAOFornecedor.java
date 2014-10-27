@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import javax.swing.JOptionPane;
 
 import com.vendas.basicas.Cliente;
 import com.vendas.basicas.Endereco;
@@ -74,8 +75,9 @@ public class DAOFornecedor implements IFornecedor  {
 	            entityManager.merge(fornecedor);
 	            entityManager.getTransaction().commit();
 	        } catch (Exception ex) {
-	            ex.printStackTrace();
-	            entityManager.getTransaction().rollback();
+	            //ex.printStackTrace();
+	            //entityManager.getTransaction().rollback();
+	           
 	        }
 		
 	}

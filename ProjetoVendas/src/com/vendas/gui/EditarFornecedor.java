@@ -28,7 +28,7 @@ import java.text.ParseException;
 
 import javax.swing.JProgressBar;
 
-public class CadastrarFornecedor extends JFrame {
+public class EditarFornecedor extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textRazaoSocial;
@@ -36,10 +36,12 @@ public class CadastrarFornecedor extends JFrame {
 	ImageIcon loading = new ImageIcon("loading.gif");
 	JLabel lblCarregando = new JLabel("Validando Fornecedor... ", loading, JLabel.CENTER);
 	JProgressBar progressBar = new JProgressBar();
-	final JButton btnSalvar = new JButton("Salvar");
+	final JButton btnSalvar = new JButton("Atualizar");
 	final JFormattedTextField cnpj = new JFormattedTextField();
 	String status;
 	MaskFormatter cnpj_format;
+	FFornecedor fachada_fornecedor = new FFornecedor();
+	Fornecedor fornecedor_editar;
 	
 	/**
 	 * Launch the application.
@@ -65,7 +67,9 @@ public class CadastrarFornecedor extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public CadastrarFornecedor() {
+	public EditarFornecedor(Fornecedor fornecedor) {
+		this.fornecedor_editar = fornecedor;
+		
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -79,7 +83,7 @@ public class CadastrarFornecedor extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblCadastroDeFornecedor = new JLabel("Cadastro de Fornecedor");
+		JLabel lblCadastroDeFornecedor = new JLabel("Atualizar Fornecedor");
 		lblCadastroDeFornecedor.setBounds(144, 11, 280, 29);
 		contentPane.add(lblCadastroDeFornecedor);
 		
@@ -131,7 +135,10 @@ public class CadastrarFornecedor extends JFrame {
 		contentPane.add(progressBar);
 		
 		lblCarregando.setVisible(false);
-		
+			
+		cnpj.setText(fornecedor_editar.getCnpj());
+		textNomeFantasia.setText(fornecedor_editar.getNomeFantasia());
+		textRazaoSocial.setText(fornecedor_editar.getRazaoSocial());
 		
 		
 		btnSalvar.addActionListener(new ActionListener() {
@@ -146,18 +153,19 @@ public class CadastrarFornecedor extends JFrame {
 						lblCarregando.setVisible(true);
 						progressBar.setVisible(true);
 						btnSalvar.setEnabled(false);
-						Fornecedor fornecedor = new Fornecedor();
-						fornecedor.setCnpj(cnpj.getText());
-						fornecedor.setNomeFantasia(textNomeFantasia.getText());
-						fornecedor.setRazaoSocial(textRazaoSocial.getText());
 						
-						FFornecedor fachada_fornecedor = new FFornecedor();
 						try {
-							status = fachada_fornecedor.validaCampo(fornecedor);
+							Fornecedor formulario_editar = new Fornecedor();
+							formulario_editar.setCnpj(cnpj.getText());
+							formulario_editar.setNomeFantasia(textNomeFantasia.getText());
+							formulario_editar.setRazaoSocial(textRazaoSocial.getText());
+							formulario_editar.setId(fornecedor_editar.getId());
+							status = fachada_fornecedor.validaCampo(formulario_editar);
 							
 							if(status == ""){
-					         fachada_fornecedor.cadastrar(fornecedor);
-					         status = "Fornecedor Cadastrado com Sucesso!";
+					        							
+							fachada_fornecedor.atualizar(formulario_editar);
+					         status = "Fornecedor Atualizado com Sucesso!";
 					         JOptionPane.showMessageDialog(null,status);
 					         cnpj.setText("");
 							 textNomeFantasia.setText("");

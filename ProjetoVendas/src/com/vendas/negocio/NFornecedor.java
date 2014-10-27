@@ -21,16 +21,20 @@ public class NFornecedor {
 		return daof.consultarPorId(id);
 	}
 	
+	public void excluir(int id){
+		daof.removeById(id);
+	}
+	
 	public String validaCampos(Fornecedor fornecedor){
 		
 		if(fornecedor.getRazaoSocial().equals("") || fornecedor.getRazaoSocial() == null){
-			return "AtenÁ„o RAZ√O SOCIAL em branco";
+			return "Aten√ß√£o RAZ√ÉO SOCIAL em branco";
 		}
 		if(fornecedor.getNomeFantasia().equals("") || fornecedor.getNomeFantasia() == null){
-			return "AtenÁ„o NOME FANTASIA em branco";
+			return "Aten√ß√£o NOME FANTASIA em branco";
 		}
 		if(fornecedor.getCnpj().equals("") || fornecedor.getCnpj() == null || fornecedor.getCnpj().equals("  .   .   /    -  ") ){
-			return "AtenÁ„o CNPJ em branco";
+			return "Aten√ß√£o CNPJ em branco";
 		}
 		
 		
@@ -40,5 +44,13 @@ public class NFornecedor {
 	
 	public List<Fornecedor> listar() {
 		return daof.listar();
+	}
+
+	public void atualizar(Fornecedor fornecedor) {
+		daof.editar(fornecedor);
+		
+	}
+	public Fornecedor consultarID(Integer id){
+		return daof.consultarPorId(id);
 	}
 }
