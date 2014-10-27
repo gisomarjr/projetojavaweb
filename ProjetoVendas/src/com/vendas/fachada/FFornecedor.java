@@ -36,4 +36,12 @@ public class FFornecedor {
 	public List<Fornecedor> listar() {
 		return nf.listar();
 	}
+
+	public void atualizar(Fornecedor fornecedor) {
+		nf.atualizar(fornecedor);
+		
+	}
+	public Fornecedor consultarID(Integer id){
+		return nf.consultarID(id);
+	}
 }

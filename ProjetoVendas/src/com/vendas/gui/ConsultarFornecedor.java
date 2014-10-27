@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JLabel;
@@ -27,16 +28,21 @@ import javax.xml.bind.ParseConversionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+import javax.swing.JProgressBar;
+
 public class ConsultarFornecedor extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
 	Fornecedor fornecedor = new Fornecedor();
 	final FFornecedor fachada_fornecedor = new FFornecedor();
-	
-	
+	int linha = 0;
+	String valor_string = null;
+	Object valor = null;
+	int erro_null = 0;
+	final JButton btnEditar = new JButton("Editar");
+	final JProgressBar progressBar = new JProgressBar();
 	 DefaultTableModel model = new DefaultTableModel(new Object[][]{}, new Object[]{"ID", "Razão", "Nome Fantasia", "CNPJ" });   
-	 
 
 	/**
 	 * Launch the application.
@@ -51,6 +57,7 @@ public class ConsultarFornecedor extends JFrame {
 				try {
 					ConsultarFornecedor frame = new ConsultarFornecedor();
 					frame.setVisible(true);
+				
 					//desabilitando o bot�o maximizar
 					frame.setResizable(false);
 					frame.setTitle("Consultar Fornecedor");
@@ -98,14 +105,50 @@ public class ConsultarFornecedor extends JFrame {
 				
 				contentPane.add(table);
 				
+				
+				progressBar.setBounds(498, 37, 89, 14);
+				contentPane.add(progressBar);
+				
 				//Barra de Rolagem
 				JScrollPane scrollPane = new JScrollPane(table);
 				scrollPane.setBounds(10, 95, 688, 348);
 				contentPane.add(scrollPane);
 				
-				JButton btnEditar = new JButton("Editar");
+				progressBar.setVisible(false);
 				btnEditar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						
+					
+						
+						
+						try{		
+							 linha =	table.getSelectedRow(); //retorna um inteiro  
+							 valor = table.getValueAt(linha,0);   					
+							 valor_string = (String)valor;
+							
+								new Thread(){
+									@Override
+									public void run() {
+									fornecedor = fachada_fornecedor.consultarID(Integer.parseInt(valor_string));
+									 btnEditar.setEnabled(false);
+									 progressBar.setVisible(true);
+								
+									 EditarFornecedor editar_fornecedor = new EditarFornecedor(fornecedor);
+									 editar_fornecedor.setVisible(true);
+									 updateProgress();
+									
+									}
+								}.start();
+								
+													 
+							
+							 
+						}catch(Exception erro){
+							JOptionPane.showMessageDialog(null,"Atenção é necessário selecionar um Fornecedor!");
+							 erro_null = 1;
+						}
+						
+						
 						
 					}
 				});
@@ -166,6 +209,20 @@ public class ConsultarFornecedor extends JFrame {
 				btnPesquisar.setBounds(308, 53, 108, 23);
 				contentPane.add(btnPesquisar);
 				
+				
+				
 	}
-	
+	private void updateProgress() {
+		  SwingUtilities.invokeLater(new Runnable() {
+		    public void run() {
+		      // Here, we can safely update the GUI
+		      // because we'll be called from the
+		      // event dispatch thread
+		    	btnEditar.setEnabled(true);
+				progressBar.setVisible(false);
+		    				    	
+				
+		    }
+		  });
+	}
 }
