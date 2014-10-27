@@ -31,9 +31,9 @@ public class Interno extends JFrame {
 				try {
 					Interno frame = new Interno();
 					frame.setVisible(true);
-					//desabilitando o botão maximizar
+					//desabilitando o botï¿½o maximizar
 					frame.setResizable(false);
-					frame.setTitle("Área Interna");
+					frame.setTitle("ï¿½rea Interna");
 					frame.setVisible(true);
 					
 				} catch (Exception e) {
@@ -67,14 +67,14 @@ public class Interno extends JFrame {
 				cadastrar_fornecedor.setVisible(true);
 			}
 		});
-		button.setBounds(50, 61, 161, 70);
+		button.setBounds(50, 61, 190, 70);
 		contentPane.add(button);
 		
 		progressBar.setIndeterminate(true);
 		progressBar.setVisible(false);
-		progressBar.setBounds(332, 43, 161, 14);
+		progressBar.setBounds(332, 43, 190, 14);
 		contentPane.add(progressBar);
-		btnConsultarFornecedor.setBounds(332, 61, 161, 70);
+		btnConsultarFornecedor.setBounds(332, 61, 190, 70);
 		contentPane.add(btnConsultarFornecedor);
 		btnConsultarFornecedor.addActionListener(new ActionListener() {
 			@Override

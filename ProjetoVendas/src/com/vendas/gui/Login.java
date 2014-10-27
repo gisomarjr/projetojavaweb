@@ -33,7 +33,7 @@ public class Login extends JFrame {
 				try {
 					Login frame = new Login();
 					frame.setVisible(true);
-					//desabilitando o botão maximizar
+					//desabilitando o botï¿½o maximizar
 					frame.setResizable(false);
 					frame.setTitle("Realizar Login");
 				    login = frame;
@@ -61,7 +61,7 @@ public class Login extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblRealizarLogin = new JLabel("Realizar Login - Sistema de Vendas");
-		lblRealizarLogin.setBounds(135, 11, 212, 14);
+		lblRealizarLogin.setBounds(135, 11, 258, 14);
 		contentPane.add(lblRealizarLogin);
 		
 		JLabel lblLogin = new JLabel("Login:");
@@ -95,7 +95,7 @@ public class Login extends JFrame {
 		contentPane.add(btnEfetuarLogin);
 		
 		JLabel lblTipoDeUsurio = new JLabel("Tipo de Usu\u00E1rio");
-		lblTipoDeUsurio.setBounds(28, 166, 103, 14);
+		lblTipoDeUsurio.setBounds(14, 166, 117, 14);
 		contentPane.add(lblTipoDeUsurio);
 		
 		JComboBox comboBox = new JComboBox();

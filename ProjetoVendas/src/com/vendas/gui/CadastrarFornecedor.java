@@ -51,7 +51,7 @@ public class CadastrarFornecedor extends JFrame {
 				try {
 					CadastrarFornecedor frame = new CadastrarFornecedor();
 					frame.setVisible(true);
-					//desabilitando o botão maximizar
+					//desabilitando o botï¿½o maximizar
 					frame.setResizable(false);
 					frame.setTitle("Cadastro de Fornecedor");
 				} catch (Exception e) {
@@ -84,29 +84,29 @@ public class CadastrarFornecedor extends JFrame {
 		contentPane.add(lblCadastroDeFornecedor);
 		
 		JLabel lblRazoSocial = new JLabel("Raz\u00E3o Social:");
-		lblRazoSocial.setBounds(17, 45, 78, 23);
+		lblRazoSocial.setBounds(10, 45, 109, 23);
 		contentPane.add(lblRazoSocial);
 		
 		textRazaoSocial = new JTextField();
-		textRazaoSocial.setBounds(105, 46, 319, 20);
+		textRazaoSocial.setBounds(117, 46, 307, 20);
 		contentPane.add(textRazaoSocial);
 		textRazaoSocial.setColumns(10);
 		
 		JLabel lblNomeFantasia = new JLabel("Nome Fantasia");
-		lblNomeFantasia.setBounds(10, 90, 85, 29);
+		lblNomeFantasia.setBounds(10, 90, 109, 29);
 		contentPane.add(lblNomeFantasia);
 		
 		textNomeFantasia = new JTextField();
-		textNomeFantasia.setBounds(105, 94, 319, 20);
+		textNomeFantasia.setBounds(117, 94, 307, 20);
 		contentPane.add(textNomeFantasia);
 		textNomeFantasia.setColumns(10);
 		
 		JLabel lblCnpj = new JLabel("CNPJ:");
-		lblCnpj.setBounds(61, 132, 34, 29);   
+		lblCnpj.setBounds(46, 131, 75, 29);   
 		contentPane.add(lblCnpj);
 		
 		
-		cnpj.setBounds(105, 136, 124, 20);
+		cnpj.setBounds(111, 136, 140, 20);
 		try {
 			cnpj_format = new MaskFormatter("##.###.###/####-##");
 		} catch (ParseException e1) {

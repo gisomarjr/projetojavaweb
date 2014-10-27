@@ -35,7 +35,7 @@ public class ConsultarFornecedor extends JFrame {
 	final FFornecedor fachada_fornecedor = new FFornecedor();
 	
 	
-	 DefaultTableModel model = new DefaultTableModel(new Object[][]{}, new Object[]{"ID", "Razão", "Nome Fantasia", "CNPJ" });   
+	 DefaultTableModel model = new DefaultTableModel(new Object[][]{}, new Object[]{"ID", "RazÃ£o", "Nome Fantasia", "CNPJ" });   
 	 
 
 	/**
@@ -51,7 +51,7 @@ public class ConsultarFornecedor extends JFrame {
 				try {
 					ConsultarFornecedor frame = new ConsultarFornecedor();
 					frame.setVisible(true);
-					//desabilitando o botão maximizar
+					//desabilitando o botï¿½o maximizar
 					frame.setResizable(false);
 					frame.setTitle("Consultar Fornecedor");
 					
@@ -83,8 +83,15 @@ public class ConsultarFornecedor extends JFrame {
 				lblConsultarFornecedores.setBounds(293, 11, 267, 14);
 				contentPane.add(lblConsultarFornecedores);
 							
-                //atualiza a tabela
-				atualizaTabela();
+				ArrayList<Fornecedor> lista_fornecedor = new ArrayList<Fornecedor>(fachada_fornecedor.listar());
+				 for (Fornecedor fornecedor : lista_fornecedor) {    
+		             model.addRow(new String[]{fornecedor.getId().toString(), 
+		            		      			   fornecedor.getRazaoSocial(),
+		            		      			   fornecedor.getNomeFantasia(),
+		            		      			   fornecedor.getCnpj()
+		            		 		});    
+		         }
+			
                  
 				table = new JTable(model);
 				table.setBounds(10, 71, 688, 296);
@@ -108,34 +115,46 @@ public class ConsultarFornecedor extends JFrame {
 				JButton btnExcluir = new JButton("Excluir");
 				btnExcluir.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						
-					int linha =	table.getSelectedRow(); //retorna um inteiro  
-					Object valor = table.getValueAt(linha,0);   
-					//retorna o objeto correspondente ao tipo determinado no momento da criação da coluna da tabela
-					//JOptionPane.showMessageDialog(null,valor);
-					
-					String valor_string = (String)valor;
+					int linha = 0;
+					String valor_string = null;
+					Object valor = null;
+					int erro_null = 0;
+				try{		
+					 linha =	table.getSelectedRow(); //retorna um inteiro  
+					 valor = table.getValueAt(linha,0);   					
+					 valor_string = (String)valor;
+				}catch(Exception erro){
+					JOptionPane.showMessageDialog(null,"AtenÃ§Ã£o Ã© necessÃ¡rio selecionar um Fornecedor!");
+					 erro_null = 1;
+				}
+				
 				try{
-					
+					if(erro_null != 1){
 					fachada_fornecedor.excluir(Integer.parseInt(valor_string));
 					
+					DefaultTableModel model = (DefaultTableModel) table.getModel();
+					model.removeRow(linha);
+					table.revalidate();
 					
-					JOptionPane.showMessageDialog(null,"Fornecedor Excluído com Sucesso!");
-					
+					JOptionPane.showMessageDialog(null,"Fornecedor ExcluÃ­do com Sucesso!");
+					}
 				}catch(Exception erro){
 					JOptionPane.showMessageDialog(null,erro.getMessage());
 				}
 					}
 				});
+				
+				
+				
 				btnExcluir.setBounds(597, 53, 89, 23);
 				contentPane.add(btnExcluir);
 				
 				JLabel lblPesquisarCnpj = new JLabel("Pesquisar  - CNPJ:");
-				lblPesquisarCnpj.setBounds(10, 57, 108, 14);
+				lblPesquisarCnpj.setBounds(10, 57, 125, 14);
 				contentPane.add(lblPesquisarCnpj);
 				
 				JFormattedTextField formattedTextField = new JFormattedTextField();
-				formattedTextField.setBounds(128, 54, 154, 20);
+				formattedTextField.setBounds(142, 55, 154, 20);
 				contentPane.add(formattedTextField);
 				
 				JButton btnPesquisar = new JButton("Pesquisar");
@@ -144,19 +163,9 @@ public class ConsultarFornecedor extends JFrame {
 						
 					}
 				});
-				btnPesquisar.setBounds(292, 53, 108, 23);
+				btnPesquisar.setBounds(308, 53, 108, 23);
 				contentPane.add(btnPesquisar);
 				
 	}
 	
-	public void atualizaTabela(){
-		ArrayList<Fornecedor> lista_fornecedor = new ArrayList<Fornecedor>(fachada_fornecedor.listar());
-		 for (Fornecedor fornecedor : lista_fornecedor) {    
-             model.addRow(new String[]{fornecedor.getId().toString(), 
-            		      			   fornecedor.getRazaoSocial(),
-            		      			   fornecedor.getNomeFantasia(),
-            		      			   fornecedor.getCnpj()
-            		 		});    
-         }
-	}
 }
