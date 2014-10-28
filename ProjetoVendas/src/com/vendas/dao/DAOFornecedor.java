@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import javax.persistence.TemporalType;
 import javax.swing.JOptionPane;
 
 import com.vendas.basicas.Cliente;
@@ -99,6 +100,17 @@ public class DAOFornecedor implements IFornecedor  {
 	@Override
 	public Fornecedor consultarPorId(Integer id) {
 		  return entityManager.find(Fornecedor.class, id);
+	}
+	
+	/*List<Tarefa> lista = manager
+  .createQuery("select t from Tarefa as t where t.finalizado = false")
+  .getResultList();
+*/
+	
+	public List<Fornecedor> consultarPorCNPJ(String cnpj) {
+		return entityManager.createQuery("select f from Fornecedor as f where f.cnpj = ?1").
+		setParameter(1, cnpj).getResultList();
+	
 	}
 
 	@Override
