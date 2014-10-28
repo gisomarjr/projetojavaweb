@@ -33,7 +33,7 @@ public class Interno extends JFrame {
 					frame.setVisible(true);
 					//desabilitando o bot�o maximizar
 					frame.setResizable(false);
-					frame.setTitle("�rea Interna");
+					frame.setTitle("Área Interna");
 					frame.setVisible(true);
 					
 				} catch (Exception e) {
@@ -47,7 +47,7 @@ public class Interno extends JFrame {
 	 * Create the frame.
 	 */
 	public Interno() {
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 554, 396);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

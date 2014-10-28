@@ -43,7 +43,7 @@ public class ConsultarFornecedor extends JFrame {
 	final JButton btnEditar = new JButton("Editar");
 	final JProgressBar progressBar = new JProgressBar();
 	 DefaultTableModel model = new DefaultTableModel(new Object[][]{}, new Object[]{"ID", "Razão", "Nome Fantasia", "CNPJ" });   
-
+	 static ConsultarFornecedor consultar;
 	/**
 	 * Launch the application.
 	 */
@@ -57,7 +57,7 @@ public class ConsultarFornecedor extends JFrame {
 				try {
 					ConsultarFornecedor frame = new ConsultarFornecedor();
 					frame.setVisible(true);
-				
+					consultar = frame;
 					//desabilitando o bot�o maximizar
 					frame.setResizable(false);
 					frame.setTitle("Consultar Fornecedor");
@@ -115,11 +115,9 @@ public class ConsultarFornecedor extends JFrame {
 				contentPane.add(scrollPane);
 				
 				progressBar.setVisible(false);
+				progressBar.setIndeterminate(true);
 				btnEditar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						
-					
-						
 						
 						try{		
 							 linha =	table.getSelectedRow(); //retorna um inteiro  
@@ -220,7 +218,7 @@ public class ConsultarFornecedor extends JFrame {
 		      // event dispatch thread
 		    	btnEditar.setEnabled(true);
 				progressBar.setVisible(false);
-		    				    	
+		        dispose();
 				
 		    }
 		  });

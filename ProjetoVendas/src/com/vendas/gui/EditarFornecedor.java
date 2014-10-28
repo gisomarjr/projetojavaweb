@@ -42,7 +42,7 @@ public class EditarFornecedor extends JFrame {
 	MaskFormatter cnpj_format;
 	FFornecedor fachada_fornecedor = new FFornecedor();
 	Fornecedor fornecedor_editar;
-	
+	static EditarFornecedor frame ;
 	/**
 	 * Launch the application.
 	 */
@@ -51,11 +51,13 @@ public class EditarFornecedor extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CadastrarFornecedor frame = new CadastrarFornecedor();
+					frame = new EditarFornecedor();
+					
 					frame.setVisible(true);
+					
 					//desabilitando o bot�o maximizar
 					frame.setResizable(false);
-					frame.setTitle("Cadastro de Fornecedor");
+					frame.setTitle("Editar Fornecedor");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -63,11 +65,15 @@ public class EditarFornecedor extends JFrame {
 		});
 	}
 	 
-	 final JLabel label = new JLabel("Validando Fornecedor... ", loading, JLabel.CENTER);
+	 final JLabel label = new JLabel("Atualizando Fornecedor... ", loading, JLabel.CENTER);
 	/**
 	 * Create the frame.
 	 */
+	 public EditarFornecedor(){}
+
 	public EditarFornecedor(Fornecedor fornecedor) {
+		
+		
 		this.fornecedor_editar = fornecedor;
 		
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
@@ -143,17 +149,16 @@ public class EditarFornecedor extends JFrame {
 		
 		btnSalvar.addActionListener(new ActionListener() {
 			
-			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				
-				
+				/*
 				new Thread(){
 					@Override
 					public void run() {
 						lblCarregando.setVisible(true);
 						progressBar.setVisible(true);
 						btnSalvar.setEnabled(false);
-						
+						*/
 						try {
 							Fornecedor formulario_editar = new Fornecedor();
 							formulario_editar.setCnpj(cnpj.getText());
@@ -167,10 +172,8 @@ public class EditarFornecedor extends JFrame {
 							fachada_fornecedor.atualizar(formulario_editar);
 					         status = "Fornecedor Atualizado com Sucesso!";
 					         JOptionPane.showMessageDialog(null,status);
-					         cnpj.setText("");
-							 textNomeFantasia.setText("");
-							 textRazaoSocial.setText("");
-							 
+							
+							
 							}else{
 								JOptionPane.showMessageDialog(null,status);
 								
@@ -179,14 +182,20 @@ public class EditarFornecedor extends JFrame {
 							
 						} catch (Exception e) {
 							JOptionPane.showMessageDialog(null,e.getMessage());
+							
 						}
-						
+					/*
 					}
 				}.start();
 				
+			}*/
 			}
-		});
-	}
+		}
+	);
+}
+		
+	
+
 	
 	private void updateProgress() {
 		  SwingUtilities.invokeLater(new Runnable() {
@@ -197,9 +206,15 @@ public class EditarFornecedor extends JFrame {
 		    	lblCarregando.setVisible(false);
 				progressBar.setVisible(false);
 				btnSalvar.setEnabled(true);
+				dispose();
+				ConsultarFornecedor c = new ConsultarFornecedor();
+				c.setVisible(true);
 				
 				
 		    }
 		  });
+		  
 		}
+	
+	
 }
