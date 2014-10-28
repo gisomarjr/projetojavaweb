@@ -102,10 +102,6 @@ public class DAOFornecedor implements IFornecedor  {
 		  return entityManager.find(Fornecedor.class, id);
 	}
 	
-	/*List<Tarefa> lista = manager
-  .createQuery("select t from Tarefa as t where t.finalizado = false")
-  .getResultList();
-*/
 	
 	public List<Fornecedor> consultarPorCNPJ(String cnpj) {
 		return entityManager.createQuery("select f from Fornecedor as f where f.cnpj = ?1").

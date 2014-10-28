@@ -16,6 +16,9 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.JProgressBar;
 
+import com.vendas.gui.Fornecedor.CadastrarFornecedor;
+import com.vendas.gui.Fornecedor.ConsultarFornecedor;
+
 public class Interno extends JFrame {
 
 	private JPanel contentPane;
@@ -33,7 +36,7 @@ public class Interno extends JFrame {
 					frame.setVisible(true);
 					//desabilitando o botÔøΩo maximizar
 					frame.setResizable(false);
-					frame.setTitle("√Årea Interna");
+					frame.setTitle("¡rea Interna");
 					frame.setVisible(true);
 					
 				} catch (Exception e) {

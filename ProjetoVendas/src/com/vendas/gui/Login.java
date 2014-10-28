@@ -9,10 +9,14 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+
+import com.vendas.basicas.Funcionario;
+import com.vendas.fachada.FFuncionario;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -20,8 +24,8 @@ import java.awt.event.ActionEvent;
 public class Login extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JPasswordField passwordField;
+	private JTextField usuario;
+	private JPasswordField senha;
 
 	static Login login;
 	/**
@@ -49,7 +53,7 @@ public class Login extends JFrame {
 	 */
 	public Login() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 450, 274);
 		contentPane = new JPanel();
 		//Tela centralizada
 				Dimension tela = Toolkit.getDefaultToolkit().getScreenSize();
@@ -72,34 +76,39 @@ public class Login extends JFrame {
 		lblSenha.setBounds(57, 129, 74, 14);
 		contentPane.add(lblSenha);
 		
-		textField = new JTextField();
-		textField.setBounds(135, 93, 232, 20);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		usuario = new JTextField();
+		usuario.setBounds(135, 93, 232, 20);
+		contentPane.add(usuario);
+		usuario.setColumns(10);
 		
-		passwordField = new JPasswordField();
-		passwordField.setBounds(135, 126, 115, 20);
-		contentPane.add(passwordField);
+		senha = new JPasswordField();
+		senha.setBounds(135, 126, 115, 20);
+		contentPane.add(senha);
 		
 		JButton btnEfetuarLogin = new JButton("Efetuar Login");
 		btnEfetuarLogin.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent arg0) {
+				
+				int cont  = 0;
+				
+				FFuncionario fachada_funcionario = new FFuncionario();
+				for (Funcionario funcionario : fachada_funcionario.realizarLogin(usuario.getText(), senha.getText())) {
+				String u = funcionario.getUsuario();
+				String s = funcionario.getSenha();
+				cont++;
+				}
+				if(cont >0){
 				Interno interno = new Interno();
 				interno.setVisible(true);
 				dispose();
+				}else{
+					JOptionPane.showMessageDialog(null,"Usuário e Senha inválida!");
+				}
 				
 			}
 		});
-		btnEfetuarLogin.setBounds(169, 227, 132, 23);
+		btnEfetuarLogin.setBounds(168, 185, 132, 23);
 		contentPane.add(btnEfetuarLogin);
-		
-		JLabel lblTipoDeUsurio = new JLabel("Tipo de Usu\u00E1rio");
-		lblTipoDeUsurio.setBounds(14, 166, 117, 14);
-		contentPane.add(lblTipoDeUsurio);
-		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(135, 163, 115, 20);
-		contentPane.add(comboBox);
 	}
 }

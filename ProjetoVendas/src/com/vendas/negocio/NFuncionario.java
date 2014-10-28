@@ -1,5 +1,6 @@
 package com.vendas.negocio;
 
+import java.util.List;
 import com.vendas.basicas.Endereco;
 import com.vendas.basicas.Fornecedor;
 import com.vendas.basicas.Funcionario;
@@ -21,6 +22,11 @@ public class NFuncionario {
 	public Funcionario consultar(Integer id) {
 		
 		return daof.consultarPorId(id);
+	}
+	
+	public List<Funcionario> realizarLogin(String usuario,String senha) {
+		
+		return daof.realizarLogin(usuario, senha);
 	}
 	
 }

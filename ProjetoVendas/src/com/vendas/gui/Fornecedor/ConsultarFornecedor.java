@@ -1,4 +1,4 @@
-package com.vendas.gui;
+package com.vendas.gui.Fornecedor;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;

@@ -9,6 +9,7 @@ import javax.persistence.Persistence;
 
 import com.vendas.basicas.Cliente;
 import com.vendas.basicas.Endereco;
+import com.vendas.basicas.Fornecedor;
 import com.vendas.basicas.Funcionario;
 import com.vendas.negocio.IFuncionario;
 
@@ -104,6 +105,20 @@ public class DAOFuncionario implements IFuncionario {
 	public List<Funcionario> listar() {
 		
 		return (ArrayList<Funcionario>) entityManager.createQuery("FROM " + Funcionario.class.getName()).getResultList();
+	}
+	
+	/**
+	 * Realizar Login - Funcionário
+	 * @param usuario
+	 * @param senha
+	 * @return
+	 */
+	public List<Funcionario> realizarLogin(String usuario,String senha) {
+		return entityManager.createQuery("select f from Funcionario as f where f.usuario = ?1 and f.senha = ?2").
+		setParameter(1, usuario).
+		setParameter(2, senha).
+		getResultList();
+	
 	}
 
 }
