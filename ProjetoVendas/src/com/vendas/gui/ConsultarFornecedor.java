@@ -225,7 +225,27 @@ public class ConsultarFornecedor extends JFrame {
 							public void run() {
 						
 								progressBarPesquisar.setVisible(true);
+					/*
+					 * Verificando se o CNPJ está vazio		
+					 */
+					if(cnpj.getText().equals("  .   .   /    -  ")){
+						
+						//removendo linhas
+						DefaultTableModel model = (DefaultTableModel) table.getModel();
+						model.setRowCount(0);
+						//Lista todos os fornecedores
+						lista_fornecedor = new ArrayList<Fornecedor>(fachada_fornecedor.listar());
+						 for (Fornecedor fornecedor : lista_fornecedor) {    
 							
+				             model.addRow(new String[]{fornecedor.getId().toString(), 
+				            		      			   fornecedor.getRazaoSocial(),
+				            		      			   fornecedor.getNomeFantasia(),
+				            		      			   fornecedor.getCnpj()
+				            		 		});    
+				         }
+						 table.setModel(model);
+						 updateProgressPesquisar();
+					}else{
 					//removendo linhas
 						DefaultTableModel model = (DefaultTableModel) table.getModel();
 						model.setRowCount(0);
@@ -247,12 +267,12 @@ public class ConsultarFornecedor extends JFrame {
 					 	}
 					 		table.setModel(model);
 							updateProgressPesquisar();
-					
+							cnpj.setText("");
 							
 							}
-						 
+							}//fim do if	 
 						}.start();
-						
+					
 					}
 				});
 				
