@@ -54,7 +54,7 @@ public class NFornecedor {
 		return daof.consultarPorId(id);
 	}
 
-	public List<?> consultarCNPJ(String cnpj) {
+	public List<Fornecedor> consultarCNPJ(String cnpj) {
 		return daof.consultarPorCNPJ(cnpj);
 	}
 }

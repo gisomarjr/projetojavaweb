@@ -45,9 +45,12 @@ public class ConsultarFornecedor extends JFrame {
 	int erro_null = 0;
 	final JButton btnEditar = new JButton("Editar");
 	final JProgressBar progressBar = new JProgressBar();
+	JProgressBar progressBarPesquisar = new JProgressBar();
 	 DefaultTableModel model = new DefaultTableModel(new Object[][]{}, new Object[]{"ID", "Razão", "Nome Fantasia", "CNPJ" });   
 	 static ConsultarFornecedor consultar;
 	 MaskFormatter cnpj_format;
+	 List<Fornecedor> lista_fornecedor;
+	 JButton btnPesquisar = new JButton("Pesquisar");
 	/**
 	 * Launch the application.
 	 */
@@ -94,7 +97,7 @@ public class ConsultarFornecedor extends JFrame {
 				lblConsultarFornecedores.setBounds(293, 11, 267, 14);
 				contentPane.add(lblConsultarFornecedores);
 							
-				ArrayList<Fornecedor> lista_fornecedor = new ArrayList<Fornecedor>(fachada_fornecedor.listar());
+				 lista_fornecedor = new ArrayList<Fornecedor>(fachada_fornecedor.listar());
 				 for (Fornecedor fornecedor : lista_fornecedor) {    
 					 this.fornecedor = fornecedor;
 		             model.addRow(new String[]{fornecedor.getId().toString(), 
@@ -120,7 +123,9 @@ public class ConsultarFornecedor extends JFrame {
 				contentPane.add(scrollPane);
 				
 				progressBar.setVisible(false);
+				progressBarPesquisar.setVisible(false);
 				progressBar.setIndeterminate(true);
+				progressBarPesquisar.setIndeterminate(true);
 				btnEditar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						
@@ -211,18 +216,54 @@ public class ConsultarFornecedor extends JFrame {
 				cnpj.setBounds(142, 55, 154, 20);
 				contentPane.add(cnpj);
 				
-				JButton btnPesquisar = new JButton("Pesquisar");
+				
 				btnPesquisar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
+					
+						new Thread(){
+							@Override
+							public void run() {
 						
+								progressBarPesquisar.setVisible(true);
 						
+					//removendo linhas
+						DefaultTableModel model = (DefaultTableModel) table.getModel();
+						 for (int i = 0; i < model.getRowCount(); i++) {
+							model.removeRow(i);
+						}
+					//listando	
+					 lista_fornecedor = new ArrayList<Fornecedor>(fachada_fornecedor.consultarCNPJ(cnpj.getText()));
+					
+					 for (Fornecedor fornecedor : lista_fornecedor) {    
 						
-					fachada_fornecedor.consultarCNPJ(cnpj.getText());
+			             model.addRow(new String[]{fornecedor.getId().toString(), 
+			            		      			   fornecedor.getRazaoSocial(),
+			            		      			   fornecedor.getNomeFantasia(),
+			            		      			   fornecedor.getCnpj()
+			            		 		});    
+			         }
+					 
+					 	if(model.getRowCount() <= 0){
+					 		JOptionPane.showMessageDialog(null,"Nenhum Fornecedor Encontrado!");
+					 	}
+					 		table.setModel(model);
+							updateProgressPesquisar();
+					
+							
+							}
+						}.start();
 						
 					}
 				});
+				
+				
+				
 				btnPesquisar.setBounds(308, 53, 108, 23);
 				contentPane.add(btnPesquisar);
+				
+				
+				progressBarPesquisar.setBounds(308, 37, 108, 14);
+				contentPane.add(progressBarPesquisar);
 				
 				
 				
@@ -235,7 +276,22 @@ public class ConsultarFornecedor extends JFrame {
 		      // event dispatch thread
 		    	btnEditar.setEnabled(true);
 				progressBar.setVisible(false);
+				
 		        dispose();
+				
+		    }
+		  });
+	}
+	
+	private void updateProgressPesquisar() {
+		  SwingUtilities.invokeLater(new Runnable() {
+		    public void run() {
+		      // Here, we can safely update the GUI
+		      // because we'll be called from the
+		      // event dispatch thread
+		    	btnPesquisar.setEnabled(true);
+				progressBarPesquisar.setVisible(false);
+				
 				
 		    }
 		  });
