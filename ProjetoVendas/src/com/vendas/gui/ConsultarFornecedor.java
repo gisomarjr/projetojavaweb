@@ -216,7 +216,7 @@ public class ConsultarFornecedor extends JFrame {
 				cnpj.setBounds(142, 55, 154, 20);
 				contentPane.add(cnpj);
 				
-				
+		
 				btnPesquisar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 					
@@ -225,12 +225,11 @@ public class ConsultarFornecedor extends JFrame {
 							public void run() {
 						
 								progressBarPesquisar.setVisible(true);
-						
+							
 					//removendo linhas
 						DefaultTableModel model = (DefaultTableModel) table.getModel();
-						 for (int i = 0; i < model.getRowCount(); i++) {
-							model.removeRow(i);
-						}
+						model.setRowCount(0);
+				
 					//listando	
 					 lista_fornecedor = new ArrayList<Fornecedor>(fachada_fornecedor.consultarCNPJ(cnpj.getText()));
 					
@@ -251,6 +250,7 @@ public class ConsultarFornecedor extends JFrame {
 					
 							
 							}
+						 
 						}.start();
 						
 					}
