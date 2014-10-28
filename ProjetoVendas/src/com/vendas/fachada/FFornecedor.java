@@ -44,4 +44,8 @@ public class FFornecedor {
 	public Fornecedor consultarID(Integer id){
 		return nf.consultarID(id);
 	}
+	
+	public List<?> consultarCNPJ(String cnpj){
+		return nf.consultarCNPJ(cnpj);
+	}
 }

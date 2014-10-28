@@ -87,7 +87,7 @@ public class Login extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				Interno interno = new Interno();
 				interno.setVisible(true);
-				login.setVisible(false);
+				dispose();
 				
 			}
 		});

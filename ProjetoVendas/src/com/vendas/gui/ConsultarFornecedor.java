@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Toolkit;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +15,8 @@ import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.MaskFormatter;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 
@@ -44,6 +47,7 @@ public class ConsultarFornecedor extends JFrame {
 	final JProgressBar progressBar = new JProgressBar();
 	 DefaultTableModel model = new DefaultTableModel(new Object[][]{}, new Object[]{"ID", "Razão", "Nome Fantasia", "CNPJ" });   
 	 static ConsultarFornecedor consultar;
+	 MaskFormatter cnpj_format;
 	/**
 	 * Launch the application.
 	 */
@@ -92,6 +96,7 @@ public class ConsultarFornecedor extends JFrame {
 							
 				ArrayList<Fornecedor> lista_fornecedor = new ArrayList<Fornecedor>(fachada_fornecedor.listar());
 				 for (Fornecedor fornecedor : lista_fornecedor) {    
+					 this.fornecedor = fornecedor;
 		             model.addRow(new String[]{fornecedor.getId().toString(), 
 		            		      			   fornecedor.getRazaoSocial(),
 		            		      			   fornecedor.getNomeFantasia(),
@@ -194,13 +199,25 @@ public class ConsultarFornecedor extends JFrame {
 				lblPesquisarCnpj.setBounds(10, 57, 125, 14);
 				contentPane.add(lblPesquisarCnpj);
 				
-				JFormattedTextField formattedTextField = new JFormattedTextField();
-				formattedTextField.setBounds(142, 55, 154, 20);
-				contentPane.add(formattedTextField);
+				final JFormattedTextField cnpj = new JFormattedTextField();
+				
+				try {
+					cnpj_format = new MaskFormatter("##.###.###/####-##");
+				} catch (ParseException e1) {
+					e1.printStackTrace();
+				}  
+		        cnpj.setFormatterFactory(new DefaultFormatterFactory(cnpj_format));
+				
+				cnpj.setBounds(142, 55, 154, 20);
+				contentPane.add(cnpj);
 				
 				JButton btnPesquisar = new JButton("Pesquisar");
 				btnPesquisar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
+						
+						
+						
+					fachada_fornecedor.consultarCNPJ(cnpj.getText());
 						
 					}
 				});
