@@ -20,5 +20,10 @@ public class NEndereco {
 		
 		return daoe.consultarPorId(id);
 	}
+
+	public void editar(Endereco endereco) {
+		daoe.editar(endereco);		
+	}
+	
 	
 }

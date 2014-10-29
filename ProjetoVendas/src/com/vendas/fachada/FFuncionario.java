@@ -53,5 +53,10 @@ public class FFuncionario {
 		nf.excluir(id);
 	}
 
+	public void editar(Funcionario funcionario) {
+		nf.editar(funcionario);
+		
+	}
+
 	
 }

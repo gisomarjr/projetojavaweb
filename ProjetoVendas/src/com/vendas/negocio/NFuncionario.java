@@ -49,5 +49,9 @@ public class NFuncionario {
 		daof.removeById(id);
 		
 	}
+
+	public void editar(Funcionario funcionario) {
+		daof.editar(funcionario);
+	}
 	
 }

@@ -19,5 +19,9 @@ public class FEndereco {
 		return ne.consultar(id);
 		
 	}
+
+	public void editar(Endereco endereco) {
+		ne.editar(endereco);
+	}
 	
 }

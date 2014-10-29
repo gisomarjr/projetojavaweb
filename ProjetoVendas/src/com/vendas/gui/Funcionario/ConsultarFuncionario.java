@@ -151,21 +151,17 @@ public class ConsultarFuncionario extends JFrame {
 									 btnEditar.setEnabled(false);
 									 progressBar.setVisible(true);
 								
-									/* EditarFuncionario editar_funcionario = new EditarFuncionario(funcionario);
+									 EditarFuncionario editar_funcionario = new EditarFuncionario(funcionario);
 									 editar_funcionario.setVisible(true);
 									 updateProgress();
-									*/
+									
 									}
 								}.start();
-								
-													 
-							
 							 
 						}catch(Exception erro){
 							JOptionPane.showMessageDialog(null,"Atenção é necessário selecionar um Funcionario!");
 							 erro_null = 1;
 						}
-						
 						
 						
 					}

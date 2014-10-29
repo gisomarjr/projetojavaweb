@@ -19,30 +19,42 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JButton;
 import javax.swing.SwingUtilities;
 
-import com.vendas.basicas.Fornecedor;
-import com.vendas.fachada.FFornecedor;
+import com.vendas.basicas.Departamento;
+import com.vendas.basicas.Endereco;
+import com.vendas.basicas.Funcionario;
+import com.vendas.basicas.Funcionario;
+import com.vendas.fachada.FDepartamento;
+import com.vendas.fachada.FEndereco;
+import com.vendas.fachada.FFuncionario;
+import com.vendas.gui.Interno;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JProgressBar;
+import javax.swing.JPasswordField;
+import javax.swing.JComboBox;
+import javax.swing.JSeparator;
 
 public class EditarFuncionario extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textRazaoSocial;
-	private JTextField textNomeFantasia;
+	private JTextField textNome;
+	private JTextField textMatricula;
 	ImageIcon loading = new ImageIcon("loading.gif");
-	JLabel lblCarregando = new JLabel("Validando Fornecedor... ", loading, JLabel.CENTER);
+	JLabel lblCarregando = new JLabel("Validando Funcionário... ", loading, JLabel.CENTER);
 	JProgressBar progressBar = new JProgressBar();
-	final JButton btnSalvar = new JButton("Atualizar");
-	final JFormattedTextField cnpj = new JFormattedTextField();
+	final JButton btnSalvar = new JButton("Salvar");
+	final JFormattedTextField cpf = new JFormattedTextField();
 	String status;
-	MaskFormatter cnpj_format;
-	FFornecedor fachada_fornecedor = new FFornecedor();
-	Fornecedor fornecedor_editar;
-	static EditarFuncionario frame ;
+	MaskFormatter cpf_format;
+	List<Departamento> lista_departamento;
+	Departamento departamento;
+	Funcionario funcionario_editar;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -51,13 +63,11 @@ public class EditarFuncionario extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					frame = new EditarFuncionario();
-					
+					EditarFuncionario frame = new EditarFuncionario();
 					frame.setVisible(true);
-					
-					//desabilitando o botï¿½o maximizar
+					//desabilitando o bot‡o maximizar
 					frame.setResizable(false);
-					frame.setTitle("Editar Fornecedor");
+					frame.setTitle("Cadastro de Funcionário");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -65,19 +75,21 @@ public class EditarFuncionario extends JFrame {
 		});
 	}
 	 
-	 final JLabel label = new JLabel("Atualizando Fornecedor... ", loading, JLabel.CENTER);
+	 final JLabel label = new JLabel("Validando Funcionário... ", loading, JLabel.CENTER);
+	
+	 
+	 private JTextField textEmail;
+	 private JTextField textLogradouro;
+	 private JTextField textCidade;
+	 private JTextField textNumero;
 	/**
 	 * Create the frame.
 	 */
-	 public EditarFuncionario(){}
-
-	public EditarFuncionario(Fornecedor fornecedor) {
-		
-		
-		this.fornecedor_editar = fornecedor;
-		
+    public EditarFuncionario(){}	 
+	public EditarFuncionario(Funcionario funcionario) {
+		this.funcionario_editar = funcionario;
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 558, 515);
 		contentPane = new JPanel();
 		
 		//Tela centralizada
@@ -89,91 +101,237 @@ public class EditarFuncionario extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblCadastroDeFornecedor = new JLabel("Atualizar Fornecedor");
-		lblCadastroDeFornecedor.setBounds(144, 11, 280, 29);
-		contentPane.add(lblCadastroDeFornecedor);
+		JLabel lblCadastroDeFuncionario = new JLabel("Cadastro de Funcionário");
+		lblCadastroDeFuncionario.setBounds(144, 11, 280, 29);
+		contentPane.add(lblCadastroDeFuncionario);
 		
-		JLabel lblRazoSocial = new JLabel("Raz\u00E3o Social:");
-		lblRazoSocial.setBounds(10, 45, 109, 23);
-		contentPane.add(lblRazoSocial);
+		JLabel lblNome = new JLabel("Nome");
+		lblNome.setBounds(10, 45, 109, 23);
+		contentPane.add(lblNome);
 		
-		textRazaoSocial = new JTextField();
-		textRazaoSocial.setBounds(117, 46, 307, 20);
-		contentPane.add(textRazaoSocial);
-		textRazaoSocial.setColumns(10);
+		textNome = new JTextField();
+		textNome.setBounds(129, 45, 307, 20);
+		contentPane.add(textNome);
+		textNome.setColumns(10);
 		
-		JLabel lblNomeFantasia = new JLabel("Nome Fantasia");
-		lblNomeFantasia.setBounds(10, 90, 109, 29);
-		contentPane.add(lblNomeFantasia);
+		JLabel lblMatricula = new JLabel("Matricula");
+		lblMatricula.setBounds(10, 90, 81, 29);
+		contentPane.add(lblMatricula);
 		
-		textNomeFantasia = new JTextField();
-		textNomeFantasia.setBounds(117, 94, 307, 20);
-		contentPane.add(textNomeFantasia);
-		textNomeFantasia.setColumns(10);
+		textMatricula = new JTextField();
+		textMatricula.setBounds(129, 88, 86, 20);
+		contentPane.add(textMatricula);
+		textMatricula.setColumns(10);
 		
-		JLabel lblCnpj = new JLabel("CNPJ:");
-		lblCnpj.setBounds(46, 131, 75, 29);   
-		contentPane.add(lblCnpj);
+		JLabel lblcpf = new JLabel("CPF:");
+		lblcpf.setBounds(225, 84, 34, 29);   
+		contentPane.add(lblcpf);
 		
 		
-		cnpj.setBounds(111, 136, 140, 20);
+		cpf.setBounds(269, 88, 109, 20);
 		try {
-			cnpj_format = new MaskFormatter("##.###.###/####-##");
+			cpf_format = new MaskFormatter("###.###.###-##");
 		} catch (ParseException e1) {
 			e1.printStackTrace();
 		}  
-        cnpj.setFormatterFactory(new DefaultFormatterFactory(cnpj_format));
-		contentPane.add(cnpj);
+        cpf.setFormatterFactory(new DefaultFormatterFactory(cpf_format));
+		contentPane.add(cpf);
 		
 		
 		
-		btnSalvar.setBounds(294, 222, 130, 29);
+		btnSalvar.setBounds(347, 431, 130, 29);
 		contentPane.add(btnSalvar);
 		
 		
-		lblCarregando.setBounds(32, 168, 378, 16);
+		lblCarregando.setBounds(99, 379, 378, 16);
 		contentPane.add(lblCarregando);
 		
 		
-		progressBar.setBounds(154, 196, 148, 14);
+		progressBar.setBounds(223, 406, 148, 14);
 		progressBar.setIndeterminate(true);
 		progressBar.setVisible(false);
 		contentPane.add(progressBar);
 		
+		
+		JLabel lblDepartamento = new JLabel("Departamento");
+		lblDepartamento.setBounds(5, 224, 114, 14);
+		contentPane.add(lblDepartamento);
+		
+		//Carregando o departamento
+		FDepartamento fachada_departamento = new FDepartamento();
+		lista_departamento = new ArrayList<Departamento>(fachada_departamento.listar());
+		ArrayList<String> lista = new ArrayList<String>();
+		 for (Departamento departamento : lista_departamento) { 
+			 this.departamento = departamento;
+			 lista.add(departamento.getNome());
+			 
+		 }
+		
+		final JComboBox comboBoxDepartamento = new JComboBox(lista.toArray());
+		comboBoxDepartamento.setBounds(129, 221, 113, 20);
+		contentPane.add(comboBoxDepartamento);
+		
+		JLabel lblTelefone = new JLabel("Telefone");
+		lblTelefone.setBounds(10, 140, 86, 14);
+		contentPane.add(lblTelefone);
+		
+		final JFormattedTextField telefone = new JFormattedTextField();
+		telefone.setBounds(129, 131, 86, 20);
+		contentPane.add(telefone);
+		
+		JLabel lblEmail = new JLabel("Email:");
+		lblEmail.setBounds(223, 133, 46, 14);
+		contentPane.add(lblEmail);
+		
+		textEmail = new JTextField();
+		textEmail.setBounds(267, 130, 167, 20);
+		contentPane.add(textEmail);
+		textEmail.setColumns(10);
+		
+		JSeparator separator = new JSeparator();
+		separator.setBounds(10, 386, 232, -104);
+		contentPane.add(separator);
+		
+		JLabel lblLogradouro = new JLabel("Logradouro");
+		lblLogradouro.setBounds(10, 264, 109, 14);
+		contentPane.add(lblLogradouro);
+		
+		textLogradouro = new JTextField();
+		textLogradouro.setBounds(129, 262, 307, 20);
+		contentPane.add(textLogradouro);
+		textLogradouro.setColumns(10);
+		
+		JLabel lblCidade = new JLabel("Cidade");
+		lblCidade.setBounds(10, 305, 95, 14);
+		contentPane.add(lblCidade);
+		
+		textCidade = new JTextField();
+		textCidade.setBounds(127, 303, 86, 20);
+		contentPane.add(textCidade);
+		textCidade.setColumns(10);
+		
+		JLabel lblEstado = new JLabel("Estado");
+		lblEstado.setBounds(223, 306, 72, 14);
+		contentPane.add(lblEstado);
+		
+		String listaEstado [] = {"PE", "SP"}; 
+		final JComboBox comboBoxEstado = new JComboBox(listaEstado);
+	
+		
+		
+		comboBoxEstado.setBounds(311, 302, 95, 20);
+		contentPane.add(comboBoxEstado);
+		
+		JLabel lblCep = new JLabel("CEP");
+		lblCep.setBounds(18, 350, 46, 14);
+		contentPane.add(lblCep);
+		
+		final JFormattedTextField cep = new JFormattedTextField();
+		cep.setBounds(127, 340, 86, 20);
+		contentPane.add(cep);
+		
+		JLabel lblNmero = new JLabel("N\u00FAmero");
+		lblNmero.setBounds(223, 343, 86, 17);
+		contentPane.add(lblNmero);
+		
+		textNumero = new JTextField();
+		textNumero.setBounds(318, 334, 46, 20);
+		contentPane.add(textNumero);
+		textNumero.setColumns(10);
+		
 		lblCarregando.setVisible(false);
-			
-		cnpj.setText(fornecedor_editar.getCnpj());
-		textNomeFantasia.setText(fornecedor_editar.getNomeFantasia());
-		textRazaoSocial.setText(fornecedor_editar.getRazaoSocial());
+		
+		/**
+		 * Carregando Funcionário
+		 */
+		
+		cpf.setText(funcionario.getCpf());
+		textMatricula.setText(funcionario.getMatricula());
+		textNome.setText(funcionario.getNome());
+		textEmail.setText(funcionario.getEmail());
+		telefone.setText(funcionario.getTelefone());
+		
+		
+		cep.setText(funcionario.getEndereco().getCep());
+		textCidade.setText(funcionario.getEndereco().getCidade());
+		comboBoxEstado.setSelectedItem(funcionario.getEndereco().getEstado());
+		textLogradouro.setText(funcionario.getEndereco().getLogradouro());
+		textNumero.setText(funcionario.getEndereco().getNumero().toString());
+		
 		
 		
 		btnSalvar.addActionListener(new ActionListener() {
 			
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				
-				/*
+				
 				new Thread(){
 					@Override
 					public void run() {
 						lblCarregando.setVisible(true);
 						progressBar.setVisible(true);
 						btnSalvar.setEnabled(false);
-						*/
+						
+						Funcionario funcionario = new Funcionario();
+						Endereco 	endereco	= new Endereco();
+						
+						funcionario.setCpf(cpf.getText());
+						funcionario.setMatricula(textMatricula.getText());
+						funcionario.setNome(textNome.getText());
+						funcionario.setEmail(textEmail.getText());
+						funcionario.setTelefone(telefone.getText());
+						funcionario.setId(funcionario_editar.getId());
+						departamento.setId(comboBoxDepartamento.getSelectedIndex() + 1);
+						departamento.setNome(comboBoxDepartamento.getSelectedItem().toString());
+						
+						funcionario.setDepartamento(departamento);
+						endereco.setCep(cep.getText());
+						endereco.setCidade(textCidade.getText());
+						endereco.setEstado(comboBoxEstado.getSelectedItem().toString());
+						endereco.setLogradouro(textLogradouro.getText());
+						endereco.setNumero(Integer.parseInt(textNumero.getText()));
+						endereco.setFuncionario(funcionario);
+						endereco.setId(funcionario_editar.getEndereco().getId());
+						
+						FFuncionario fachada_Funcionario = new FFuncionario();
+						FEndereco    fachada_endereco    = new FEndereco();
 						try {
-							Fornecedor formulario_editar = new Fornecedor();
-							formulario_editar.setCnpj(cnpj.getText());
-							formulario_editar.setNomeFantasia(textNomeFantasia.getText());
-							formulario_editar.setRazaoSocial(textRazaoSocial.getText());
-							formulario_editar.setId(fornecedor_editar.getId());
-							status = fachada_fornecedor.validaCampo(formulario_editar);
+							status = fachada_Funcionario.validaCampo(funcionario);
 							
 							if(status == ""){
-					        							
-							fachada_fornecedor.atualizar(formulario_editar);
-					         status = "Fornecedor Atualizado com Sucesso!";
+						    
+					         //Cadastrar Funcionário
+							 fachada_Funcionario.editar(funcionario);
+					         
+					         cpf.setText("");
+							 textMatricula.setText("");
+							 textNome.setText("");
+							 //Cadastrar Endere?o
+							 fachada_endereco.editar(endereco);
+							 status = "Funcionario Alterado com Sucesso!";
 					         JOptionPane.showMessageDialog(null,status);
-							
-							
+					         
+					         String messageExit = "Cadastrar novo usu‡rio?";
+
+					         String title = "Confirma?‹o";
+
+					         //Exibe caixa de dialogo solicitando confirma?‹o ou n‹o. 
+
+					         //Se o usu‡rio clicar em "Sim" retorna 0 pra variavel reply, se informado n‹o retorna 1
+
+					         int reply = JOptionPane.showConfirmDialog(null, messageExit, title, JOptionPane.YES_NO_OPTION);
+
+					           if (reply == JOptionPane.NO_OPTION)
+
+					           {
+					        	   	dispose();
+					        	   	Interno interno = new Interno();
+					        	   	interno.setVisible(true);
+					           		}else{
+					           //fa?a nada!! :)
+					           }
+
 							}else{
 								JOptionPane.showMessageDialog(null,status);
 								
@@ -182,20 +340,14 @@ public class EditarFuncionario extends JFrame {
 							
 						} catch (Exception e) {
 							JOptionPane.showMessageDialog(null,e.getMessage());
-							
 						}
-					/*
+						
 					}
 				}.start();
 				
-			}*/
 			}
-		}
-	);
-}
-		
-	
-
+		});
+	}
 	
 	private void updateProgress() {
 		  SwingUtilities.invokeLater(new Runnable() {
@@ -206,15 +358,9 @@ public class EditarFuncionario extends JFrame {
 		    	lblCarregando.setVisible(false);
 				progressBar.setVisible(false);
 				btnSalvar.setEnabled(true);
-				dispose();
-				ConsultarFuncionario c = new ConsultarFuncionario();
-				c.setVisible(true);
 				
 				
 		    }
 		  });
-		  
 		}
-	
-	
 }
