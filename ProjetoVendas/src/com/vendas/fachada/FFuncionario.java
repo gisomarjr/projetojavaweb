@@ -1,5 +1,6 @@
 package com.vendas.fachada;
 
+import java.util.Collection;
 import java.util.List;
 
 import com.vendas.basicas.Cliente;
@@ -31,5 +32,10 @@ public class FFuncionario {
 	public String validaCampo(Funcionario funcionario) {
 		// TODO Auto-generated method stub
 		return "";
+	}
+
+	public List<Funcionario> listar() {
+		// TODO Auto-generated method stub
+		return nf.listar();
 	}
 }

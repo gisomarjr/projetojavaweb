@@ -28,5 +28,10 @@ public class NFuncionario {
 		
 		return daof.realizarLogin(usuario, senha);
 	}
+
+	public List<Funcionario> listar() {
+		// TODO Auto-generated method stub
+		return daof.listar();
+	}
 	
 }

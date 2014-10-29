@@ -20,8 +20,8 @@ import javax.swing.text.MaskFormatter;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 
-import com.vendas.basicas.Fornecedor;
-import com.vendas.fachada.FFornecedor;
+import com.vendas.basicas.Funcionario;
+import com.vendas.fachada.FFuncionario;
 
 import javax.swing.JScrollBar;
 import javax.swing.JButton;
@@ -37,8 +37,8 @@ public class ConsultarFuncionario extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
-	Fornecedor fornecedor = new Fornecedor();
-	final FFornecedor fachada_fornecedor = new FFornecedor();
+	Funcionario funcionario = new Funcionario();
+	final FFuncionario fachada_funcionario = new FFuncionario();
 	int linha = 0;
 	String valor_string = null;
 	Object valor = null;
@@ -46,10 +46,10 @@ public class ConsultarFuncionario extends JFrame {
 	final JButton btnEditar = new JButton("Editar");
 	final JProgressBar progressBar = new JProgressBar();
 	JProgressBar progressBarPesquisar = new JProgressBar();
-	 DefaultTableModel model = new DefaultTableModel(new Object[][]{}, new Object[]{"ID", "Razão", "Nome Fantasia", "CNPJ" });   
+	 DefaultTableModel model = new DefaultTableModel(new Object[][]{}, new Object[]{"ID", "CPF", "Nome", "Matricula","Email", "Telefone","Usuario","Departamento","Logradouro","Cidade","Numero","Estado" });   
 	 static ConsultarFuncionario consultar;
 	 MaskFormatter cnpj_format;
-	 List<Fornecedor> lista_fornecedor;
+	 List<Funcionario> lista_funcionario;
 	 JButton btnPesquisar = new JButton("Pesquisar");
 	/**
 	 * Launch the application.
@@ -67,7 +67,7 @@ public class ConsultarFuncionario extends JFrame {
 					consultar = frame;
 					//desabilitando o bot�o maximizar
 					frame.setResizable(false);
-					frame.setTitle("Consultar Fornecedor");
+					frame.setTitle("Consultar Funcionario");
 					
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -82,7 +82,7 @@ public class ConsultarFuncionario extends JFrame {
 	 */
 	public ConsultarFuncionario() {
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-		setBounds(100, 100, 724, 493);
+		setBounds(100, 100, 1033, 549);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		//Tela centralizada
@@ -93,17 +93,26 @@ public class ConsultarFuncionario extends JFrame {
 				setContentPane(contentPane);
 				contentPane.setLayout(null);
 				
-				JLabel lblConsultarFornecedores = new JLabel("Consultar Fornecedores");
-				lblConsultarFornecedores.setBounds(293, 11, 267, 14);
-				contentPane.add(lblConsultarFornecedores);
+				JLabel lblConsultarFuncionarioes = new JLabel("Consultar Funcionarios");
+				lblConsultarFuncionarioes.setBounds(452, 11, 267, 14);
+				contentPane.add(lblConsultarFuncionarioes);
 							
-				 lista_fornecedor = new ArrayList<Fornecedor>(fachada_fornecedor.listar());
-				 for (Fornecedor fornecedor : lista_fornecedor) {    
-					 this.fornecedor = fornecedor;
-		             model.addRow(new String[]{fornecedor.getId().toString(), 
-		            		      			   fornecedor.getRazaoSocial(),
-		            		      			   fornecedor.getNomeFantasia(),
-		            		      			   fornecedor.getCnpj()
+				 lista_funcionario = new ArrayList<Funcionario>(fachada_funcionario.listar());
+				 for (Funcionario funcionario : lista_funcionario) {    
+					 this.funcionario = funcionario;
+		             model.addRow(new String[]{funcionario.getId().toString(), 
+		            		      			   funcionario.getCpf(),
+		            		      			   funcionario.getNome(),
+		            		      			   funcionario.getMatricula(),
+		            		      			   funcionario.getEmail(),
+		            		      			   funcionario.getTelefone(),
+		            		      			   funcionario.getUsuario(),
+		            		      			   funcionario.getDepartamento().getNome(),
+		            		      			   funcionario.getEndereco().getLogradouro(),
+		            		      			   funcionario.getEndereco().getCidade(),
+		            		      			   funcionario.getEndereco().getNumero().toString(),
+		            		      			   funcionario.getEndereco().getEstado(),
+		            		      			   
 		            		 		});    
 		         }
 			
@@ -114,12 +123,12 @@ public class ConsultarFuncionario extends JFrame {
 				contentPane.add(table);
 				
 				
-				progressBar.setBounds(498, 37, 89, 14);
+				progressBar.setBounds(805, 37, 89, 14);
 				contentPane.add(progressBar);
 				
 				//Barra de Rolagem
 				JScrollPane scrollPane = new JScrollPane(table);
-				scrollPane.setBounds(10, 95, 688, 348);
+				scrollPane.setBounds(10, 95, 1009, 402);
 				contentPane.add(scrollPane);
 				
 				progressBar.setVisible(false);
@@ -137,14 +146,14 @@ public class ConsultarFuncionario extends JFrame {
 								new Thread(){
 									@Override
 									public void run() {
-									fornecedor = fachada_fornecedor.consultarID(Integer.parseInt(valor_string));
+									//funcionario = fachada_funcionario.consultarID(Integer.parseInt(valor_string));
 									 btnEditar.setEnabled(false);
 									 progressBar.setVisible(true);
 								
-									 EditarFuncionario editar_fornecedor = new EditarFuncionario(fornecedor);
-									 editar_fornecedor.setVisible(true);
+									/* EditarFuncionario editar_funcionario = new EditarFuncionario(funcionario);
+									 editar_funcionario.setVisible(true);
 									 updateProgress();
-									
+									*/
 									}
 								}.start();
 								
@@ -152,7 +161,7 @@ public class ConsultarFuncionario extends JFrame {
 							
 							 
 						}catch(Exception erro){
-							JOptionPane.showMessageDialog(null,"Atenção é necessário selecionar um Fornecedor!");
+							JOptionPane.showMessageDialog(null,"Atenção é necessário selecionar um Funcionario!");
 							 erro_null = 1;
 						}
 						
@@ -160,7 +169,7 @@ public class ConsultarFuncionario extends JFrame {
 						
 					}
 				});
-				btnEditar.setBounds(498, 53, 89, 23);
+				btnEditar.setBounds(805, 53, 89, 23);
 				contentPane.add(btnEditar);
 				
 				JButton btnExcluir = new JButton("Excluir");
@@ -175,19 +184,19 @@ public class ConsultarFuncionario extends JFrame {
 					 valor = table.getValueAt(linha,0);   					
 					 valor_string = (String)valor;
 				}catch(Exception erro){
-					JOptionPane.showMessageDialog(null,"Atenção é necessário selecionar um Fornecedor!");
+					JOptionPane.showMessageDialog(null,"Atenção é necessário selecionar um Funcionario!");
 					 erro_null = 1;
 				}
 				
 				try{
 					if(erro_null != 1){
-					fachada_fornecedor.excluir(Integer.parseInt(valor_string));
+					//fachada_funcionario.excluir(Integer.parseInt(valor_string));
 					
 					DefaultTableModel model = (DefaultTableModel) table.getModel();
 					model.removeRow(linha);
 					table.revalidate();
 					
-					JOptionPane.showMessageDialog(null,"Fornecedor Excluído com Sucesso!");
+					JOptionPane.showMessageDialog(null,"Funcionario Excluído com Sucesso!");
 					}
 				}catch(Exception erro){
 					JOptionPane.showMessageDialog(null,erro.getMessage());
@@ -197,7 +206,7 @@ public class ConsultarFuncionario extends JFrame {
 				
 				
 				
-				btnExcluir.setBounds(597, 53, 89, 23);
+				btnExcluir.setBounds(917, 53, 89, 23);
 				contentPane.add(btnExcluir);
 				
 				JLabel lblPesquisarCnpj = new JLabel("Pesquisar  - CNPJ:");
@@ -226,22 +235,31 @@ public class ConsultarFuncionario extends JFrame {
 						
 								progressBarPesquisar.setVisible(true);
 					/*
-					 * Verificando se o CNPJ est� vazio		
+					 * Verificando se o CNPJ est� vazio		
 					 */
 					if(cnpj.getText().equals("  .   .   /    -  ")){
 						
 						//removendo linhas
 						DefaultTableModel model = (DefaultTableModel) table.getModel();
 						model.setRowCount(0);
-						//Lista todos os fornecedores
-						lista_fornecedor = new ArrayList<Fornecedor>(fachada_fornecedor.listar());
-						 for (Fornecedor fornecedor : lista_fornecedor) {    
+						//Lista todos os funcionarioes
+						lista_funcionario = new ArrayList<Funcionario>(fachada_funcionario.listar());
+						 for (Funcionario funcionario : lista_funcionario) {    
 							
-				             model.addRow(new String[]{fornecedor.getId().toString(), 
-				            		      			   fornecedor.getRazaoSocial(),
-				            		      			   fornecedor.getNomeFantasia(),
-				            		      			   fornecedor.getCnpj()
-				            		 		});    
+							  model.addRow(new String[]{funcionario.getId().toString(), 
+           		      			   funcionario.getDepartamento().getNome(),
+           		      			   funcionario.getCpf(),
+           		      			   funcionario.getEmail(),
+           		      			   funcionario.getMatricula(),
+           		      			   funcionario.getTelefone(),
+           		      			   funcionario.getUsuario(),
+           		      			   funcionario.getNome(),
+           		      			   funcionario.getEndereco().getLogradouro(),
+           		      			   funcionario.getEndereco().getCidade(),
+           		      			   funcionario.getEndereco().getNumero().toString(),
+           		      			   funcionario.getEndereco().getEstado(),
+           		      			   
+           		 		});    
 				         }
 						 table.setModel(model);
 						 updateProgressPesquisar();
@@ -251,19 +269,28 @@ public class ConsultarFuncionario extends JFrame {
 						model.setRowCount(0);
 				
 					//listando	
-					 lista_fornecedor = new ArrayList<Fornecedor>(fachada_fornecedor.consultarCNPJ(cnpj.getText()));
+					// lista_funcionario = new ArrayList<Funcionario>(fachada_funcionario.consultarCNPJ(cnpj.getText()));
 					
-					 for (Fornecedor fornecedor : lista_fornecedor) {    
+					 for (Funcionario funcionario : lista_funcionario) {    
 						
-			             model.addRow(new String[]{fornecedor.getId().toString(), 
-			            		      			   fornecedor.getRazaoSocial(),
-			            		      			   fornecedor.getNomeFantasia(),
-			            		      			   fornecedor.getCnpj()
-			            		 		});    
-			         }
+						  model.addRow(new String[]{funcionario.getId().toString(), 
+       		      			   funcionario.getDepartamento().getNome(),
+       		      			   funcionario.getCpf(),
+       		      			   funcionario.getEmail(),
+       		      			   funcionario.getMatricula(),
+       		      			   funcionario.getTelefone(),
+       		      			   funcionario.getUsuario(),
+       		      			   funcionario.getNome(),
+       		      			   funcionario.getEndereco().getLogradouro(),
+       		      			   funcionario.getEndereco().getCidade(),
+       		      			   funcionario.getEndereco().getNumero().toString(),
+       		      			   funcionario.getEndereco().getEstado(),
+       		      			   
+       		 		});     
+			       }
 					 
 					 	if(model.getRowCount() <= 0){
-					 		JOptionPane.showMessageDialog(null,"Nenhum Fornecedor Encontrado!");
+					 		JOptionPane.showMessageDialog(null,"Nenhum Funcionario Encontrado!");
 					 	}
 					 		table.setModel(model);
 							updateProgressPesquisar();
