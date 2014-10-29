@@ -1,5 +1,7 @@
 package com.vendas.fachada;
 
+import java.util.List;
+
 import com.vendas.basicas.Cliente;
 import com.vendas.basicas.Departamento;
 import com.vendas.basicas.Endereco;
@@ -19,5 +21,9 @@ public class FDepartamento {
 		
 		return nd.consultar(id);
 		
+	}
+	
+	public List<Departamento> listar(){
+		return nd.listar();
 	}
 }

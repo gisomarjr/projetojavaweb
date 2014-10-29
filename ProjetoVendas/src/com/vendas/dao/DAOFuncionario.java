@@ -62,7 +62,7 @@ public class DAOFuncionario implements IFuncionario {
             entityManager.persist(funcionario);
             entityManager.getTransaction().commit();
         } catch (Exception ex) {
-        	
+        	throw new Exception(ex.getMessage());
         }
 	}
 
@@ -108,7 +108,7 @@ public class DAOFuncionario implements IFuncionario {
 	}
 	
 	/**
-	 * Realizar Login - Funcionário
+	 * Realizar Login - Funcionï¿½rio
 	 * @param usuario
 	 * @param senha
 	 * @return

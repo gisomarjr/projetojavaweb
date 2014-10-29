@@ -19,12 +19,19 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JButton;
 import javax.swing.SwingUtilities;
 
+import com.vendas.basicas.Departamento;
+import com.vendas.basicas.Endereco;
+import com.vendas.basicas.Fornecedor;
 import com.vendas.basicas.Funcionario;
+import com.vendas.fachada.FDepartamento;
+import com.vendas.fachada.FEndereco;
 import com.vendas.fachada.FFuncionario;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JProgressBar;
 import javax.swing.JPasswordField;
@@ -43,6 +50,8 @@ public class CadastrarFuncionario extends JFrame {
 	final JFormattedTextField cpf = new JFormattedTextField();
 	String status;
 	MaskFormatter cpf_format;
+	List<Departamento> lista_departamento;
+	Departamento departamento;
 	
 	/**
 	 * Launch the application.
@@ -160,7 +169,16 @@ public class CadastrarFuncionario extends JFrame {
 		lblDepartamento.setBounds(5, 224, 114, 14);
 		contentPane.add(lblDepartamento);
 		
-		JComboBox comboBoxDepartamento = new JComboBox();
+		//Carregando o departamento
+		FDepartamento fachada_departamento = new FDepartamento();
+		lista_departamento = new ArrayList<Departamento>(fachada_departamento.listar());
+		ArrayList<String> lista = new ArrayList<String>();
+		 for (Departamento departamento : lista_departamento) { 
+			 this.departamento = departamento;
+			 lista.add(departamento.getNome());
+		 }
+		
+		JComboBox comboBoxDepartamento = new JComboBox(lista.toArray());
 		comboBoxDepartamento.setBounds(129, 221, 113, 20);
 		contentPane.add(comboBoxDepartamento);
 		
@@ -168,7 +186,7 @@ public class CadastrarFuncionario extends JFrame {
 		lblTelefone.setBounds(10, 140, 86, 14);
 		contentPane.add(lblTelefone);
 		
-		JFormattedTextField telefone = new JFormattedTextField();
+		final JFormattedTextField telefone = new JFormattedTextField();
 		telefone.setBounds(129, 131, 86, 20);
 		contentPane.add(telefone);
 		
@@ -207,7 +225,11 @@ public class CadastrarFuncionario extends JFrame {
 		lblEstado.setBounds(223, 306, 72, 14);
 		contentPane.add(lblEstado);
 		
-		JComboBox comboBoxEstado = new JComboBox();
+		String listaEstado [] = {"PE", "SP"}; 
+		final JComboBox comboBoxEstado = new JComboBox(listaEstado);
+	
+		
+		
 		comboBoxEstado.setBounds(311, 302, 95, 20);
 		contentPane.add(comboBoxEstado);
 		
@@ -215,7 +237,7 @@ public class CadastrarFuncionario extends JFrame {
 		lblCep.setBounds(18, 350, 46, 14);
 		contentPane.add(lblCep);
 		
-		JFormattedTextField cep = new JFormattedTextField();
+		final JFormattedTextField cep = new JFormattedTextField();
 		cep.setBounds(127, 340, 86, 20);
 		contentPane.add(cep);
 		
@@ -244,23 +266,39 @@ public class CadastrarFuncionario extends JFrame {
 						lblCarregando.setVisible(true);
 						progressBar.setVisible(true);
 						btnSalvar.setEnabled(false);
-						Funcionario Funcionario = new Funcionario();
-						Funcionario.setCpf(cpf.getText());
-						Funcionario.setMatricula(textMatricula.getText());
-						Funcionario.setNome(textNome.getText());
+						Funcionario funcionario = new Funcionario();
+						Endereco 	endereco	= new Endereco();
+						funcionario.setCpf(cpf.getText());
+						funcionario.setMatricula(textMatricula.getText());
+						funcionario.setNome(textNome.getText());
+						funcionario.setEmail(textEmail.getText());
+						funcionario.setTelefone(telefone.getText());
+						funcionario.setUsuario(textUsuario.getText());
+						funcionario.setSenha(passwordField.getText());
+						funcionario.setDepartamento(departamento);
+						endereco.setCep(cep.getText());
+						endereco.setCidade(textCidade.getText());
+						endereco.setEstado(comboBoxEstado.getSelectedItem().toString());
+						endereco.setLogradouro(textLogradouro.getText());
+						endereco.setNumero(Integer.parseInt(textNumero.getText()));
+						endereco.setFuncionario(funcionario);
 						
 						FFuncionario fachada_Funcionario = new FFuncionario();
+						FEndereco    fachada_endereco    = new FEndereco();
 						try {
-							status = fachada_Funcionario.validaCampo(Funcionario);
+							status = fachada_Funcionario.validaCampo(funcionario);
 							
 							if(status == ""){
-					         fachada_Funcionario.cadastrar(Funcionario);
-					         status = "Funcionario Cadastrado com Sucesso!";
-					         JOptionPane.showMessageDialog(null,status);
+					         //Cadastrar Funcionário
+							 fachada_Funcionario.cadastrar(funcionario);
+					         
 					         cpf.setText("");
 							 textMatricula.setText("");
 							 textNome.setText("");
-							 
+							 //Cadastrar Endereço
+							 fachada_endereco.cadastrar(endereco);
+							 status = "Funcionario Cadastrado com Sucesso!";
+					         JOptionPane.showMessageDialog(null,status);
 							}else{
 								JOptionPane.showMessageDialog(null,status);
 								

@@ -1,5 +1,7 @@
 package com.vendas.negocio;
 
+import java.util.List;
+
 import com.vendas.basicas.Cliente;
 import com.vendas.basicas.Departamento;
 import com.vendas.basicas.Endereco;
@@ -18,6 +20,11 @@ public class NDepartamento {
 	public Departamento consultar(Integer id) {
 		
 		return daod.consultarPorId(id);
+	}
+
+	public List<Departamento> listar() {
+		
+		return daod.listar();
 	}
 	
 }
