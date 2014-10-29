@@ -178,7 +178,7 @@ public class CadastrarFuncionario extends JFrame {
 			 lista.add(departamento.getNome());
 		 }
 		
-		JComboBox comboBoxDepartamento = new JComboBox(lista.toArray());
+		final JComboBox comboBoxDepartamento = new JComboBox(lista.toArray());
 		comboBoxDepartamento.setBounds(129, 221, 113, 20);
 		contentPane.add(comboBoxDepartamento);
 		
@@ -275,6 +275,7 @@ public class CadastrarFuncionario extends JFrame {
 						funcionario.setTelefone(telefone.getText());
 						funcionario.setUsuario(textUsuario.getText());
 						funcionario.setSenha(passwordField.getText());
+						departamento.setNome(comboBoxDepartamento.getSelectedItem().toString());
 						funcionario.setDepartamento(departamento);
 						endereco.setCep(cep.getText());
 						endereco.setCidade(textCidade.getText());
