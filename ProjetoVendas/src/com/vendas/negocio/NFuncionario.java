@@ -44,5 +44,10 @@ public class NFuncionario {
 		
 		return daof.consultarPorCPF(cpf);
 	}
+
+	public void excluir(int id) {
+		daof.removeById(id);
+		
+	}
 	
 }

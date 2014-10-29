@@ -48,4 +48,10 @@ public class FFuncionario {
 		
 		return nf.consultarCPF(cpf);
 	}
+
+	public void excluir(int id) {
+		nf.excluir(id);
+	}
+
+	
 }

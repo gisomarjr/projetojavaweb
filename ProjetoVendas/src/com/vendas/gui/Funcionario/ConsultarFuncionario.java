@@ -190,7 +190,7 @@ public class ConsultarFuncionario extends JFrame {
 				
 				try{
 					if(erro_null != 1){
-					//fachada_funcionario.excluir(Integer.parseInt(valor_string));
+					fachada_funcionario.excluir(Integer.parseInt(valor_string));
 					
 					DefaultTableModel model = (DefaultTableModel) table.getModel();
 					model.removeRow(linha);
