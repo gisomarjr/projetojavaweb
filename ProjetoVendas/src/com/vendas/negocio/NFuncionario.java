@@ -33,21 +33,5 @@ public class NFuncionario {
 		// TODO Auto-generated method stub
 		return daof.listar();
 	}
-
-	public List<Funcionario> consultarCPF(String cpf) {
-		
-		return daof.consultarPorCPF(cpf);
-	}
-
-	public Funcionario consultarID(int id) {
-	
-		return daof.consultarPorId(id);
-	}
-
-	public void editar(Funcionario funcionario) {
-
-		daof.editar(funcionario);
-		
-	}
 	
 }

@@ -121,11 +121,4 @@ public class DAOFuncionario implements IFuncionario {
 	
 	}
 
-	public List<Funcionario> consultarPorCPF(String cpf) {
-		
-		return entityManager.createQuery("select f from Funcionario as f where f.cpf = ?1").
-				setParameter(1, cpf).
-				getResultList();
-	}
-
 }
