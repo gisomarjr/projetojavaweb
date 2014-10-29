@@ -26,6 +26,7 @@ import com.vendas.basicas.Funcionario;
 import com.vendas.fachada.FDepartamento;
 import com.vendas.fachada.FEndereco;
 import com.vendas.fachada.FFuncionario;
+import com.vendas.gui.Interno;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -299,13 +300,30 @@ public class CadastrarFuncionario extends JFrame {
 							 fachada_endereco.cadastrar(endereco);
 							 status = "Funcionario Cadastrado com Sucesso!";
 					         JOptionPane.showMessageDialog(null,status);
+					         
+					         
+					         	String messageExit = "Cadastrar novo usuário?";
+								String title = "Confirmação";
+								//Exibe caixa de dialogo solicitando confirmação ou não. 
+								//Se o usuário clicar em "Sim" retorna 0 pra variavel reply, se informado não retorna 1
+								int reply = JOptionPane.showConfirmDialog(null, messageExit, title, JOptionPane.YES_NO_OPTION);
+								  if (reply == JOptionPane.NO_OPTION)
+								  {
+									  dispose();
+										Interno interno = new Interno();
+										interno.setVisible(true);
+								  }else{
+									  //faça nada!! :)
+								  }
+							
 							}else{
 								JOptionPane.showMessageDialog(null,status);
 								
 							}
 							updateProgress();
 							
-						} catch (Exception e) {
+							
+						}catch (Exception e) {
 							JOptionPane.showMessageDialog(null,e.getMessage());
 						}
 						

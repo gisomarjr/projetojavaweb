@@ -22,6 +22,7 @@ import javax.swing.JTable;
 
 import com.vendas.basicas.Fornecedor;
 import com.vendas.fachada.FFornecedor;
+import com.vendas.gui.Interno;
 
 import javax.swing.JScrollBar;
 import javax.swing.JButton;
@@ -114,12 +115,12 @@ public class ConsultarFornecedor extends JFrame {
 				contentPane.add(table);
 				
 				
-				progressBar.setBounds(498, 37, 89, 14);
+				progressBar.setBounds(529, 37, 89, 14);
 				contentPane.add(progressBar);
 				
 				//Barra de Rolagem
 				JScrollPane scrollPane = new JScrollPane(table);
-				scrollPane.setBounds(10, 95, 688, 348);
+				scrollPane.setBounds(20, 83, 688, 348);
 				contentPane.add(scrollPane);
 				
 				progressBar.setVisible(false);
@@ -160,7 +161,7 @@ public class ConsultarFornecedor extends JFrame {
 						
 					}
 				});
-				btnEditar.setBounds(498, 53, 89, 23);
+				btnEditar.setBounds(529, 53, 89, 23);
 				contentPane.add(btnEditar);
 				
 				JButton btnExcluir = new JButton("Excluir");
@@ -197,11 +198,11 @@ public class ConsultarFornecedor extends JFrame {
 				
 				
 				
-				btnExcluir.setBounds(597, 53, 89, 23);
+				btnExcluir.setBounds(609, 53, 89, 23);
 				contentPane.add(btnExcluir);
 				
 				JLabel lblPesquisarCnpj = new JLabel("Pesquisar  - CNPJ:");
-				lblPesquisarCnpj.setBounds(10, 57, 125, 14);
+				lblPesquisarCnpj.setBounds(20, 55, 125, 14);
 				contentPane.add(lblPesquisarCnpj);
 				
 				final JFormattedTextField cnpj = new JFormattedTextField();
@@ -213,7 +214,7 @@ public class ConsultarFornecedor extends JFrame {
 				}  
 		        cnpj.setFormatterFactory(new DefaultFormatterFactory(cnpj_format));
 				
-				cnpj.setBounds(142, 55, 154, 20);
+				cnpj.setBounds(152, 53, 154, 20);
 				contentPane.add(cnpj);
 				
 		
@@ -284,6 +285,24 @@ public class ConsultarFornecedor extends JFrame {
 				
 				progressBarPesquisar.setBounds(308, 37, 108, 14);
 				contentPane.add(progressBarPesquisar);
+				
+				JButton btnSair = new JButton("Sair");
+				btnSair.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						
+						String messageExit = "Deseja realmente voltar?";
+						String title = "Confirmação";
+						int reply = JOptionPane.showConfirmDialog(null, messageExit, title, JOptionPane.YES_NO_OPTION);
+						  if (reply == JOptionPane.YES_OPTION)
+						  {
+							  dispose();
+								Interno interno = new Interno();
+								interno.setVisible(true);
+						  }
+					}
+				});
+				btnSair.setBounds(639, 436, 69, 29);
+				contentPane.add(btnSair);
 				
 				
 				

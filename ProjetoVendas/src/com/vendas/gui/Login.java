@@ -24,8 +24,8 @@ import java.awt.event.ActionEvent;
 public class Login extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField usuario;
-	private JPasswordField senha;
+	private JTextField txtUsuario;
+	private JPasswordField txtSenha;
 
 	static Login login;
 	/**
@@ -76,14 +76,14 @@ public class Login extends JFrame {
 		lblSenha.setBounds(57, 129, 74, 14);
 		contentPane.add(lblSenha);
 		
-		usuario = new JTextField();
-		usuario.setBounds(135, 93, 232, 20);
-		contentPane.add(usuario);
-		usuario.setColumns(10);
+		txtUsuario = new JTextField();
+		txtUsuario.setBounds(135, 93, 232, 20);
+		contentPane.add(txtUsuario);
+		txtUsuario.setColumns(10);
 		
-		senha = new JPasswordField();
-		senha.setBounds(135, 126, 115, 20);
-		contentPane.add(senha);
+		txtSenha = new JPasswordField();
+		txtSenha.setBounds(135, 126, 115, 20);
+		contentPane.add(txtSenha);
 		
 		JButton btnEfetuarLogin = new JButton("Efetuar Login");
 		btnEfetuarLogin.addActionListener(new ActionListener() {
@@ -93,7 +93,7 @@ public class Login extends JFrame {
 				int cont  = 0;
 				
 				FFuncionario fachada_funcionario = new FFuncionario();
-				for (Funcionario funcionario : fachada_funcionario.realizarLogin(usuario.getText(), senha.getText())) {
+				for (Funcionario funcionario : fachada_funcionario.realizarLogin(txtUsuario.getText(), txtSenha.getText())) {
 				String u = funcionario.getUsuario();
 				String s = funcionario.getSenha();
 				cont++;
@@ -104,6 +104,8 @@ public class Login extends JFrame {
 				dispose();
 				}else{
 					JOptionPane.showMessageDialog(null,"Usuário e Senha inválida!");
+					txtUsuario.setText("");
+					txtSenha.setText("");
 				}
 				
 			}
