@@ -27,4 +27,9 @@ public class FFuncionario {
 		
 		return nf.realizarLogin(usuario, senha);
 	}
+
+	public String validaCampo(Funcionario funcionario) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
