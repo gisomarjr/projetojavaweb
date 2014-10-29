@@ -70,7 +70,7 @@ public class Interno extends JFrame {
 				cadastrar_fornecedor.setVisible(true);
 			}
 		});
-		button.setBounds(50, 61, 190, 70);
+		button.setBounds(17, 61, 190, 70);
 		contentPane.add(button);
 		
 		progressBar.setIndeterminate(true);
