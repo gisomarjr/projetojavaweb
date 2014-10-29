@@ -37,7 +37,7 @@ public class CadastrarFuncionario extends JFrame {
 	private JTextField textNome;
 	private JTextField textMatricula;
 	ImageIcon loading = new ImageIcon("loading.gif");
-	JLabel lblCarregando = new JLabel("Validando Funcion�rio... ", loading, JLabel.CENTER);
+	JLabel lblCarregando = new JLabel("Validando Funcionário... ", loading, JLabel.CENTER);
 	JProgressBar progressBar = new JProgressBar();
 	final JButton btnSalvar = new JButton("Salvar");
 	final JFormattedTextField cpf = new JFormattedTextField();
@@ -54,9 +54,9 @@ public class CadastrarFuncionario extends JFrame {
 				try {
 					CadastrarFuncionario frame = new CadastrarFuncionario();
 					frame.setVisible(true);
-					//desabilitando o bot�o maximizar
+					//desabilitando o botáo maximizar
 					frame.setResizable(false);
-					frame.setTitle("Cadastro de Funcion�rio");
+					frame.setTitle("Cadastro de Funcionário");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -64,7 +64,7 @@ public class CadastrarFuncionario extends JFrame {
 		});
 	}
 	 
-	 final JLabel label = new JLabel("Validando Funcion�rio... ", loading, JLabel.CENTER);
+	 final JLabel label = new JLabel("Validando Funcionário... ", loading, JLabel.CENTER);
 	 private JTextField textUsuario;
 	 private JPasswordField passwordField;
 	 private JTextField textEmail;
@@ -76,7 +76,7 @@ public class CadastrarFuncionario extends JFrame {
 	 */
 	public CadastrarFuncionario() {
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-		setBounds(100, 100, 450, 515);
+		setBounds(100, 100, 558, 515);
 		contentPane = new JPanel();
 		
 		//Tela centralizada
@@ -88,7 +88,7 @@ public class CadastrarFuncionario extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblCadastroDeFuncionario = new JLabel("Cadastro de Funcion�rio");
+		JLabel lblCadastroDeFuncionario = new JLabel("Cadastro de Funcionário");
 		lblCadastroDeFuncionario.setBounds(144, 11, 280, 29);
 		contentPane.add(lblCadastroDeFuncionario);
 		
@@ -97,25 +97,25 @@ public class CadastrarFuncionario extends JFrame {
 		contentPane.add(lblNome);
 		
 		textNome = new JTextField();
-		textNome.setBounds(74, 51, 307, 20);
+		textNome.setBounds(129, 45, 307, 20);
 		contentPane.add(textNome);
 		textNome.setColumns(10);
 		
 		JLabel lblMatricula = new JLabel("Matricula");
-		lblMatricula.setBounds(10, 90, 54, 29);
+		lblMatricula.setBounds(10, 90, 81, 29);
 		contentPane.add(lblMatricula);
 		
 		textMatricula = new JTextField();
-		textMatricula.setBounds(74, 94, 86, 20);
+		textMatricula.setBounds(129, 88, 86, 20);
 		contentPane.add(textMatricula);
 		textMatricula.setColumns(10);
 		
 		JLabel lblcpf = new JLabel("CPF:");
-		lblcpf.setBounds(170, 90, 34, 29);   
+		lblcpf.setBounds(225, 84, 34, 29);   
 		contentPane.add(lblcpf);
 		
 		
-		cpf.setBounds(214, 94, 95, 20);
+		cpf.setBounds(269, 88, 109, 20);
 		try {
 			cpf_format = new MaskFormatter("###.###.###-##");
 		} catch (ParseException e1) {
@@ -126,58 +126,58 @@ public class CadastrarFuncionario extends JFrame {
 		
 		
 		
-		btnSalvar.setBounds(294, 438, 130, 29);
+		btnSalvar.setBounds(347, 431, 130, 29);
 		contentPane.add(btnSalvar);
 		
 		
-		lblCarregando.setBounds(46, 386, 378, 16);
+		lblCarregando.setBounds(99, 379, 378, 16);
 		contentPane.add(lblCarregando);
 		
 		
-		progressBar.setBounds(170, 413, 148, 14);
+		progressBar.setBounds(223, 406, 148, 14);
 		progressBar.setIndeterminate(true);
 		progressBar.setVisible(false);
 		contentPane.add(progressBar);
 		
 		JLabel lblUsurio = new JLabel("Usu\u00E1rio");
-		lblUsurio.setBounds(10, 185, 46, 14);
+		lblUsurio.setBounds(10, 185, 81, 14);
 		contentPane.add(lblUsurio);
 		
 		textUsuario = new JTextField();
-		textUsuario.setBounds(76, 182, 117, 20);
+		textUsuario.setBounds(129, 175, 117, 20);
 		contentPane.add(textUsuario);
 		textUsuario.setColumns(10);
 		
 		JLabel lblSenha = new JLabel("Senha");
-		lblSenha.setBounds(203, 185, 39, 14);
+		lblSenha.setBounds(256, 178, 51, 21);
 		contentPane.add(lblSenha);
 		
 		passwordField = new JPasswordField();
-		passwordField.setBounds(246, 182, 135, 20);
+		passwordField.setBounds(316, 175, 135, 20);
 		contentPane.add(passwordField);
 		
 		JLabel lblDepartamento = new JLabel("Departamento");
-		lblDepartamento.setBounds(5, 224, 86, 14);
+		lblDepartamento.setBounds(5, 224, 114, 14);
 		contentPane.add(lblDepartamento);
 		
 		JComboBox comboBoxDepartamento = new JComboBox();
-		comboBoxDepartamento.setBounds(91, 221, 113, 20);
+		comboBoxDepartamento.setBounds(129, 221, 113, 20);
 		contentPane.add(comboBoxDepartamento);
 		
 		JLabel lblTelefone = new JLabel("Telefone");
-		lblTelefone.setBounds(10, 140, 54, 14);
+		lblTelefone.setBounds(10, 140, 86, 14);
 		contentPane.add(lblTelefone);
 		
 		JFormattedTextField telefone = new JFormattedTextField();
-		telefone.setBounds(74, 137, 86, 20);
+		telefone.setBounds(129, 131, 86, 20);
 		contentPane.add(telefone);
 		
 		JLabel lblEmail = new JLabel("Email:");
-		lblEmail.setBounds(170, 140, 46, 14);
+		lblEmail.setBounds(223, 133, 46, 14);
 		contentPane.add(lblEmail);
 		
 		textEmail = new JTextField();
-		textEmail.setBounds(214, 137, 167, 20);
+		textEmail.setBounds(267, 130, 167, 20);
 		contentPane.add(textEmail);
 		textEmail.setColumns(10);
 		
@@ -186,29 +186,29 @@ public class CadastrarFuncionario extends JFrame {
 		contentPane.add(separator);
 		
 		JLabel lblLogradouro = new JLabel("Logradouro");
-		lblLogradouro.setBounds(10, 271, 71, 14);
+		lblLogradouro.setBounds(10, 264, 109, 14);
 		contentPane.add(lblLogradouro);
 		
 		textLogradouro = new JTextField();
-		textLogradouro.setBounds(91, 268, 307, 20);
+		textLogradouro.setBounds(129, 262, 307, 20);
 		contentPane.add(textLogradouro);
 		textLogradouro.setColumns(10);
 		
 		JLabel lblCidade = new JLabel("Cidade");
-		lblCidade.setBounds(10, 313, 46, 14);
+		lblCidade.setBounds(10, 305, 95, 14);
 		contentPane.add(lblCidade);
 		
 		textCidade = new JTextField();
-		textCidade.setBounds(74, 310, 86, 20);
+		textCidade.setBounds(127, 303, 86, 20);
 		contentPane.add(textCidade);
 		textCidade.setColumns(10);
 		
 		JLabel lblEstado = new JLabel("Estado");
-		lblEstado.setBounds(170, 313, 46, 14);
+		lblEstado.setBounds(223, 306, 72, 14);
 		contentPane.add(lblEstado);
 		
 		JComboBox comboBoxEstado = new JComboBox();
-		comboBoxEstado.setBounds(214, 310, 95, 20);
+		comboBoxEstado.setBounds(311, 302, 95, 20);
 		contentPane.add(comboBoxEstado);
 		
 		JLabel lblCep = new JLabel("CEP");
@@ -216,15 +216,15 @@ public class CadastrarFuncionario extends JFrame {
 		contentPane.add(lblCep);
 		
 		JFormattedTextField cep = new JFormattedTextField();
-		cep.setBounds(74, 347, 86, 20);
+		cep.setBounds(127, 340, 86, 20);
 		contentPane.add(cep);
 		
 		JLabel lblNmero = new JLabel("N\u00FAmero");
-		lblNmero.setBounds(170, 350, 46, 14);
+		lblNmero.setBounds(223, 343, 86, 17);
 		contentPane.add(lblNmero);
 		
 		textNumero = new JTextField();
-		textNumero.setBounds(224, 347, 46, 20);
+		textNumero.setBounds(318, 334, 46, 20);
 		contentPane.add(textNumero);
 		textNumero.setColumns(10);
 		

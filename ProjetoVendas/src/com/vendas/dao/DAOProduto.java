@@ -1,14 +1,12 @@
 package com.vendas.dao;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import com.vendas.basicas.Cliente;
-import com.vendas.negocio.ICliente;
 import com.vendas.negocio.IProduto;
 import com.vendas.basicas.Produto;
 
@@ -102,6 +100,6 @@ public class DAOProduto implements IProduto{
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<Produto> listar() {
-		return entityManager.createQuery("FROM " + Cliente.class.getName()).getResultList();
+		return entityManager.createQuery("FROM " + Produto.class.getName()).getResultList();
 	}
 }

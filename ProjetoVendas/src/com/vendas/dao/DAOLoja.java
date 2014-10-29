@@ -1,55 +1,108 @@
 package com.vendas.dao;
 
-import java.util.ArrayList;
-
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-
-import com.vendas.basicas.Fornecedor;
 import com.vendas.basicas.Loja;
 import com.vendas.negocio.ILoja;
 
-public class DAOLoja implements ILoja{
+public class DAOLoja implements ILoja  {
 
-	EntityManagerFactory emf = Persistence.createEntityManagerFactory("mysql");
-	
-	EntityManager em = emf.createEntityManager();
+	protected EntityManager entityManager;
+	 
+	/**
+	 * Construtor para pegar o EntityManager
+	 */
+    public DAOLoja() {
+        entityManager = getEntityManager();
+    }
+     
+    /**
+     * Verificando se j√° existe a conex√£o com o banco
+     * @return
+     */
+    private EntityManager getEntityManager() {
+        EntityManagerFactory factory = Persistence
+                .createEntityManagerFactory("mysql");
+        if (entityManager == null) {
+            entityManager = factory.createEntityManager();
+        }
+ 
+        return entityManager;
+    }
+ 
+ 
+    /**
+     * Removendo pelo ID
+     * @param id
+     */
+    
+    public void removeById(final Integer id) {
+        try {
+            Loja loja = consultarPorId(id);
+            excluir(loja);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
 
-	EntityTransaction et = em.getTransaction();
-	
+	@Override
 	public void cadastrar(Loja loja) throws Exception {
-
-		try{	
-			et.begin();
-			em.persist(loja);
-			et.commit();
-			em.close(); 
-			emf.close();
-		}catch(Exception e){
-			throw new Exception("N„o foi possÌvel Inserir os dados (Loja)");
-		}
+		try {
+            entityManager.getTransaction().begin();
+            entityManager.persist(loja);
+            entityManager.getTransaction().commit();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            entityManager.getTransaction().rollback();
+        }
+		
 	}
 
+	@Override
 	public void editar(Loja loja) {
-		// TODO Auto-generated method stub
+		  try {
+	            entityManager.getTransaction().begin();
+	            entityManager.merge(loja);
+	            entityManager.getTransaction().commit();
+	        } catch (Exception ex) {
+	            //ex.printStackTrace();
+	            //entityManager.getTransaction().rollback();
+	           
+	        }
 		
 	}
 
+	@Override
 	public void excluir(Loja loja) {
-		// TODO Auto-generated method stub
+		 try {
+	            entityManager.getTransaction().begin();
+	            loja = entityManager.find(Loja.class, loja.getId());
+	            entityManager.remove(loja);
+	            entityManager.getTransaction().commit();
+	        } catch (Exception ex) {
+	            ex.printStackTrace();
+	            entityManager.getTransaction().rollback();
+	        }
 		
 	}
 
+	@Override
 	public Loja consultarPorId(Integer id) {
-
-		 return em.find(Loja.class, id);
+		  return entityManager.find(Loja.class, id);
 	}
+	
+	
+	/*public List<Loja> consultarPorCNPJ(String cnpj) {
+		return entityManager.createQuery("select f from Loja as f where f.cnpj = ?1").
+		setParameter(1, cnpj).getResultList();
+	
+	}*/
 
-	public ArrayList<Loja> listar() {
-		// TODO Auto-generated method stub
-		return null;
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<Loja> listar() {
+		return entityManager.createQuery("FROM " + Loja.class.getName()).getResultList();
 	}
-
 }

@@ -6,6 +6,8 @@ import java.util.ArrayList;
 
 
 
+import java.util.List;
+
 import com.vendas.basicas.Cliente;
 import com.vendas.basicas.Endereco;
 import com.vendas.basicas.Loja;
@@ -16,6 +18,6 @@ public interface ILoja {
 	public void editar(Loja loja);
 	public void excluir(Loja loja);
 	public Loja consultarPorId(Integer id);
-	public ArrayList<Loja> listar();
+	public List<Loja> listar();
 	
 }

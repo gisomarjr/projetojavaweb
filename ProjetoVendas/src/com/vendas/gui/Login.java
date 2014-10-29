@@ -103,7 +103,7 @@ public class Login extends JFrame {
 				interno.setVisible(true);
 				dispose();
 				}else{
-					JOptionPane.showMessageDialog(null,"Usu·rio e Senha inv·lida!");
+					JOptionPane.showMessageDialog(null,"Usu√°rio e Senha inv√°lida!");
 				}
 				
 			}

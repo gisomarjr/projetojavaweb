@@ -1,58 +1,108 @@
 package com.vendas.dao;
 
-import java.util.ArrayList;
-
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-
-import com.vendas.basicas.Cliente;
 import com.vendas.basicas.Departamento;
-import com.vendas.basicas.Endereco;
-import com.vendas.negocio.ICliente;
 import com.vendas.negocio.IDepartamento;
 
 public class DAODepartamento implements IDepartamento  {
 
-	EntityManagerFactory emf = Persistence.createEntityManagerFactory("mysql");
-	
-	EntityManager em = emf.createEntityManager();
+	protected EntityManager entityManager;
+	 
+	/**
+	 * Construtor para pegar o EntityManager
+	 */
+    public DAODepartamento() {
+        entityManager = getEntityManager();
+    }
+     
+    /**
+     * Verificando se já existe a conexão com o banco
+     * @return
+     */
+    private EntityManager getEntityManager() {
+        EntityManagerFactory factory = Persistence
+                .createEntityManagerFactory("mysql");
+        if (entityManager == null) {
+            entityManager = factory.createEntityManager();
+        }
+ 
+        return entityManager;
+    }
+ 
+ 
+    /**
+     * Removendo pelo ID
+     * @param id
+     */
+    
+    public void removeById(final Integer id) {
+        try {
+            Departamento departamento = consultarPorId(id);
+            excluir(departamento);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
 
-	EntityTransaction et = em.getTransaction();
-	
-	public void cadastrar(Departamento departamento) throws Exception {	
-	try{	
-		et.begin();
-		em.persist(departamento);
-		et.commit();
-		emf.close();
-		em.close(); 
+	@Override
+	public void cadastrar(Departamento departamento) throws Exception {
+		try {
+            entityManager.getTransaction().begin();
+            entityManager.persist(departamento);
+            entityManager.getTransaction().commit();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            entityManager.getTransaction().rollback();
+        }
 		
-	}catch(Exception e){
-		throw new Exception("N�o foi poss�vel Inserir os dados (Cliente)");
 	}
-}
 
+	@Override
 	public void editar(Departamento departamento) {
-		// TODO Auto-generated method stub
+		  try {
+	            entityManager.getTransaction().begin();
+	            entityManager.merge(departamento);
+	            entityManager.getTransaction().commit();
+	        } catch (Exception ex) {
+	            //ex.printStackTrace();
+	            //entityManager.getTransaction().rollback();
+	           
+	        }
 		
 	}
 
+	@Override
 	public void excluir(Departamento departamento) {
-		// TODO Auto-generated method stub
+		 try {
+	            entityManager.getTransaction().begin();
+	            departamento = entityManager.find(Departamento.class, departamento.getId());
+	            entityManager.remove(departamento);
+	            entityManager.getTransaction().commit();
+	        } catch (Exception ex) {
+	            ex.printStackTrace();
+	            entityManager.getTransaction().rollback();
+	        }
 		
 	}
 
+	@Override
 	public Departamento consultarPorId(Integer id) {
-
-		return em.find(Departamento.class, id);
+		  return entityManager.find(Departamento.class, id);
 	}
-
-	public ArrayList<Departamento> listar() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	
+	
+	/*public List<Departamento> consultarPorCNPJ(String cnpj) {
+		return entityManager.createQuery("select f from Departamento as f where f.cnpj = ?1").
+		setParameter(1, cnpj).getResultList();
+	
+	}*/
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<Departamento> listar() {
+		return entityManager.createQuery("FROM " + Departamento.class.getName()).getResultList();
+	}
 }

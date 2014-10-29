@@ -6,6 +6,8 @@ import java.util.ArrayList;
 
 
 
+import java.util.List;
+
 import com.vendas.basicas.Cliente;
 import com.vendas.basicas.Departamento;
 import com.vendas.basicas.Endereco;
@@ -16,6 +18,6 @@ public interface IDepartamento {
 	public void editar(Departamento departamento);
 	public void excluir(Departamento departamento);
 	public Departamento consultarPorId(Integer id);
-	public ArrayList<Departamento> listar();
+	public List<Departamento> listar();
 	
 }
