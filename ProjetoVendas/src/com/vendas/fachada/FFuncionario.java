@@ -38,4 +38,19 @@ public class FFuncionario {
 		// TODO Auto-generated method stub
 		return nf.listar();
 	}
+
+	public List<Funcionario> consultarCPF(String cpf) {
+		
+		return nf.consultarCPF(cpf);
+	}
+
+	public Funcionario consultarID(int id) {
+		
+		return nf.consultarID(id);
+	}
+
+	public void editar(Funcionario funcionario) {
+		
+		nf.editar(funcionario);
+	}
 }

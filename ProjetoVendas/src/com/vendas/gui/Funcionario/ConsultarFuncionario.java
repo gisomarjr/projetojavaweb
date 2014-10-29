@@ -48,7 +48,7 @@ public class ConsultarFuncionario extends JFrame {
 	JProgressBar progressBarPesquisar = new JProgressBar();
 	 DefaultTableModel model = new DefaultTableModel(new Object[][]{}, new Object[]{"ID", "CPF", "Nome", "Matricula","Email", "Telefone","Usuario","Departamento","Logradouro","Cidade","Numero","Estado" });   
 	 static ConsultarFuncionario consultar;
-	 MaskFormatter cnpj_format;
+	 MaskFormatter cpf_format;
 	 List<Funcionario> lista_funcionario;
 	 JButton btnPesquisar = new JButton("Pesquisar");
 	/**
@@ -115,8 +115,7 @@ public class ConsultarFuncionario extends JFrame {
 		            		      			   
 		            		 		});    
 		         }
-			
-                 
+			                 
 				table = new JTable(model);
 				table.setBounds(10, 71, 688, 296);
 				
@@ -146,14 +145,14 @@ public class ConsultarFuncionario extends JFrame {
 								new Thread(){
 									@Override
 									public void run() {
-									//funcionario = fachada_funcionario.consultarID(Integer.parseInt(valor_string));
+									funcionario = fachada_funcionario.consultarID(Integer.parseInt(valor_string));
 									 btnEditar.setEnabled(false);
 									 progressBar.setVisible(true);
 								
-									/* EditarFuncionario editar_funcionario = new EditarFuncionario(funcionario);
-									 editar_funcionario.setVisible(true);
-									 updateProgress();
-									*/
+									EditarFuncionario editar_funcionario = new EditarFuncionario(funcionario);
+									editar_funcionario.setVisible(true);
+									updateProgress();
+									
 									}
 								}.start();
 								
@@ -209,21 +208,21 @@ public class ConsultarFuncionario extends JFrame {
 				btnExcluir.setBounds(917, 53, 89, 23);
 				contentPane.add(btnExcluir);
 				
-				JLabel lblPesquisarCnpj = new JLabel("Pesquisar  - CNPJ:");
+				JLabel lblPesquisarCnpj = new JLabel("Pesquisar  - CPF:");
 				lblPesquisarCnpj.setBounds(10, 57, 125, 14);
 				contentPane.add(lblPesquisarCnpj);
 				
-				final JFormattedTextField cnpj = new JFormattedTextField();
+				final JFormattedTextField cpf = new JFormattedTextField();
 				
 				try {
-					cnpj_format = new MaskFormatter("##.###.###/####-##");
+					cpf_format = new MaskFormatter("###.###.###-##");
 				} catch (ParseException e1) {
 					e1.printStackTrace();
 				}  
-		        cnpj.setFormatterFactory(new DefaultFormatterFactory(cnpj_format));
+		        cpf.setFormatterFactory(new DefaultFormatterFactory(cpf_format));
 				
-				cnpj.setBounds(142, 55, 154, 20);
-				contentPane.add(cnpj);
+				cpf.setBounds(142, 55, 108, 20);
+				contentPane.add(cpf);
 				
 		
 				btnPesquisar.addActionListener(new ActionListener() {
@@ -237,7 +236,7 @@ public class ConsultarFuncionario extends JFrame {
 					/*
 					 * Verificando se o CNPJ est� vazio		
 					 */
-					if(cnpj.getText().equals("  .   .   /    -  ")){
+					if(cpf.getText().equals("   .   .   -  ")){
 						
 						//removendo linhas
 						DefaultTableModel model = (DefaultTableModel) table.getModel();
@@ -246,20 +245,20 @@ public class ConsultarFuncionario extends JFrame {
 						lista_funcionario = new ArrayList<Funcionario>(fachada_funcionario.listar());
 						 for (Funcionario funcionario : lista_funcionario) {    
 							
-							  model.addRow(new String[]{funcionario.getId().toString(), 
-           		      			   funcionario.getDepartamento().getNome(),
-           		      			   funcionario.getCpf(),
-           		      			   funcionario.getEmail(),
-           		      			   funcionario.getMatricula(),
-           		      			   funcionario.getTelefone(),
-           		      			   funcionario.getUsuario(),
-           		      			   funcionario.getNome(),
-           		      			   funcionario.getEndereco().getLogradouro(),
-           		      			   funcionario.getEndereco().getCidade(),
-           		      			   funcionario.getEndereco().getNumero().toString(),
-           		      			   funcionario.getEndereco().getEstado(),
-           		      			   
-           		 		});    
+							 model.addRow(new String[]{funcionario.getId().toString(), 
+          		      			   funcionario.getCpf(),
+          		      			   funcionario.getNome(),
+          		      			   funcionario.getMatricula(),
+          		      			   funcionario.getEmail(),
+          		      			   funcionario.getTelefone(),
+          		      			   funcionario.getUsuario(),
+          		      			   funcionario.getDepartamento().getNome(),
+          		      			   funcionario.getEndereco().getLogradouro(),
+          		      			   funcionario.getEndereco().getCidade(),
+          		      			   funcionario.getEndereco().getNumero().toString(),
+          		      			   funcionario.getEndereco().getEstado(),
+          		      			   
+          		 		});  
 				         }
 						 table.setModel(model);
 						 updateProgressPesquisar();
@@ -269,24 +268,24 @@ public class ConsultarFuncionario extends JFrame {
 						model.setRowCount(0);
 				
 					//listando	
-					// lista_funcionario = new ArrayList<Funcionario>(fachada_funcionario.consultarCNPJ(cnpj.getText()));
+					lista_funcionario = new ArrayList<Funcionario>(fachada_funcionario.consultarCPF(cpf.getText()));
 					
 					 for (Funcionario funcionario : lista_funcionario) {    
 						
-						  model.addRow(new String[]{funcionario.getId().toString(), 
-       		      			   funcionario.getDepartamento().getNome(),
-       		      			   funcionario.getCpf(),
-       		      			   funcionario.getEmail(),
-       		      			   funcionario.getMatricula(),
-       		      			   funcionario.getTelefone(),
-       		      			   funcionario.getUsuario(),
-       		      			   funcionario.getNome(),
-       		      			   funcionario.getEndereco().getLogradouro(),
-       		      			   funcionario.getEndereco().getCidade(),
-       		      			   funcionario.getEndereco().getNumero().toString(),
-       		      			   funcionario.getEndereco().getEstado(),
-       		      			   
-       		 		});     
+						 model.addRow(new String[]{funcionario.getId().toString(), 
+      		      			   funcionario.getCpf(),
+      		      			   funcionario.getNome(),
+      		      			   funcionario.getMatricula(),
+      		      			   funcionario.getEmail(),
+      		      			   funcionario.getTelefone(),
+      		      			   funcionario.getUsuario(),
+      		      			   funcionario.getDepartamento().getNome(),
+      		      			   funcionario.getEndereco().getLogradouro(),
+      		      			   funcionario.getEndereco().getCidade(),
+      		      			   funcionario.getEndereco().getNumero().toString(),
+      		      			   funcionario.getEndereco().getEstado(),
+      		      			   
+      		 		});  
 			       }
 					 
 					 	if(model.getRowCount() <= 0){
@@ -294,7 +293,7 @@ public class ConsultarFuncionario extends JFrame {
 					 	}
 					 		table.setModel(model);
 							updateProgressPesquisar();
-							cnpj.setText("");
+							cpf.setText("");
 							
 							}
 							}//fim do if	 
