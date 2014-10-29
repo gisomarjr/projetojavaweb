@@ -16,8 +16,11 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.JProgressBar;
 
+import com.vendas.basicas.Funcionario;
 import com.vendas.gui.Fornecedor.CadastrarFornecedor;
 import com.vendas.gui.Fornecedor.ConsultarFornecedor;
+import com.vendas.gui.Funcionario.CadastrarFuncionario;
+import com.vendas.gui.Funcionario.ConsultarFuncionario;
 
 import javax.swing.JLabel;
 
@@ -98,8 +101,26 @@ public class Interno extends JFrame {
 		lblFuncionrio.setFont(new Font("Lucida Grande", Font.BOLD | Font.ITALIC, 13));
 		
 		JButton btnCadastrarFuncionrio = new JButton("Cadastrar Funcion\u00E1rio");
+		btnCadastrarFuncionrio.addActionListener(new ActionListener() {
+			
+			
+			public void actionPerformed(ActionEvent e) {
+				CadastrarFuncionario cadastrar_funcionario = new CadastrarFuncionario();
+				cadastrar_funcionario.setVisible(true);
+				
+				
+			}
+		});
 		
 		JButton btnConsultarFuncionrio = new JButton("Consultar Funcion\u00E1rio");
+		btnConsultarFuncionrio.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				ConsultarFuncionario consultar_funcionario = new ConsultarFuncionario();
+				consultar_funcionario.setVisible(true);
+				
+			}
+		});
 		
 		JButton btnCadastrarLoja = new JButton("Cadastrar Loja");
 		

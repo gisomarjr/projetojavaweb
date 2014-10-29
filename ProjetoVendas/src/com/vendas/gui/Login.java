@@ -112,5 +112,16 @@ public class Login extends JFrame {
 		});
 		btnEfetuarLogin.setBounds(168, 185, 132, 23);
 		contentPane.add(btnEfetuarLogin);
+		
+		JButton btnSair = new JButton("Sair");
+		btnSair.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				
+				dispose();
+			}
+		});
+		btnSair.setBounds(207, 205, 54, 29);
+		contentPane.add(btnSair);
 	}
 }

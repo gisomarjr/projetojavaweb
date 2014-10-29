@@ -1,6 +1,7 @@
 package com.vendas.negocio;
 
 import java.util.List;
+
 import com.vendas.basicas.Endereco;
 import com.vendas.basicas.Fornecedor;
 import com.vendas.basicas.Funcionario;
@@ -32,6 +33,21 @@ public class NFuncionario {
 	public List<Funcionario> listar() {
 		// TODO Auto-generated method stub
 		return daof.listar();
+	}
+
+	public Funcionario consultarID(int id) {
+		
+		return daof.consultarPorId(id);
+	}
+
+	public List<Funcionario> consultarCPF(String cpf) {
+		
+		return daof.consultarPorCPF(cpf);
+	}
+
+	public void excluir(int id) {
+		daof.removeById(id);
+		
 	}
 	
 }

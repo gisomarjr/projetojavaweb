@@ -22,6 +22,7 @@ import javax.swing.JTable;
 
 import com.vendas.basicas.Funcionario;
 import com.vendas.fachada.FFuncionario;
+import com.vendas.gui.Interno;
 
 import javax.swing.JScrollBar;
 import javax.swing.JButton;
@@ -48,7 +49,7 @@ public class ConsultarFuncionario extends JFrame {
 	JProgressBar progressBarPesquisar = new JProgressBar();
 	 DefaultTableModel model = new DefaultTableModel(new Object[][]{}, new Object[]{"ID", "CPF", "Nome", "Matricula","Email", "Telefone","Usuario","Departamento","Logradouro","Cidade","Numero","Estado" });   
 	 static ConsultarFuncionario consultar;
-	 MaskFormatter cnpj_format;
+	 MaskFormatter cpf_format;
 	 List<Funcionario> lista_funcionario;
 	 JButton btnPesquisar = new JButton("Pesquisar");
 	/**
@@ -123,12 +124,12 @@ public class ConsultarFuncionario extends JFrame {
 				contentPane.add(table);
 				
 				
-				progressBar.setBounds(805, 37, 89, 14);
+				progressBar.setBounds(620, 37, 146, 14);
 				contentPane.add(progressBar);
 				
 				//Barra de Rolagem
 				JScrollPane scrollPane = new JScrollPane(table);
-				scrollPane.setBounds(10, 95, 1009, 402);
+				scrollPane.setBounds(10, 80, 1009, 402);
 				contentPane.add(scrollPane);
 				
 				progressBar.setVisible(false);
@@ -146,7 +147,7 @@ public class ConsultarFuncionario extends JFrame {
 								new Thread(){
 									@Override
 									public void run() {
-									//funcionario = fachada_funcionario.consultarID(Integer.parseInt(valor_string));
+									funcionario = fachada_funcionario.consultarID(Integer.parseInt(valor_string));
 									 btnEditar.setEnabled(false);
 									 progressBar.setVisible(true);
 								
@@ -169,7 +170,7 @@ public class ConsultarFuncionario extends JFrame {
 						
 					}
 				});
-				btnEditar.setBounds(805, 53, 89, 23);
+				btnEditar.setBounds(647, 53, 89, 23);
 				contentPane.add(btnEditar);
 				
 				JButton btnExcluir = new JButton("Excluir");
@@ -190,7 +191,7 @@ public class ConsultarFuncionario extends JFrame {
 				
 				try{
 					if(erro_null != 1){
-					//fachada_funcionario.excluir(Integer.parseInt(valor_string));
+					fachada_funcionario.excluir(Integer.parseInt(valor_string));
 					
 					DefaultTableModel model = (DefaultTableModel) table.getModel();
 					model.removeRow(linha);
@@ -206,24 +207,24 @@ public class ConsultarFuncionario extends JFrame {
 				
 				
 				
-				btnExcluir.setBounds(917, 53, 89, 23);
+				btnExcluir.setBounds(776, 53, 89, 23);
 				contentPane.add(btnExcluir);
 				
-				JLabel lblPesquisarCnpj = new JLabel("Pesquisar  - CNPJ:");
-				lblPesquisarCnpj.setBounds(10, 57, 125, 14);
-				contentPane.add(lblPesquisarCnpj);
+				JLabel lblPesquisarcpf = new JLabel("Pesquisar  - CPF:");
+				lblPesquisarcpf.setBounds(10, 26, 125, 14);
+				contentPane.add(lblPesquisarcpf);
 				
-				final JFormattedTextField cnpj = new JFormattedTextField();
+				final JFormattedTextField cpf = new JFormattedTextField();
 				
 				try {
-					cnpj_format = new MaskFormatter("##.###.###/####-##");
+					cpf_format = new MaskFormatter("###.###.###-##");
 				} catch (ParseException e1) {
 					e1.printStackTrace();
 				}  
-		        cnpj.setFormatterFactory(new DefaultFormatterFactory(cnpj_format));
+		        cpf.setFormatterFactory(new DefaultFormatterFactory(cpf_format));
 				
-				cnpj.setBounds(142, 55, 154, 20);
-				contentPane.add(cnpj);
+				cpf.setBounds(142, 24, 154, 20);
+				contentPane.add(cpf);
 				
 		
 				btnPesquisar.addActionListener(new ActionListener() {
@@ -235,9 +236,9 @@ public class ConsultarFuncionario extends JFrame {
 						
 								progressBarPesquisar.setVisible(true);
 					/*
-					 * Verificando se o CNPJ est� vazio		
+					 * Verificando se o cpf est� vazio		
 					 */
-					if(cnpj.getText().equals("  .   .   /    -  ")){
+					if(cpf.getText().equals("   .   .   -  ")){
 						
 						//removendo linhas
 						DefaultTableModel model = (DefaultTableModel) table.getModel();
@@ -247,19 +248,19 @@ public class ConsultarFuncionario extends JFrame {
 						 for (Funcionario funcionario : lista_funcionario) {    
 							
 							  model.addRow(new String[]{funcionario.getId().toString(), 
-           		      			   funcionario.getDepartamento().getNome(),
            		      			   funcionario.getCpf(),
-           		      			   funcionario.getEmail(),
+           		      			   funcionario.getNome(),
            		      			   funcionario.getMatricula(),
+           		      			   funcionario.getEmail(),
            		      			   funcionario.getTelefone(),
            		      			   funcionario.getUsuario(),
-           		      			   funcionario.getNome(),
+           		      			   funcionario.getDepartamento().getNome(),
            		      			   funcionario.getEndereco().getLogradouro(),
            		      			   funcionario.getEndereco().getCidade(),
            		      			   funcionario.getEndereco().getNumero().toString(),
            		      			   funcionario.getEndereco().getEstado(),
            		      			   
-           		 		});    
+           		 		});  
 				         }
 						 table.setModel(model);
 						 updateProgressPesquisar();
@@ -269,24 +270,24 @@ public class ConsultarFuncionario extends JFrame {
 						model.setRowCount(0);
 				
 					//listando	
-					// lista_funcionario = new ArrayList<Funcionario>(fachada_funcionario.consultarCNPJ(cnpj.getText()));
+					 lista_funcionario = new ArrayList<Funcionario>(fachada_funcionario.consultarCPF(cpf.getText()));
 					
 					 for (Funcionario funcionario : lista_funcionario) {    
 						
 						  model.addRow(new String[]{funcionario.getId().toString(), 
-       		      			   funcionario.getDepartamento().getNome(),
        		      			   funcionario.getCpf(),
-       		      			   funcionario.getEmail(),
+       		      			   funcionario.getNome(),
        		      			   funcionario.getMatricula(),
+       		      			   funcionario.getEmail(),
        		      			   funcionario.getTelefone(),
        		      			   funcionario.getUsuario(),
-       		      			   funcionario.getNome(),
+       		      			   funcionario.getDepartamento().getNome(),
        		      			   funcionario.getEndereco().getLogradouro(),
        		      			   funcionario.getEndereco().getCidade(),
        		      			   funcionario.getEndereco().getNumero().toString(),
        		      			   funcionario.getEndereco().getEstado(),
        		      			   
-       		 		});     
+       		 		});  
 			       }
 					 
 					 	if(model.getRowCount() <= 0){
@@ -294,7 +295,7 @@ public class ConsultarFuncionario extends JFrame {
 					 	}
 					 		table.setModel(model);
 							updateProgressPesquisar();
-							cnpj.setText("");
+							cpf.setText("");
 							
 							}
 							}//fim do if	 
@@ -305,12 +306,37 @@ public class ConsultarFuncionario extends JFrame {
 				
 				
 				
-				btnPesquisar.setBounds(308, 53, 108, 23);
+				btnPesquisar.setBounds(298, 23, 108, 23);
 				contentPane.add(btnPesquisar);
 				
 				
-				progressBarPesquisar.setBounds(308, 37, 108, 14);
+				progressBarPesquisar.setBounds(174, 46, 108, 14);
 				contentPane.add(progressBarPesquisar);
+				
+				JButton btnVoltar = new JButton("Voltar");
+				btnVoltar.addActionListener(new ActionListener() {
+					
+					public void actionPerformed(ActionEvent arg0) {
+						
+						String messageExit = "Deseja voltar?";
+						String title = "Confirmação";
+
+						//Exibe caixa de dialogo solicitando confirmação ou não. 
+						//Se o usuário clicar em "Sim" retorna 0 pra variavel reply, se informado não retorna 1
+
+						int reply = JOptionPane.showConfirmDialog(null, messageExit, title, JOptionPane.YES_NO_OPTION);
+						  	if (reply == JOptionPane.YES_OPTION)
+						  {
+								dispose();
+								Interno interno = new Interno();
+								interno.setVisible(true);
+						  }else{
+						  //faça nada!! :)
+						  }
+					}
+				});
+				btnVoltar.setBounds(946, 492, 81, 29);
+				contentPane.add(btnVoltar);
 				
 				
 				

@@ -45,7 +45,7 @@ public class CadastrarFuncionario extends JFrame {
 	private JTextField textNome;
 	private JTextField textMatricula;
 	ImageIcon loading = new ImageIcon("loading.gif");
-	JLabel lblCarregando = new JLabel("Validando Funcion√°rio... ", loading, JLabel.CENTER);
+	JLabel lblCarregando = new JLabel("Validando Funcionário... ", loading, JLabel.CENTER);
 	JProgressBar progressBar = new JProgressBar();
 	final JButton btnSalvar = new JButton("Salvar");
 	final JFormattedTextField cpf = new JFormattedTextField();
@@ -64,9 +64,9 @@ public class CadastrarFuncionario extends JFrame {
 				try {
 					CadastrarFuncionario frame = new CadastrarFuncionario();
 					frame.setVisible(true);
-					//desabilitando o bot√°o maximizar
+					//desabilitando o botáo maximizar
 					frame.setResizable(false);
-					frame.setTitle("Cadastro de Funcion√°rio");
+					frame.setTitle("Cadastro de Funcionário");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -74,7 +74,7 @@ public class CadastrarFuncionario extends JFrame {
 		});
 	}
 	 
-	 final JLabel label = new JLabel("Validando Funcion√°rio... ", loading, JLabel.CENTER);
+	 final JLabel label = new JLabel("Validando Funcionário... ", loading, JLabel.CENTER);
 	 private JTextField textUsuario;
 	 private JPasswordField passwordField;
 	 private JTextField textEmail;
@@ -98,7 +98,7 @@ public class CadastrarFuncionario extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblCadastroDeFuncionario = new JLabel("Cadastro de Funcion√°rio");
+		JLabel lblCadastroDeFuncionario = new JLabel("Cadastro de Funcionário");
 		lblCadastroDeFuncionario.setBounds(144, 11, 280, 29);
 		contentPane.add(lblCadastroDeFuncionario);
 		
@@ -177,9 +177,10 @@ public class CadastrarFuncionario extends JFrame {
 		 for (Departamento departamento : lista_departamento) { 
 			 this.departamento = departamento;
 			 lista.add(departamento.getNome());
+			 
 		 }
 		
-		JComboBox comboBoxDepartamento = new JComboBox(lista.toArray());
+		final JComboBox comboBoxDepartamento = new JComboBox(lista.toArray());
 		comboBoxDepartamento.setBounds(129, 221, 113, 20);
 		contentPane.add(comboBoxDepartamento);
 		
@@ -276,6 +277,8 @@ public class CadastrarFuncionario extends JFrame {
 						funcionario.setTelefone(telefone.getText());
 						funcionario.setUsuario(textUsuario.getText());
 						funcionario.setSenha(passwordField.getText());
+						departamento.setId(comboBoxDepartamento.getSelectedIndex() + 1);
+						departamento.setNome(comboBoxDepartamento.getSelectedItem().toString());
 						funcionario.setDepartamento(departamento);
 						endereco.setCep(cep.getText());
 						endereco.setCidade(textCidade.getText());
@@ -290,40 +293,44 @@ public class CadastrarFuncionario extends JFrame {
 							status = fachada_Funcionario.validaCampo(funcionario);
 							
 							if(status == ""){
-					         //Cadastrar Funcion√°rio
+					         //Cadastrar Funcionário
 							 fachada_Funcionario.cadastrar(funcionario);
 					         
 					         cpf.setText("");
 							 textMatricula.setText("");
 							 textNome.setText("");
-							 //Cadastrar Endere√ßo
+							 //Cadastrar Endereço
 							 fachada_endereco.cadastrar(endereco);
 							 status = "Funcionario Cadastrado com Sucesso!";
 					         JOptionPane.showMessageDialog(null,status);
 					         
-					         
-					         	String messageExit = "Cadastrar novo usuário?";
-								String title = "Confirmação";
-								//Exibe caixa de dialogo solicitando confirmação ou não. 
-								//Se o usuário clicar em "Sim" retorna 0 pra variavel reply, se informado não retorna 1
-								int reply = JOptionPane.showConfirmDialog(null, messageExit, title, JOptionPane.YES_NO_OPTION);
-								  if (reply == JOptionPane.NO_OPTION)
-								  {
-									  dispose();
-										Interno interno = new Interno();
-										interno.setVisible(true);
-								  }else{
-									  //faça nada!! :)
-								  }
-							
+					         String messageExit = "Cadastrar novo usuário?";
+
+					         String title = "Confirmação";
+
+					         //Exibe caixa de dialogo solicitando confirmação ou não. 
+
+					         //Se o usuário clicar em "Sim" retorna 0 pra variavel reply, se informado não retorna 1
+
+					         int reply = JOptionPane.showConfirmDialog(null, messageExit, title, JOptionPane.YES_NO_OPTION);
+
+					           if (reply == JOptionPane.NO_OPTION)
+
+					           {
+					        	   	dispose();
+					        	   	Interno interno = new Interno();
+					        	   	interno.setVisible(true);
+					           		}else{
+					           //faça nada!! :)
+					           }
+
 							}else{
 								JOptionPane.showMessageDialog(null,status);
 								
 							}
 							updateProgress();
 							
-							
-						}catch (Exception e) {
+						} catch (Exception e) {
 							JOptionPane.showMessageDialog(null,e.getMessage());
 						}
 						
