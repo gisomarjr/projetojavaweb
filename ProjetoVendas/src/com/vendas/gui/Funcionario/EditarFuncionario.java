@@ -275,16 +275,14 @@ public class EditarFuncionario extends JFrame {
 						
 						Funcionario funcionario = new Funcionario();
 						Endereco 	endereco	= new Endereco();
-						
+						//Pegando do Formulário ;)
 						funcionario.setCpf(cpf.getText());
 						funcionario.setMatricula(textMatricula.getText());
 						funcionario.setNome(textNome.getText());
 						funcionario.setEmail(textEmail.getText());
 						funcionario.setTelefone(telefone.getText());
-						funcionario.setId(funcionario_editar.getId());
 						departamento.setId(comboBoxDepartamento.getSelectedIndex() + 1);
 						departamento.setNome(comboBoxDepartamento.getSelectedItem().toString());
-						
 						funcionario.setDepartamento(departamento);
 						endereco.setCep(cep.getText());
 						endereco.setCidade(textCidade.getText());
@@ -292,7 +290,11 @@ public class EditarFuncionario extends JFrame {
 						endereco.setLogradouro(textLogradouro.getText());
 						endereco.setNumero(Integer.parseInt(textNumero.getText()));
 						endereco.setFuncionario(funcionario);
+						//Pegando do Banco :D
 						endereco.setId(funcionario_editar.getEndereco().getId());
+						funcionario.setId(funcionario_editar.getId());
+						funcionario.setUsuario(funcionario_editar.getUsuario());
+						funcionario.setSenha(funcionario_editar.getSenha());
 						
 						FFuncionario fachada_Funcionario = new FFuncionario();
 						FEndereco    fachada_endereco    = new FEndereco();

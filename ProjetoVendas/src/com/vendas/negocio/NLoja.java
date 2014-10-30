@@ -1,5 +1,8 @@
 package com.vendas.negocio;
 
+import java.util.List;
+
+import com.vendas.basicas.Departamento;
 import com.vendas.basicas.Fornecedor;
 import com.vendas.basicas.Loja;
 import com.vendas.dao.DAOFornecedor;
@@ -19,6 +22,11 @@ public class NLoja {
 	public Loja consultar(Integer id) {
 		
 		return daol.consultarPorId(id);
+	}
+
+	public List<Loja> listar() {
+		// TODO Auto-generated method stub
+		return daol.listar();
 	}
 	
 }

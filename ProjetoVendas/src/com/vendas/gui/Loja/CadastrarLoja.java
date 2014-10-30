@@ -1,0 +1,285 @@
+package com.vendas.gui.Loja;
+
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.EventQueue;
+import java.awt.Toolkit;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.MaskFormatter;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextPane;
+import javax.swing.JTextField;
+import javax.swing.JFormattedTextField;
+import javax.swing.JButton;
+import javax.swing.SwingUtilities;
+
+import com.vendas.basicas.Departamento;
+import com.vendas.basicas.Fornecedor;
+import com.vendas.basicas.Loja;
+import com.vendas.fachada.FDepartamento;
+import com.vendas.fachada.FLoja;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+import javax.swing.JProgressBar;
+import javax.swing.JTable;
+
+public class CadastrarLoja extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField textRazaoSocial;
+	private JTextField textNomeFantasia;
+	ImageIcon loading = new ImageIcon("loading.gif");
+	JLabel lblCarregando = new JLabel("Validando Loja... ", loading, JLabel.CENTER);
+	JProgressBar progressBar = new JProgressBar();
+	final JButton btnSalvar = new JButton("Salvar");
+	final JFormattedTextField cnpj = new JFormattedTextField();
+	String status;
+	MaskFormatter cnpj_format;
+	Collection<Departamento> lista_departamento = new ArrayList<Departamento>();
+	List<Loja> lista_loja_departamento;
+	Loja loja_public = new Loja();
+	 DefaultTableModel model = new DefaultTableModel(new Object[][]{}, new Object[]{"ID", "Nome" });
+	
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					CadastrarLoja frame = new CadastrarLoja();
+					frame.setVisible(true);
+					//desabilitando o bot�o maximizar
+					frame.setResizable(false);
+					frame.setTitle("Cadastro de Loja");
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+	 
+	 final JLabel label = new JLabel("Validando Loja... ", loading, JLabel.CENTER);
+	 private JTextField textEmail;
+	 private JTable table;
+	/**
+	 * Create the frame.
+	 */
+	public CadastrarLoja() {
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		setBounds(100, 100, 450, 465);
+		contentPane = new JPanel();
+		
+		//Tela centralizada
+		Dimension tela = Toolkit.getDefaultToolkit().getScreenSize();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		  setLocation((tela.width-this.getSize().width)/2,   
+                  (tela.height-this.getSize().height)/2);
+		   
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JLabel lblCadastroDeLoja = new JLabel("Cadastro de Loja");
+		lblCadastroDeLoja.setBounds(173, 11, 245, 29);
+		contentPane.add(lblCadastroDeLoja);
+		
+		JLabel lblRazoSocial = new JLabel("Raz\u00E3o Social:");
+		lblRazoSocial.setBounds(10, 45, 109, 23);
+		contentPane.add(lblRazoSocial);
+		
+		textRazaoSocial = new JTextField();
+		textRazaoSocial.setBounds(111, 46, 307, 20);
+		contentPane.add(textRazaoSocial);
+		textRazaoSocial.setColumns(10);
+		
+		JLabel lblNomeFantasia = new JLabel("Nome Fantasia");
+		lblNomeFantasia.setBounds(10, 90, 109, 29);
+		contentPane.add(lblNomeFantasia);
+		
+		textNomeFantasia = new JTextField();
+		textNomeFantasia.setBounds(111, 94, 307, 20);
+		contentPane.add(textNomeFantasia);
+		textNomeFantasia.setColumns(10);
+		
+		JLabel lblCnpj = new JLabel("CNPJ:");
+		lblCnpj.setBounds(46, 131, 75, 29);   
+		contentPane.add(lblCnpj);
+		
+		
+		cnpj.setBounds(111, 136, 140, 20);
+		try {
+			cnpj_format = new MaskFormatter("##.###.###/####-##");
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}  
+        cnpj.setFormatterFactory(new DefaultFormatterFactory(cnpj_format));
+		contentPane.add(cnpj);
+		
+		
+		
+		btnSalvar.setBounds(294, 387, 130, 29);
+		contentPane.add(btnSalvar);
+		
+		
+		lblCarregando.setBounds(32, 334, 378, 16);
+		contentPane.add(lblCarregando);
+		
+		
+		progressBar.setBounds(154, 361, 148, 14);
+		progressBar.setIndeterminate(true);
+		progressBar.setVisible(false);
+		contentPane.add(progressBar);
+		
+		JLabel lblEmail = new JLabel("Email");
+		lblEmail.setBounds(46, 179, 46, 14);
+		contentPane.add(lblEmail);
+		
+		textEmail = new JTextField();
+		textEmail.setBounds(111, 176, 307, 20);
+		contentPane.add(textEmail);
+		textEmail.setColumns(10);
+		
+		JLabel lblTelefone = new JLabel("Telefone");
+		lblTelefone.setBounds(46, 220, 46, 14);
+		contentPane.add(lblTelefone);
+		
+		final JFormattedTextField telefone = new JFormattedTextField();
+		telefone.setBounds(107, 217, 109, 20);
+		contentPane.add(telefone);
+		
+		FDepartamento fachada_departamento = new FDepartamento();
+		FLoja fachada_loja = new FLoja();
+		lista_loja_departamento = new ArrayList<Loja>(fachada_loja.listar());
+		
+		 for (Loja loja : fachada_loja.listar()) {    
+			this.loja_public = loja;
+			 loja.getId();
+			 loja.getDepartamentos();
+			 //lista_departamento.add(loja.getDepartamentos());
+			 lista_loja_departamento.add(loja);
+			 
+          
+         }
+		 
+		 lista_loja_departamento = new ArrayList<Loja>(fachada_loja.listar());
+		 for (Departamento departamento : lista_departamento) {    
+			
+			 
+			 
+			 model.addRow(new String[]{departamento.getId().toString(), 
+	 				   				   departamento.getNome()
+	 		});
+			 
+          
+         }
+		
+
+		
+		table = new JTable(model);
+		table.setBounds(111, 295, 109, -46);
+		contentPane.add(table);
+		
+		//Barra de Rolagem
+		JScrollPane scrollPane = new JScrollPane(table);
+		scrollPane.setBounds(111, 244, 188, 78);
+		contentPane.add(scrollPane);
+		
+		JLabel lblDepartamentos = new JLabel("Departamentos:");
+		lblDepartamentos.setBounds(10, 273, 82, 16);
+		contentPane.add(lblDepartamentos);
+		
+		JButton btnCadastrar = new JButton("Cadastrar");
+		btnCadastrar.setBounds(308, 244, 110, 23);
+		contentPane.add(btnCadastrar);
+		
+		JButton btnEditar = new JButton("Editar");
+		btnEditar.setBounds(309, 270, 110, 23);
+		contentPane.add(btnEditar);
+		
+		JButton btnExcluir = new JButton("Excluir");
+		btnExcluir.setBounds(309, 300, 109, 23);
+		contentPane.add(btnExcluir);
+		
+		lblCarregando.setVisible(false);
+		
+		
+		
+		btnSalvar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				
+				
+				new Thread(){
+					@Override
+					public void run() {
+						lblCarregando.setVisible(true);
+						progressBar.setVisible(true);
+						btnSalvar.setEnabled(false);
+						Loja loja = new Loja();
+						loja.setCnpj(cnpj.getText());
+						loja.setRazao_social(textRazaoSocial.getText());
+						loja.setDepartamentos(lista_departamento);
+						loja.setEmail(textEmail.getText());
+						loja.setNome(textNomeFantasia.getText());
+						loja.setTelefone_comercial(telefone.getText());
+						
+						FLoja fachada_loja = new FLoja();
+						try {
+							status = fachada_loja.validaCampo(loja);
+							
+							if(status == ""){
+					         fachada_loja.cadastrar(loja);
+					         status = "Loja Cadastrado com Sucesso!";
+					         JOptionPane.showMessageDialog(null,status);
+					         cnpj.setText("");
+							 textNomeFantasia.setText("");
+							 textRazaoSocial.setText("");
+							 
+							}else{
+								JOptionPane.showMessageDialog(null,status);
+								
+							}
+							updateProgress();
+							
+						} catch (Exception e) {
+							JOptionPane.showMessageDialog(null,e.getMessage());
+						}
+						
+					}
+				}.start();
+				
+			}
+		});
+	}
+	
+	private void updateProgress() {
+		  SwingUtilities.invokeLater(new Runnable() {
+		    public void run() {
+		      // Here, we can safely update the GUI
+		      // because we'll be called from the
+		      // event dispatch thread
+		    	lblCarregando.setVisible(false);
+				progressBar.setVisible(false);
+				btnSalvar.setEnabled(true);
+				
+				
+		    }
+		  });
+		}
+}
