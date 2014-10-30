@@ -8,6 +8,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import com.vendas.basicas.Cliente;
+import com.vendas.basicas.Departamento;
 import com.vendas.basicas.Endereco;
 import com.vendas.basicas.Fornecedor;
 import com.vendas.basicas.Funcionario;
@@ -124,6 +125,12 @@ public class DAOFuncionario implements IFuncionario {
 	public List<Funcionario> consultarPorCPF(String cpf) {
 		return entityManager.createQuery("select f from Funcionario as f where f.cpf = ?1").
 				setParameter(1, cpf).
+				getResultList();
+	}
+	//Fazer Inner Join Endereço - Loja - Funcionario - Departamento
+	public List<Departamento> funcionarioDepartamento(Funcionario funcionario) {
+		return entityManager.createQuery("").
+				setParameter(1, funcionario).
 				getResultList();
 	}
 
