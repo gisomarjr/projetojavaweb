@@ -50,7 +50,7 @@ public class CadastrarLoja extends JFrame {
 	String status;
 	MaskFormatter cnpj_format;
 	Collection<Departamento> lista_departamento = new ArrayList<Departamento>();
-	List<Loja> lista_loja_departamento;
+//	List<Loja> lista_loja_departamento;
 	Loja loja_public = new Loja();
 	 DefaultTableModel model = new DefaultTableModel(new Object[][]{}, new Object[]{"ID", "Nome" });
 	
@@ -95,7 +95,7 @@ public class CadastrarLoja extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblCadastroDeLoja = new JLabel("Cadastro de Loja");
+		final JLabel lblCadastroDeLoja = new JLabel("Cadastro de Loja");
 		lblCadastroDeLoja.setBounds(173, 11, 245, 29);
 		contentPane.add(lblCadastroDeLoja);
 		
@@ -165,8 +165,7 @@ public class CadastrarLoja extends JFrame {
 		
 		final FDepartamento fachada_departamento = new FDepartamento();
 		
-		FLoja fachada_loja = new FLoja();
-		
+		/*
 		lista_loja_departamento = new ArrayList<Loja>(fachada_loja.listar());
 		try{
 		 for (Loja loja : fachada_loja.listar()) {    
@@ -193,16 +192,9 @@ public class CadastrarLoja extends JFrame {
 		}catch(java.lang.NullPointerException nulo){
 			
 		}
-
+*/
 		
-		table = new JTable(model);
-		table.setBounds(111, 295, 109, -46);
-		contentPane.add(table);
 		
-		//Barra de Rolagem
-		JScrollPane scrollPane = new JScrollPane(table);
-		scrollPane.setBounds(129, 244, 170, 78);
-		contentPane.add(scrollPane);
 		
 		JLabel lblDepartamentos = new JLabel("Departamentos:");
 		lblDepartamentos.setBounds(10, 273, 123, 16);
@@ -235,10 +227,17 @@ public class CadastrarLoja extends JFrame {
 				
 				departamento.setNome(textCadastroNomeDepartamento.getText());
 				
-				lista_departamento.add(departamento);
-				
 				try {
-					fachada_departamento.cadastrar(departamento);
+					
+					 lista_departamento.add(departamento);
+					 fachada_departamento.cadastrar(departamento);
+					 
+					 model.addRow(new String[]{departamento.getId().toString(), 
+			 				   				   departamento.getNome()
+			 		});
+					
+					 
+					
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -246,6 +245,16 @@ public class CadastrarLoja extends JFrame {
 				
 			}
 		});
+		
+		table = new JTable(model);
+		table.setBounds(111, 295, 109, -46);
+		contentPane.add(table);
+		
+		//Barra de Rolagem
+		JScrollPane scrollPane = new JScrollPane(table);
+		scrollPane.setBounds(129, 244, 170, 78);
+		contentPane.add(scrollPane);
+		
 		btnOkCadastrarDepartamento.setBounds(308, 335, 60, 20);
 		contentPane.add(btnOkCadastrarDepartamento);
 		btnOkCadastrarDepartamento.setVisible(false);
