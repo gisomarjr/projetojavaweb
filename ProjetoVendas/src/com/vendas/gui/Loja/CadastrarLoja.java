@@ -163,7 +163,7 @@ public class CadastrarLoja extends JFrame {
 		telefone.setBounds(129, 218, 109, 20);
 		contentPane.add(telefone);
 		
-		FDepartamento fachada_departamento = new FDepartamento();
+		final FDepartamento fachada_departamento = new FDepartamento();
 		
 		FLoja fachada_loja = new FLoja();
 		
@@ -231,6 +231,18 @@ public class CadastrarLoja extends JFrame {
 				textCadastroNomeDepartamento.setVisible(false);
 				btnOkCadastrarDepartamento.setVisible(false);
 				
+				Departamento departamento = new Departamento();
+				
+				departamento.setNome(textCadastroNomeDepartamento.getText());
+				
+				lista_departamento.add(departamento);
+				
+				try {
+					fachada_departamento.cadastrar(departamento);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				
 			}
 		});

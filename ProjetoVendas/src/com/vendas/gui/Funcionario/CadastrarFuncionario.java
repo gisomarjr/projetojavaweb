@@ -45,7 +45,7 @@ public class CadastrarFuncionario extends JFrame {
 	private JTextField textNome;
 	private JTextField textMatricula;
 	ImageIcon loading = new ImageIcon("loading.gif");
-	JLabel lblCarregando = new JLabel("Validando Funcionário... ", loading, JLabel.CENTER);
+	JLabel lblCarregando = new JLabel("Validando FuncionÔøΩrio... ", loading, JLabel.CENTER);
 	JProgressBar progressBar = new JProgressBar();
 	final JButton btnSalvar = new JButton("Salvar");
 	final JFormattedTextField cpf = new JFormattedTextField();
@@ -64,9 +64,9 @@ public class CadastrarFuncionario extends JFrame {
 				try {
 					CadastrarFuncionario frame = new CadastrarFuncionario();
 					frame.setVisible(true);
-					//desabilitando o botáo maximizar
+					//desabilitando o botÔøΩo maximizar
 					frame.setResizable(false);
-					frame.setTitle("Cadastro de Funcionário");
+					frame.setTitle("Cadastro de FuncionÔøΩrio");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -74,7 +74,7 @@ public class CadastrarFuncionario extends JFrame {
 		});
 	}
 	 
-	 final JLabel label = new JLabel("Validando Funcionário... ", loading, JLabel.CENTER);
+	 final JLabel label = new JLabel("Validando FuncionÔøΩrio... ", loading, JLabel.CENTER);
 	 private JTextField textUsuario;
 	 private JPasswordField passwordField;
 	 private JTextField textEmail;
@@ -98,7 +98,7 @@ public class CadastrarFuncionario extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblCadastroDeFuncionario = new JLabel("Cadastro de Funcionário");
+		JLabel lblCadastroDeFuncionario = new JLabel("Cadastro de FuncionÔøΩrio");
 		lblCadastroDeFuncionario.setBounds(144, 11, 280, 29);
 		contentPane.add(lblCadastroDeFuncionario);
 		
@@ -277,8 +277,8 @@ public class CadastrarFuncionario extends JFrame {
 						funcionario.setTelefone(telefone.getText());
 						funcionario.setUsuario(textUsuario.getText());
 						funcionario.setSenha(passwordField.getText());
-						departamento.setId(comboBoxDepartamento.getSelectedIndex() + 1);
-						departamento.setNome(comboBoxDepartamento.getSelectedItem().toString());
+						//departamento.setId(comboBoxDepartamento.getSelectedIndex() + 1);
+					    //departamento.setNome(comboBoxDepartamento.getSelectedItem().toString());
 						funcionario.setDepartamento(departamento);
 						endereco.setCep(cep.getText());
 						endereco.setCidade(textCidade.getText());
@@ -293,24 +293,24 @@ public class CadastrarFuncionario extends JFrame {
 							status = fachada_Funcionario.validaCampo(funcionario);
 							
 							if(status == ""){
-					         //Cadastrar Funcionário
+					         //Cadastrar FuncionÔøΩrio
 							 fachada_Funcionario.cadastrar(funcionario);
 					         
 					         cpf.setText("");
 							 textMatricula.setText("");
 							 textNome.setText("");
-							 //Cadastrar Endereço
+							 //Cadastrar EndereÔøΩo
 							 fachada_endereco.cadastrar(endereco);
 							 status = "Funcionario Cadastrado com Sucesso!";
 					         JOptionPane.showMessageDialog(null,status);
 					         
-					         String messageExit = "Cadastrar novo usuário?";
+					         String messageExit = "Cadastrar novo usuÔøΩrio?";
 
-					         String title = "Confirmação";
+					         String title = "ConfirmaÔøΩÔøΩo";
 
-					         //Exibe caixa de dialogo solicitando confirmação ou não. 
+					         //Exibe caixa de dialogo solicitando confirmaÔøΩÔøΩo ou nÔøΩo. 
 
-					         //Se o usuário clicar em "Sim" retorna 0 pra variavel reply, se informado não retorna 1
+					         //Se o usuÔøΩrio clicar em "Sim" retorna 0 pra variavel reply, se informado nÔøΩo retorna 1
 
 					         int reply = JOptionPane.showConfirmDialog(null, messageExit, title, JOptionPane.YES_NO_OPTION);
 
@@ -321,7 +321,7 @@ public class CadastrarFuncionario extends JFrame {
 					        	   	Interno interno = new Interno();
 					        	   	interno.setVisible(true);
 					           		}else{
-					           //faça nada!! :)
+					           //faÔøΩa nada!! :)
 					           }
 
 							}else{
