@@ -82,7 +82,7 @@ public class CadastrarLoja extends JFrame {
 	 */
 	public CadastrarLoja() {
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-		setBounds(100, 100, 450, 465);
+		setBounds(100, 100, 488, 465);
 		contentPane = new JPanel();
 		
 		//Tela centralizada
@@ -103,7 +103,7 @@ public class CadastrarLoja extends JFrame {
 		contentPane.add(lblRazoSocial);
 		
 		textRazaoSocial = new JTextField();
-		textRazaoSocial.setBounds(111, 46, 307, 20);
+		textRazaoSocial.setBounds(129, 47, 307, 20);
 		contentPane.add(textRazaoSocial);
 		textRazaoSocial.setColumns(10);
 		
@@ -112,16 +112,16 @@ public class CadastrarLoja extends JFrame {
 		contentPane.add(lblNomeFantasia);
 		
 		textNomeFantasia = new JTextField();
-		textNomeFantasia.setBounds(111, 94, 307, 20);
+		textNomeFantasia.setBounds(129, 95, 307, 20);
 		contentPane.add(textNomeFantasia);
 		textNomeFantasia.setColumns(10);
 		
 		JLabel lblCnpj = new JLabel("CNPJ:");
-		lblCnpj.setBounds(46, 131, 75, 29);   
+		lblCnpj.setBounds(72, 131, 75, 29);   
 		contentPane.add(lblCnpj);
 		
 		
-		cnpj.setBounds(111, 136, 140, 20);
+		cnpj.setBounds(129, 136, 140, 20);
 		try {
 			cnpj_format = new MaskFormatter("##.###.###/####-##");
 		} catch (ParseException e1) {
@@ -146,48 +146,52 @@ public class CadastrarLoja extends JFrame {
 		contentPane.add(progressBar);
 		
 		JLabel lblEmail = new JLabel("Email");
-		lblEmail.setBounds(46, 179, 46, 14);
+		lblEmail.setBounds(65, 179, 46, 14);
 		contentPane.add(lblEmail);
 		
 		textEmail = new JTextField();
-		textEmail.setBounds(111, 176, 307, 20);
+		textEmail.setBounds(129, 177, 307, 20);
 		contentPane.add(textEmail);
 		textEmail.setColumns(10);
 		
 		JLabel lblTelefone = new JLabel("Telefone");
-		lblTelefone.setBounds(46, 220, 46, 14);
+		lblTelefone.setBounds(46, 218, 73, 16);
 		contentPane.add(lblTelefone);
 		
 		final JFormattedTextField telefone = new JFormattedTextField();
-		telefone.setBounds(107, 217, 109, 20);
+		telefone.setBounds(129, 218, 109, 20);
 		contentPane.add(telefone);
 		
 		FDepartamento fachada_departamento = new FDepartamento();
-		FLoja fachada_loja = new FLoja();
-		lista_loja_departamento = new ArrayList<Loja>(fachada_loja.listar());
 		
+		FLoja fachada_loja = new FLoja();
+		
+		lista_loja_departamento = new ArrayList<Loja>(fachada_loja.listar());
+		try{
 		 for (Loja loja : fachada_loja.listar()) {    
 			this.loja_public = loja;
 			 loja.getId();
 			 loja.getDepartamentos();
-			 //lista_departamento.add(loja.getDepartamentos());
+			 
 			 lista_loja_departamento.add(loja);
 			 
           
          }
 		 
 		 lista_loja_departamento = new ArrayList<Loja>(fachada_loja.listar());
-		 for (Departamento departamento : lista_departamento) {    
+		 for (Departamento departamento : loja_public.getDepartamentos()) {    
 			
 			 
-			 
+			 lista_departamento.add(departamento);
 			 model.addRow(new String[]{departamento.getId().toString(), 
 	 				   				   departamento.getNome()
 	 		});
 			 
           
          }
-		
+		}catch(java.lang.NullPointerException nulo){
+			
+		}
 
 		
 		table = new JTable(model);
@@ -196,11 +200,11 @@ public class CadastrarLoja extends JFrame {
 		
 		//Barra de Rolagem
 		JScrollPane scrollPane = new JScrollPane(table);
-		scrollPane.setBounds(111, 244, 188, 78);
+		scrollPane.setBounds(129, 244, 170, 78);
 		contentPane.add(scrollPane);
 		
 		JLabel lblDepartamentos = new JLabel("Departamentos:");
-		lblDepartamentos.setBounds(10, 273, 82, 16);
+		lblDepartamentos.setBounds(10, 273, 123, 16);
 		contentPane.add(lblDepartamentos);
 		
 		JButton btnCadastrar = new JButton("Cadastrar");
@@ -238,6 +242,7 @@ public class CadastrarLoja extends JFrame {
 						loja.setEmail(textEmail.getText());
 						loja.setNome(textNomeFantasia.getText());
 						loja.setTelefone_comercial(telefone.getText());
+						
 						
 						FLoja fachada_loja = new FLoja();
 						try {
