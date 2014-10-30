@@ -77,12 +77,13 @@ public class CadastrarLoja extends JFrame {
 	 final JLabel label = new JLabel("Validando Loja... ", loading, JLabel.CENTER);
 	 private JTextField textEmail;
 	 private JTable table;
+	 private JTextField textCadastroNomeDepartamento;
 	/**
 	 * Create the frame.
 	 */
 	public CadastrarLoja() {
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-		setBounds(100, 100, 488, 465);
+		setBounds(100, 100, 498, 647);
 		contentPane = new JPanel();
 		
 		//Tela centralizada
@@ -132,15 +133,15 @@ public class CadastrarLoja extends JFrame {
 		
 		
 		
-		btnSalvar.setBounds(294, 387, 130, 29);
+		btnSalvar.setBounds(322, 565, 130, 29);
 		contentPane.add(btnSalvar);
 		
 		
-		lblCarregando.setBounds(32, 334, 378, 16);
+		lblCarregando.setBounds(60, 512, 378, 16);
 		contentPane.add(lblCarregando);
 		
 		
-		progressBar.setBounds(154, 361, 148, 14);
+		progressBar.setBounds(182, 539, 148, 14);
 		progressBar.setIndeterminate(true);
 		progressBar.setVisible(false);
 		contentPane.add(progressBar);
@@ -207,9 +208,52 @@ public class CadastrarLoja extends JFrame {
 		lblDepartamentos.setBounds(10, 273, 123, 16);
 		contentPane.add(lblDepartamentos);
 		
-		JButton btnCadastrar = new JButton("Cadastrar");
-		btnCadastrar.setBounds(308, 244, 110, 23);
-		contentPane.add(btnCadastrar);
+
+		textCadastroNomeDepartamento = new JTextField();
+		textCadastroNomeDepartamento.setBounds(185, 334, 114, 19);
+		contentPane.add(textCadastroNomeDepartamento);
+		textCadastroNomeDepartamento.setColumns(10);
+		
+		final JLabel lblNomeDoDepartamento = new JLabel("Nome do departamento");
+		lblNomeDoDepartamento.setBounds(10, 336, 187, 15);
+		contentPane.add(lblNomeDoDepartamento);
+		lblNomeDoDepartamento.setVisible(false);
+		textCadastroNomeDepartamento.setVisible(false);
+		
+		/**
+		 * Cadastrar Departamento
+		 */
+		final JButton btnOkCadastrarDepartamento = new JButton("OK");
+		btnOkCadastrarDepartamento.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				lblNomeDoDepartamento.setVisible(false);
+				textCadastroNomeDepartamento.setVisible(false);
+				btnOkCadastrarDepartamento.setVisible(false);
+				
+				
+			}
+		});
+		btnOkCadastrarDepartamento.setBounds(308, 335, 60, 20);
+		contentPane.add(btnOkCadastrarDepartamento);
+		btnOkCadastrarDepartamento.setVisible(false);
+		
+		/**
+		 * * Habilitar o botão de cadastrar departamento e o
+		 * textbox do departametno
+		 */
+		JButton btnChamarCadastroDepartamento = new JButton("Cadastrar");
+		btnChamarCadastroDepartamento.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				lblNomeDoDepartamento.setVisible(true);
+				textCadastroNomeDepartamento.setVisible(true);
+				btnOkCadastrarDepartamento.setVisible(true);
+				
+			}
+		});
+		btnChamarCadastroDepartamento.setBounds(308, 244, 110, 23);
+		contentPane.add(btnChamarCadastroDepartamento);
 		
 		JButton btnEditar = new JButton("Editar");
 		btnEditar.setBounds(309, 270, 110, 23);
@@ -218,6 +262,10 @@ public class CadastrarLoja extends JFrame {
 		JButton btnExcluir = new JButton("Excluir");
 		btnExcluir.setBounds(309, 300, 109, 23);
 		contentPane.add(btnExcluir);
+		
+		
+		
+		
 		
 		lblCarregando.setVisible(false);
 		
