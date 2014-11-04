@@ -23,6 +23,12 @@ public class Funcionario extends Pessoa {
     String usuario;
 	String senha;
 	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="id_loja", insertable=true,updatable=true)
+	@Fetch(FetchMode.JOIN)
+	private
+	Loja loja;
+	
 	@OneToOne(mappedBy="funcionario")
 	@Cascade(CascadeType.ALL)
 	Endereco endereco;
@@ -62,5 +68,11 @@ public class Funcionario extends Pessoa {
 	}
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+	public Loja getLoja() {
+		return loja;
+	}
+	public void setLoja(Loja loja) {
+		this.loja = loja;
 	}
 }

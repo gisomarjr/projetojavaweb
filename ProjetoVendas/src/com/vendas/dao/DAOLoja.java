@@ -94,9 +94,9 @@ public class DAOLoja implements ILoja  {
 	}
 	
 	
-	/*public List<Loja> consultarPorCNPJ(String cnpj) {
+	/*public List<Loja> listarDepartamentos(Loja loja) {
 		return entityManager.createQuery("select f from Loja as f where f.cnpj = ?1").
-		setParameter(1, cnpj).getResultList();
+		setParameter(1, "").getResultList();
 	
 	}*/
 

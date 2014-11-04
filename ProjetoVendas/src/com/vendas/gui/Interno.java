@@ -21,6 +21,7 @@ import com.vendas.gui.Fornecedor.CadastrarFornecedor;
 import com.vendas.gui.Fornecedor.ConsultarFornecedor;
 import com.vendas.gui.Funcionario.CadastrarFuncionario;
 import com.vendas.gui.Funcionario.ConsultarFuncionario;
+import com.vendas.gui.Loja.CadastrarLoja;
 
 import javax.swing.JLabel;
 
@@ -49,7 +50,7 @@ public class Interno extends JFrame {
 					frame.setVisible(true);
 					//desabilitando o botÔøΩo maximizar
 					frame.setResizable(false);
-					frame.setTitle("¡rea Interna");
+					frame.setTitle("ÔøΩrea Interna");
 					frame.setVisible(true);
 					
 				} catch (Exception e) {
@@ -123,8 +124,22 @@ public class Interno extends JFrame {
 		});
 		
 		JButton btnCadastrarLoja = new JButton("Cadastrar Loja");
+		btnCadastrarLoja.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				CadastrarLoja cadastrar_loja = new CadastrarLoja();
+				cadastrar_loja.setVisible(true);
+			}
+		});
 		
 		JButton btnConsultarLoja = new JButton("Consultar Loja");
+		btnConsultarLoja.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				
+				
+			}
+		});
 		
 		JLabel lblLoja = new JLabel("Loja");
 		lblLoja.setFont(new Font("Lucida Grande", Font.BOLD | Font.ITALIC, 13));
@@ -133,8 +148,21 @@ public class Interno extends JFrame {
 		lblProduto.setFont(new Font("Lucida Grande", Font.BOLD | Font.ITALIC, 13));
 		
 		JButton btnCadastrarProduto = new JButton("Cadastrar Produto");
+		btnCadastrarProduto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				
+				
+			}
+		});
 		
 		JButton btnConsultarProduto = new JButton("Consultar Produto");
+		btnConsultarProduto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				
+			}
+		});
 		
 		JButton btnSair = new JButton("Sair");
 		btnSair.addActionListener(new ActionListener() {
@@ -142,9 +170,9 @@ public class Interno extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				String messageExit = "Deseja realmente sair?";
-				String title = "Confirmação";
-				//Exibe caixa de dialogo solicitando confirmação ou não. 
-				//Se o usuário clicar em "Sim" retorna 0 pra variavel reply, se informado não retorna 1
+				String title = "ConfirmaÔøΩÔøΩo";
+				//Exibe caixa de dialogo solicitando confirmaÔøΩÔøΩo ou nÔøΩo. 
+				//Se o usuÔøΩrio clicar em "Sim" retorna 0 pra variavel reply, se informado nÔøΩo retorna 1
 				int reply = JOptionPane.showConfirmDialog(null, messageExit, title, JOptionPane.YES_NO_OPTION);
 				  if (reply == JOptionPane.YES_OPTION)
 				  {

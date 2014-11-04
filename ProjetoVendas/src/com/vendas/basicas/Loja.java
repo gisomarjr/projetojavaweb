@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -25,6 +26,9 @@ public class Loja {
 	String email;
 	String telefone_comercial;
 	
+	@OneToMany(mappedBy="loja", fetch = FetchType.LAZY)
+	private
+	Collection<Funcionario> funcionarios;
 	
 	@OneToOne(mappedBy="loja")
 	Endereco endereco;
@@ -40,6 +44,8 @@ public class Loja {
 	joinColumns=@JoinColumn(name="id_loja"),
 	inverseJoinColumns=@JoinColumn(name="id_departamento"))
 	Collection<Departamento> departamentos;
+	
+	
 	
 	
 	public Integer getId() {
@@ -95,6 +101,12 @@ public class Loja {
 	}
 	public void setDepartamentos(Collection<Departamento> departamentos) {
 		this.departamentos = departamentos;
+	}
+	public Collection<Funcionario> getFuncionarios() {
+		return funcionarios;
+	}
+	public void setFuncionarios(Collection<Funcionario> funcionarios) {
+		this.funcionarios = funcionarios;
 	}
 	
 	

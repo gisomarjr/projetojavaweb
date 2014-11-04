@@ -23,9 +23,11 @@ import com.vendas.basicas.Departamento;
 import com.vendas.basicas.Endereco;
 import com.vendas.basicas.Fornecedor;
 import com.vendas.basicas.Funcionario;
+import com.vendas.basicas.Loja;
 import com.vendas.fachada.FDepartamento;
 import com.vendas.fachada.FEndereco;
 import com.vendas.fachada.FFuncionario;
+import com.vendas.fachada.FLoja;
 import com.vendas.gui.Interno;
 
 import java.awt.event.ActionListener;
@@ -52,7 +54,9 @@ public class CadastrarFuncionario extends JFrame {
 	String status;
 	MaskFormatter cpf_format;
 	List<Departamento> lista_departamento;
+	List<Loja> lista_loja;
 	Departamento departamento;
+	Loja loja;
 	
 	/**
 	 * Launch the application.
@@ -167,22 +171,44 @@ public class CadastrarFuncionario extends JFrame {
 		contentPane.add(passwordField);
 		
 		JLabel lblDepartamento = new JLabel("Departamento");
-		lblDepartamento.setBounds(5, 224, 114, 14);
+		lblDepartamento.setBounds(225, 224, 114, 14);
 		contentPane.add(lblDepartamento);
+		
+		//Carregando a Loja
+		FLoja fachada_loja = new FLoja();
+		lista_loja = new ArrayList<Loja>(fachada_loja.listar());
+		ArrayList<String> lista_nome_loja = new ArrayList<String>();
+		JComboBox comboBoxLoja = null;
+		for(Loja loja : lista_loja){
+		    this.loja = loja;
+		    
+			lista_nome_loja.add(loja.getNome());
+		    comboBoxLoja  = new JComboBox(lista_nome_loja.toArray());
+			
+		}
+		comboBoxLoja.setBounds(127, 219, 86, 24);
+		contentPane.add(comboBoxLoja);
+		
 		
 		//Carregando o departamento
 		FDepartamento fachada_departamento = new FDepartamento();
 		lista_departamento = new ArrayList<Departamento>(fachada_departamento.listar());
 		ArrayList<String> lista = new ArrayList<String>();
-		 for (Departamento departamento : lista_departamento) { 
+		
+		
+		for (Departamento departamento : lista_departamento) { 
 			 this.departamento = departamento;
 			 lista.add(departamento.getNome());
 			 
-		 }
+		}
+		
+		
 		
 		final JComboBox comboBoxDepartamento = new JComboBox(lista.toArray());
-		comboBoxDepartamento.setBounds(129, 221, 113, 20);
+		comboBoxDepartamento.setBounds(338, 221, 113, 20);
 		contentPane.add(comboBoxDepartamento);
+		
+	
 		
 		JLabel lblTelefone = new JLabel("Telefone");
 		lblTelefone.setBounds(10, 140, 86, 14);
@@ -230,8 +256,6 @@ public class CadastrarFuncionario extends JFrame {
 		String listaEstado [] = {"PE", "SP"}; 
 		final JComboBox comboBoxEstado = new JComboBox(listaEstado);
 	
-		
-		
 		comboBoxEstado.setBounds(311, 302, 95, 20);
 		contentPane.add(comboBoxEstado);
 		
@@ -251,6 +275,12 @@ public class CadastrarFuncionario extends JFrame {
 		textNumero.setBounds(318, 334, 46, 20);
 		contentPane.add(textNumero);
 		textNumero.setColumns(10);
+		
+		JLabel lblLoja = new JLabel("Loja:");
+		lblLoja.setBounds(10, 224, 70, 15);
+		contentPane.add(lblLoja);
+		
+	
 		
 		lblCarregando.setVisible(false);
 		
@@ -280,12 +310,15 @@ public class CadastrarFuncionario extends JFrame {
 						//departamento.setId(comboBoxDepartamento.getSelectedIndex() + 1);
 					    //departamento.setNome(comboBoxDepartamento.getSelectedItem().toString());
 						funcionario.setDepartamento(departamento);
+						funcionario.setLoja(loja);
+						
 						endereco.setCep(cep.getText());
 						endereco.setCidade(textCidade.getText());
 						endereco.setEstado(comboBoxEstado.getSelectedItem().toString());
 						endereco.setLogradouro(textLogradouro.getText());
 						endereco.setNumero(Integer.parseInt(textNumero.getText()));
 						endereco.setFuncionario(funcionario);
+						
 						
 						FFuncionario fachada_Funcionario = new FFuncionario();
 						FEndereco    fachada_endereco    = new FEndereco();
