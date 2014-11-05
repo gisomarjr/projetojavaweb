@@ -32,8 +32,11 @@ import com.vendas.gui.Interno;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.swing.JProgressBar;
@@ -57,6 +60,10 @@ public class CadastrarFuncionario extends JFrame {
 	List<Loja> lista_loja;
 	Departamento departamento;
 	Loja loja;
+	Collection<Departamento> collection_departamento = null;
+	ArrayList<String> lista = new ArrayList<String>();
+	FDepartamento fachada_departamento = new FDepartamento();
+	JComboBox comboBoxDepartamento = new JComboBox(lista.toArray());
 	
 	/**
 	 * Launch the application.
@@ -177,10 +184,15 @@ public class CadastrarFuncionario extends JFrame {
 		//Carregando a Loja
 		FLoja fachada_loja = new FLoja();
 		lista_loja = new ArrayList<Loja>(fachada_loja.listar());
+		
 		ArrayList<String> lista_nome_loja = new ArrayList<String>();
+		
 		JComboBox comboBoxLoja = null;
+		
 		for(Loja loja : lista_loja){
 		    this.loja = loja;
+		    
+		    collection_departamento = loja.getDepartamentos();
 		    
 			lista_nome_loja.add(loja.getNome());
 		    comboBoxLoja  = new JComboBox(lista_nome_loja.toArray());
@@ -191,24 +203,22 @@ public class CadastrarFuncionario extends JFrame {
 		
 		
 		//Carregando o departamento
-		FDepartamento fachada_departamento = new FDepartamento();
-		lista_departamento = new ArrayList<Departamento>(fachada_departamento.listar());
-		ArrayList<String> lista = new ArrayList<String>();
 		
-		
-		for (Departamento departamento : lista_departamento) { 
-			 this.departamento = departamento;
-			 lista.add(departamento.getNome());
-			 
-		}
-		
-		
-		
-		final JComboBox comboBoxDepartamento = new JComboBox(lista.toArray());
-		comboBoxDepartamento.setBounds(338, 221, 113, 20);
-		contentPane.add(comboBoxDepartamento);
 		
 	
+		
+		ItemListener listener = new ItemListener(){  
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				
+				
+				atualizaCombo();
+			}
+			
+		};
+		
+		comboBoxLoja.addItemListener(listener);
+		
 		
 		JLabel lblTelefone = new JLabel("Telefone");
 		lblTelefone.setBounds(10, 140, 86, 14);
@@ -372,8 +382,22 @@ public class CadastrarFuncionario extends JFrame {
 				
 			}
 		});
+		
+		comboBoxDepartamento.setBounds(338, 221, 113, 20);
+		contentPane.add(comboBoxDepartamento);
 	}
 	
+	public void atualizaCombo(){
+		
+		lista_departamento = new ArrayList<Departamento>(fachada_departamento.listar());
+		comboBoxDepartamento.removeAllItems();
+		for (Departamento departamento : collection_departamento) { 
+			 this.departamento = departamento;
+			 lista.add(departamento.getNome());
+			 comboBoxDepartamento.addItem(lista);		
+		}
+	}
+
 	private void updateProgress() {
 		  SwingUtilities.invokeLater(new Runnable() {
 		    public void run() {
