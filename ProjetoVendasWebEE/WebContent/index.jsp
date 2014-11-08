@@ -3,39 +3,86 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-   
-       <!-- Bootstrap core CSS -->
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
+	 <!-- Bootstrap core CSS -->
     <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="http://getbootstrap.com/examples/signin/signin.css" rel="stylesheet">
+    <link href="http://getbootstrap.com/examples/cover/cover.css" rel="stylesheet">
 
-    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-    <script src="http://getbootstrap.com/assets/js/ie-emulation-modes-warning.js"></script>
-   
     
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Realizar Login</title>
+    <script src="http://getbootstrap.com/assets/js/ie-emulation-modes-warning.js"></script>
+
+   	<script src="js/bootstrap.js"></script>
+
+<title>Shopping Virtual</title>
 </head>
 <body>
+
+	 <div class="site-wrapper">
+
+      <div class="site-wrapper-inner">
+
+        <div class="cover-container">
+
+          <div class="masthead clearfix">
+            <div class="inner">
+              <h3 class="masthead-brand">Shopping Virtual</h3>
+              <ul class="nav masthead-nav">
+                <li class="active"><a href="#">Pagina Inicial</a></li>
+                <li><a href="#">Sobre</a></li>
+                <li><a href="login.jsp">Login - Clientes</a></li>
+                <li><a href="login.jsp">Login - Lojas</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="inner cover">
+            <h1 class="cover-heading">Empresas Participantes</h1>
+            <p class="lead"></p>
+            <p class="lead">
+              
+            </p>
+            
+            
+          </div>
+
+		<img class="img-circle" src="http://demo.portfoliopen.com/Resources/52/571-600x600-scale.png" alt="Generic placeholder image" style="width: 140px; height: 140px;">
+		<img class="img-circle" src="http://www.araguaiashopping.com.br/public/uploads/34793e8b62154a60ef08c095c59a5b78.jpg" alt="Generic placeholder image" style="width: 140px; height: 140px;">
+		<img class="img-circle" src="https://s3.amazonaws.com/cea.com.br/front/img/padrao/facebook.jpg" alt="Generic placeholder image" style="width: 140px; height: 140px;">
+		<img class="img-circle" src="http://www.shoppingdifusora.com.br/site/repositorio/imagem/1380477763-1_esposende.png" alt="Generic placeholder image" style="width: 140px; height: 140px;">
+		<img class="img-circle" src="http://cdn.slidesharecdn.com/ss_thumbnails/analise-arquitetura-informacao-ponto-frio-adson-130801144541-phpapp02-thumbnail-4.jpg?cb=1375386404" alt="Generic placeholder image" style="width: 140px; height: 140px;">
+		<img class="img-circle" src="http://www.tem-aqui.com/wp-content/uploads/2011/01/Extra_Hipermercados-logo4.gif" alt="Generic placeholder image" style="width: 140px; height: 140px;">
+		<img class="img-circle" src="http://cdn.mundodastribos.com/wp-admin/uploads/2011/04/Eletro-CasasBahia.jpg" alt="Generic placeholder image" style="width: 140px; height: 140px;">
+		<img class="img-circle" src="http://iguatemisalvador.com.br/wp-content/uploads/2012/10/INSINUANTE.png" alt="Generic placeholder image" style="width: 140px; height: 140px;">
+			
+		<br clear="all"><br clear="all"><br clear="all">
 		
-    <div class="container">
+		<a href="Loja/CadastrarLoja.jsp" class="btn btn-lg btn-default">Cadastre sua Loja Aqui</a>
+		<a href="#" class="btn btn-lg btn-default">Cliente se Cadastre Aqui</a>
 
-      <form class="form-signin" role="form">
-        <h2 class="form-signin-heading"> Realizar Login </h2>
-        <input  class="form-control" placeholder="Infome seu Usuário" required autofocus>
-        <input type="password" class="form-control" placeholder="Informe sua Senha" required>
-        <div class="checkbox">
-          <label>
-            <input type="checkbox" value="remember-me"> Continuar conectado
-          </label>
+          <div class="mastfoot">
+            <div class="inner">
+              <p>Projeto Faculdade Unibratec</a>.</p>
+              
+              
+              
+            </div>
+            
+          </div>
+
         </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Realizar Login</button>
-      </form>
 
-    </div> <!-- /container -->
+      </div>
 
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+  
+  </body>
 
 
 </body>
