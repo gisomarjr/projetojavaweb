@@ -6,6 +6,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Cadastrar Lojas</title>
 
+
+
 	<!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
 
@@ -15,14 +17,36 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 
-<script src="../js/bootstrap.js"></script>
 </head>
 <body>
+
+
+ <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle </span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="../index.jsp">Shopping Virtual</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li ><a href="../index.jsp">Home</a></li>
+            <li><a href="../sobre.jsp">Sobre</a></li>
+            <li><a href="../login.jsp">Login - Clientes</a></li>
+            <li><a href="../login.jsp">Login - Lojas</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
 
 <div class="jumbotron">
   <div class="container">
 
-    <h1>Ótima escolha!</h1>
+    <h1>Otima escolha!</h1>
   <p>Obrigado por escolher o Shopping Virtual
   Preencha seus dados para efetivar o seu cadastro.</p>
 
@@ -30,74 +54,99 @@
   
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h2 class="panel-title">Cadastre sua loja</h2>
+    <h2 class="panel-title">Informe seus dados cadastrais para efetuar o seu cadastro.</h2>
   </div>
   <div class="panel-body">
 
-  <!--   <img src="img/loja_cadastro.jpg" width="300" height="300" alt="Fuzzy Cardigan" 
-   class="img-thumbnail img-responsive">-->
+     
   
   
-  
-  <form role="form">
-  
-  <div class="form-group">
-  
-    <label for="exampleInputEmail1">Nome da Loja</label>
-    <input type="text" class="form-control" id="" placeholder="Informe o Nome da Loja">
-  </div>
-   <div class="form-group">
-      <label for="exampleInputEmail1">Razão Social</label>
-    <input type="text" class="form-control" id="" placeholder="Informe a Razão social aqui">
-    
-  </div>
-   
-   <div class="form-group">
-      <label for="exampleInputEmail1">CNPJ</label>
-    <input type="text" class="form-control" id="" placeholder="CNPJ">
-    
-  </div>
-  
-  <div class="form-group">
-      <label for="exampleInputEmail1">Telefone Comercial</label>
-    <input type="text" class="form-control" id="" placeholder="Telefone">
-    
-  </div>
-  
-  <div class="form-group">
-  
-    <label for="exampleInputEmail1">Informe seu Email</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
-  </div>
-  <div class="form-group">
-    <label for="exampleInputPassword1">Informe sua Senha</label>
-    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-  </div>
-  <div class="form-group">
-    <label for="exampleInputFile">Enviar Foto da Loja - LOGO</label>
-    <input type="file" id="exampleInputFile">
-    <p class="help-block">Formato aceitos: *jpg e *jpeg </p>
-  </div>
-  <div class="checkbox">
-    <label>
-      <input type="checkbox"> Check me out
-    </label>
-  </div>
-  
-  
-<!-- Small modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Small modal</button>
+  <form class="form-horizontal">
+<fieldset>
 
-<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-      ...
-    </div>
-  </div>
-</div>  
-  
+<!--  
+<div align="center">
+	<img src="img/loja_cadastro.jpg" width="300" height="300" alt="" 
+   	class="img-thumbnail img-responsive">
+</div>
+-->   	
+   	
+<!-- Form Name -->
+<legend>Cadastrar Loja</legend>
 
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="nome">Nome da Loja</label>  
+  <div class="col-md-5">
+  <input id="nome" name="nome" type="text" placeholder="Nome" class="form-control input-md" required="">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="razao_social">Razão Social da Loja</label>  
+  <div class="col-md-5">
+  <input id="razao_social" name="razao_social" type="text" placeholder="Razão Social" class="form-control input-md" required="">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="cnpj">Informe o CNPJ</label>  
+  <div class="col-md-4">
+  <input id="cnpj" name="cnpj" type="text" placeholder="CNPJ" class="form-control input-md" required="">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="Email">Email</label>  
+  <div class="col-md-6">
+  <input id="Email" name="Email" type="text" placeholder="Email" class="form-control input-md" required="">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="telefone">Telefone Comercial</label>  
+  <div class="col-md-4">
+  <input id="telefone" name="telefone" type="text" placeholder="Telefone Comercial" class="form-control input-md" required="">
+    
+  </div>
+</div>
+
+<!-- File Button --> 
+<div class="form-group">
+  <label class="col-md-4 control-label" for="logo_foto">Logo Marca Loja</label>
+  <div class="col-md-4">
+    <input id="logo_foto" name="logo_foto" class="input-file" type="file">
+  </div>
+</div>
+
+<!-- Password input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="senha">Senha de Acesso</label>
+  <div class="col-md-4">
+    <input id="senha" name="senha" type="password" placeholder="senha" class="form-control input-md" required="">
+    
+  </div>
+</div>
+
+<!-- Button -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="enviar"></label>
+  <div class="col-md-4">
+    <button id="enviar" name="enviar" class="btn btn-primary">Enviar</button>
+  </div>
+</div>
+
+</fieldset>
 </form>
+
   
   
 	</div>
