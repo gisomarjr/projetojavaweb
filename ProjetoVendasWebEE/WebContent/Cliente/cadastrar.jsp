@@ -21,7 +21,9 @@
 	<!-- MASCARAS -->
 	<script type="text/javascript" src="../mascara/jquery.maskedinput.js"></script>
 	<script src="../mascara/mascaras.js" ></script>
-	
+
+	<!-- CEP -->
+	<script src="../cep/script.js" ></script>	
 
 <title>Cadastrar Cliente</title>
 </head>
@@ -43,8 +45,7 @@
           <ul class="nav navbar-nav">
             <li ><a href="../index.jsp">Home</a></li>
             <li><a href="../sobre.jsp">Sobre</a></li>
-            <li><a href="../login.jsp">Login - Clientes</a></li>
-            <li><a href="../login.jsp">Login - Lojas</a></li>
+             <li><a href="../login.jsp">Iniciar Sessão</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -122,7 +123,10 @@
   <label class="col-md-4 control-label" for="cep">CEP</label>  
   <div class="col-md-4">
   <input id="cep" name="cep" type="text" placeholder="CEP" class="form-control input-md" required="">
-    
+  <input type="button" class="btn btn-default" id="getEndereco" value="Procurar Endereço" name="procurar"> 
+ 
+ <h5 id="loadingCep"></h5>
+ 
   </div>
 </div>
 

@@ -38,8 +38,7 @@
           <ul class="nav navbar-nav">
             <li ><a href="index.jsp">Home</a></li>
             <li class="active" ><a href="sobre.jsp">Sobre</a></li>
-            <li><a href="login.jsp">Login - Clientes</a></li>
-            <li><a href="login.jsp">Login - Lojas</a></li>
+             <li><a href="login.jsp">Iniciar Sessão</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>

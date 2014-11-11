@@ -32,8 +32,7 @@
               <ul class="nav masthead-nav">
                 <li class="active"><a href="#">Pagina Inicial</a></li>
                 <li><a href="sobre.jsp">Sobre</a></li>
-                <li><a href="login.jsp">Login - Clientes</a></li>
-                <li><a href="login.jsp">Login - Lojas</a></li>
+                <li><a href="login.jsp">Iniciar Sessão</a></li>
               </ul>
             </div>
           </div>
