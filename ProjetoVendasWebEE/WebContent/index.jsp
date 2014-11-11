@@ -60,7 +60,7 @@
 		<br clear="all"><br clear="all"><br clear="all">
 		
 		<a href="Loja/CadastrarLoja.jsp" class="btn btn-lg btn-default">Cadastre sua Loja Aqui</a>
-		<a href="#" class="btn btn-lg btn-default">Cliente se Cadastre Aqui</a>
+		<a href="Cliente/cadastrar.jsp" class="btn btn-lg btn-default">Cliente se Cadastre Aqui</a>
 
           <div class="mastfoot">
             <div class="inner">

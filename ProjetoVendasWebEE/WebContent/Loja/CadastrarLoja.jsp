@@ -1,12 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Cadastrar Lojas</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-
+<!-- JQuery -->
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 
 	<!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
@@ -16,6 +16,15 @@
 
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+
+	<!-- MASCARAS -->
+	<script type="text/javascript" src="../mascara/jquery.maskedinput.js"></script>
+	<script src="../mascara/mascaras.js" ></script>
+	
+<title>Cadastrar Lojas</title>
+
+
 
 </head>
 <body>
@@ -132,6 +141,62 @@
   <label class="col-md-4 control-label" for="senha">Senha de Acesso</label>
   <div class="col-md-4">
     <input id="senha" name="senha" type="password" placeholder="senha" class="form-control input-md" required="">
+    
+  </div>
+</div>
+
+
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="cep">CEP</label>  
+  <div class="col-md-4">
+  <input id="cep" name="cep" type="text" placeholder="CEP" class="form-control input-md" required="">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="logradouro">Logradouro</label>  
+  <div class="col-md-6">
+  <input id="logradouro" name="logradouro" type="text" placeholder="Logradouro" class="form-control input-md" required="">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="estado">Estado</label>  
+  <div class="col-md-4">
+  <input id="estado" name="estado" type="text" placeholder="Estado" class="form-control input-md" required="">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="cidade">Cidade</label>  
+  <div class="col-md-4">
+  <input id="cidade" name="cidade" type="text" placeholder="Cidade" class="form-control input-md" required="">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="numero">Número</label>  
+  <div class="col-md-2">
+  <input id="numero" name="numero" type="text" placeholder="Nº" class="form-control input-md">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="complemento">Complemento</label>  
+  <div class="col-md-5">
+  <input id="complemento" name="complemento" type="text" placeholder="Complemento" class="form-control input-md" required="">
     
   </div>
 </div>
