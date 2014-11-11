@@ -222,8 +222,6 @@ overflow: hidden;
 </div>
 	</div>
 </div>
-	
-	
-	
+		
 </body>
 </html>

@@ -47,14 +47,14 @@
             
           </div>
 
-		<img class="img-circle" src="http://demo.portfoliopen.com/Resources/52/571-600x600-scale.png" alt="Generic placeholder image" style="width: 140px; height: 140px;">
-		<img class="img-circle" src="http://www.araguaiashopping.com.br/public/uploads/34793e8b62154a60ef08c095c59a5b78.jpg" alt="Generic placeholder image" style="width: 140px; height: 140px;">
-		<img class="img-circle" src="https://s3.amazonaws.com/cea.com.br/front/img/padrao/facebook.jpg" alt="Generic placeholder image" style="width: 140px; height: 140px;">
-		<img class="img-circle" src="http://www.shoppingdifusora.com.br/site/repositorio/imagem/1380477763-1_esposende.png" alt="Generic placeholder image" style="width: 140px; height: 140px;">
-		<img class="img-circle" src="http://cdn.slidesharecdn.com/ss_thumbnails/analise-arquitetura-informacao-ponto-frio-adson-130801144541-phpapp02-thumbnail-4.jpg?cb=1375386404" alt="Generic placeholder image" style="width: 140px; height: 140px;">
-		<img class="img-circle" src="http://www.tem-aqui.com/wp-content/uploads/2011/01/Extra_Hipermercados-logo4.gif" alt="Generic placeholder image" style="width: 140px; height: 140px;">
-		<img class="img-circle" src="http://cdn.mundodastribos.com/wp-admin/uploads/2011/04/Eletro-CasasBahia.jpg" alt="Generic placeholder image" style="width: 140px; height: 140px;">
-		<img class="img-circle" src="http://iguatemisalvador.com.br/wp-content/uploads/2012/10/INSINUANTE.png" alt="Generic placeholder image" style="width: 140px; height: 140px;">
+		<a href="#"><img class="img-circle" src="http://demo.portfoliopen.com/Resources/52/571-600x600-scale.png" alt="Generic placeholder image" style="width: 140px; height: 140px;"> </a>
+		<a href="#"><img class="img-circle" src="http://www.araguaiashopping.com.br/public/uploads/34793e8b62154a60ef08c095c59a5b78.jpg" alt="Generic placeholder image" style="width: 140px; height: 140px;"></a>
+		<a href="#"><img class="img-circle" src="https://s3.amazonaws.com/cea.com.br/front/img/padrao/facebook.jpg" alt="Generic placeholder image" style="width: 140px; height: 140px;"></a>
+		<a href="#"><img class="img-circle" src="http://www.shoppingdifusora.com.br/site/repositorio/imagem/1380477763-1_esposende.png" alt="Generic placeholder image" style="width: 140px; height: 140px;"></a>
+		<a href="#"><img class="img-circle" src="http://cdn.slidesharecdn.com/ss_thumbnails/analise-arquitetura-informacao-ponto-frio-adson-130801144541-phpapp02-thumbnail-4.jpg?cb=1375386404" alt="Generic placeholder image" style="width: 140px; height: 140px;"></a>
+		<a href="#"><img class="img-circle" src="http://www.tem-aqui.com/wp-content/uploads/2011/01/Extra_Hipermercados-logo4.gif" alt="Generic placeholder image" style="width: 140px; height: 140px;"></a>
+		<a href="#"><img class="img-circle" src="http://cdn.mundodastribos.com/wp-admin/uploads/2011/04/Eletro-CasasBahia.jpg" alt="Generic placeholder image" style="width: 140px; height: 140px;"></a>
+		<a href="#"><img class="img-circle" src="http://iguatemisalvador.com.br/wp-content/uploads/2012/10/INSINUANTE.png" alt="Generic placeholder image" style="width: 140px; height: 140px;"></a>
 			
 		<br clear="all"><br clear="all"><br clear="all">
 		
