@@ -73,10 +73,10 @@
 		<br><br>
     <div class="container">
 
-      <form class="form-signin" role="form" method="post" action="Login">
+      <form class="form-signin" role="form" method="post" action="Cliente">
         <h2 align="center" class="form-signin-heading"> Realizar Login </h2>
-        <input id="usuario" class="form-control" placeholder="Informe seu CPF/CNPJ" required autofocus>
-        <input type="password" class="form-control" placeholder="Informe sua Senha" required>
+        <input id="usuario" name="usuario" class="form-control" placeholder="Informe seu CPF/CNPJ" required autofocus>
+        <input type="password" name="senha" class="form-control" placeholder="Informe sua Senha" required>
            
 			    <select id="perfil" name="perfil" class="form-control input-lg">
 			      <option value="1">Cliente</option>
@@ -89,7 +89,14 @@
             <input type="checkbox" value="remember-me"> Continuar conectado
           </label>
         </div>
+        
+        <% if(request.getAttribute("e") == "1"){  %>
+        		<div align="center"><label>Atenção Login ou Senha Inválida!</label></div>
+        <% }%>
+       
+     
         <button class="btn btn-lg btn-primary btn-block" type="submit">Realizar Login</button>
+         <button class="btn btn-lg  btn-warning btn-block" type="submit">Esqueceu a Senha</button>
       </form>
 
     </div> <!-- /container -->

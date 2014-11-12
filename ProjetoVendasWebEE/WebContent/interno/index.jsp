@@ -91,8 +91,8 @@ overflow: hidden;
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li ><a href="../index.jsp">Home</a></li>
-            <li ><a href="../sobre.jsp">Sobre</a></li>
+            <li ><a href="index.jsp">Home</a></li>
+            <li ><a href="sobre.jsp">Sobre</a></li>
              <li  class="active"><a href="login.jsp">Iniciar Sessão</a></li>
           </ul>
       
