@@ -14,8 +14,9 @@ import com.vendas.interfaces.ICliente;
 
 
 public class DAOCliente implements ICliente{
-
+	
 	protected EntityManager entityManager;
+	
 	 
 	/**
 	 * Construtor para pegar o EntityManager
@@ -23,7 +24,9 @@ public class DAOCliente implements ICliente{
     public DAOCliente() {
         entityManager = getEntityManager();
     }
-     
+    
+    
+    
     /**
      * Verificando se já existe a conexão com o banco
      * @return

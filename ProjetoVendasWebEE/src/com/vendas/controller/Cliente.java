@@ -58,8 +58,8 @@ public class Cliente extends HttpServlet {
 	   	  * 2 - Fornecedor
 	   	  * 3 - Loja
 	   	  */
-	   	switch (perfil) {
-		case "1":
+	   	switch (Integer.parseInt(perfil)) {
+		case 1:
 			int cont =0;
 		 	for (Clientes clientes : model.realizarLogin(usuario, senha)) {
 				String u = clientes.getCpf();
