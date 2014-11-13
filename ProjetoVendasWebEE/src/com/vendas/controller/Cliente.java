@@ -42,10 +42,13 @@ public class Cliente extends HttpServlet {
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-    		
-    	if(request.getParameter("acao") == "login"){
     	
     	PrintWriter out = response.getWriter();
+    	
+       	
+    	if(request.getParameter("acao") == "login"){
+    	
+    	
     	
     	  //Usuário
    	      cliente.setNome(request.getParameter("nome"));
@@ -68,9 +71,9 @@ public class Cliente extends HttpServlet {
    	      endereco.setClientes(cliente);
    	      
    	      try {
-   	    	model_cliente.cadastrar(cliente);
-   	    	model_endereco.cadastrar(endereco);  
-   	    	  
+   	    	
+   	    	  model_cliente.cadastrar(cliente);
+   	    	  model_endereco.cadastrar(endereco);  
    	    	
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

@@ -31,10 +31,18 @@ public class DAOCliente implements ICliente{
      * Verificando se já existe a conexão com o banco
      * @return
      */
+    
     private EntityManager getEntityManager() {
+    	
         EntityManagerFactory factory = Persistence
                 .createEntityManagerFactory("mysql");
         if (entityManager == null) {
+        	try {
+    			Class.forName("com.mysql.jdbc.Driver");
+    		} catch (ClassNotFoundException e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    		}
             entityManager = factory.createEntityManager();
         }
  

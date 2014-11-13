@@ -188,11 +188,21 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="enviar"></label>
   <div class="col-md-4">
-    <button id="enviar" name="enviar" class="btn btn-primary">Enviar</button>
+    <button id="enviar" name="enviar" class="btn btn-primary"data-target=".bs-example-modal-sm">Enviar</button>
   </div>
 </div>
 	 <input type="hidden" value="login" name="acao">
 </fieldset>
+
+<!-- Small modal 
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Small modal</button>-->
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      ...
+    </div>
+  </div>
+</div>
 </form>
 		
 		
