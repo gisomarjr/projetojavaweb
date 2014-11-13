@@ -1,3 +1,4 @@
+<%@page import="java.nio.channels.SeekableByteChannel"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -96,7 +97,8 @@ overflow: hidden;
              <li  class="active"><a href="login.jsp">Iniciar Sessão</a></li>
           </ul>
       
-        
+        <% 	HttpSession sessao = request.getSession(true);%>
+       
         <!-- Conta usuário -->
 	<ul class="nav navbar-nav navbar-right">
                                     <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Sua Conta
@@ -112,9 +114,9 @@ overflow: hidden;
                                                                 <a href="#">Alterar Foto</a></p>
                                                         </div>
                                                         <div class="col-md-7">
-                                                            <span>Nome do Usuário</span>
+                                                            <span> <%  out.print(sessao.getAttribute("usuario")); %></span>
                                                             <p class="text-muted small">
-                                                                mail@gmail.com</p>
+                                                                <%  out.print(sessao.getAttribute("email")); %></p>
                                                             <div class="divider">
                                                             </div>
                                                             <a href="#" class="btn btn-primary btn-sm active">Ver perfil</a>
@@ -128,7 +130,7 @@ overflow: hidden;
                                                                 <a href="#" class="btn btn-default btn-sm">Alterar Senha</a>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <a href="http://www.jquery2dotnet.com" class="btn btn-default btn-sm pull-right">Sair</a>
+                                                                <a href="#" class="btn btn-default btn-sm pull-right">Sair</a>
                                                            </div>
                                                            </div>
                                                 </div>

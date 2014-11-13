@@ -73,7 +73,7 @@
 		<br><br>
     <div class="container">
 
-      <form class="form-signin" role="form" method="post" action="Cliente">
+      <form class="form-signin" role="form" method="post" action="Login">
         <h2 align="center" class="form-signin-heading"> Realizar Login </h2>
         <input id="usuario" name="usuario" class="form-control" placeholder="Informe seu CPF/CNPJ" required autofocus>
         <input type="password" name="senha" class="form-control" placeholder="Informe sua Senha" required>

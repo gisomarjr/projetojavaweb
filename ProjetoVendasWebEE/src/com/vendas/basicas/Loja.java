@@ -25,6 +25,7 @@ public class Loja {
 	String cnpj;
 	String email;
 	String telefone_comercial;
+	String urlLogo;
 	
 	@OneToMany(mappedBy="loja", fetch = FetchType.LAZY)
 	private

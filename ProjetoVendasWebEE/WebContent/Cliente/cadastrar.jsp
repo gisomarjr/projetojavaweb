@@ -66,7 +66,7 @@
   </div>
   	<div class="panel-body">
 	
-		<form class="form-horizontal">
+		<form class="form-horizontal" action="../Cliente" method="post">
 <fieldset>
 
 <!-- Form Name -->
@@ -141,6 +141,15 @@
 
 <!-- Text input-->
 <div class="form-group">
+  <label class="col-md-4 control-label" for="logradouro">Bairro</label>  
+  <div class="col-md-6">
+  <input id="bairro" name="bairro" type="text" placeholder="Bairro" class="form-control input-md" required="">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
   <label class="col-md-4 control-label" for="estado">Estado</label>  
   <div class="col-md-4">
   <input id="estado" name="estado" type="text" placeholder="Estado" class="form-control input-md" required="">
@@ -182,7 +191,7 @@
     <button id="enviar" name="enviar" class="btn btn-primary">Enviar</button>
   </div>
 </div>
-
+	 <input type="hidden" value="login" name="acao">
 </fieldset>
 </form>
 		

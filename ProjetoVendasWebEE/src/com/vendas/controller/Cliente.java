@@ -1,25 +1,24 @@
 package com.vendas.controller;
 
-
-import com.vendas.basicas.Clientes;
-
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Collection;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.swing.JOptionPane;
 
-
+import com.vendas.basicas.Clientes;
+import com.vendas.basicas.Departamento;
+import com.vendas.basicas.Endereco;
 import com.vendas.model.DAOCliente;
+import com.vendas.model.DAOEndereco;
 
 /**
- * Servlet implementation class Login
+ * Servlet implementation class Cliente
  */
 @WebServlet("/Cliente")
 public class Cliente extends HttpServlet {
@@ -33,87 +32,67 @@ public class Cliente extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
     
+    	  Clientes cliente = new Clientes();
+    	  Endereco endereco = new Endereco();
+	      DAOCliente model_cliente = new DAOCliente();
+	      DAOEndereco model_endereco = new DAOEndereco();
+	      Collection<Endereco> collection_endereco = null;
+	      
+    
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+    		
+    	if(request.getParameter("acao") == "login"){
     	
-    	HttpSession sessao = request.getSession(true);
+    	PrintWriter out = response.getWriter();
     	
-    	try{
-	   	 String usuario = request.getParameter("usuario");
-	   	 String perfil = request.getParameter("perfil");
-	   	 String senha = request.getParameter("senha");
-	   	 
-
-	   	 sessao.setAttribute("usuario", usuario);
-	   	 sessao.setAttribute("perfil", perfil);
-	   	 
-	   	 PrintWriter out = response.getWriter();
-	   
-	   	 DAOCliente model = new DAOCliente();
-	   	 
-	   	 /**
-	   	  * Verifica o tipo de perfil e redericiona
-	   	  * 1 - Cliente
-	   	  * 2 - Fornecedor
-	   	  * 3 - Loja
-	   	  */
-	   	switch (Integer.parseInt(perfil)) {
-		case 1:
-			int cont =0;
-		 	for (Clientes clientes : model.realizarLogin(usuario, senha)) {
-				String u = clientes.getCpf();
-				String s = clientes.getSenha();
-				cont++;
-				}
-				if(cont >0){
-				
-					 
-			   		request.setAttribute("e", "");
-			   		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/interno/index.jsp");
-			        requestDispatcher.forward(request, response);
-					
-				}else{
-					
-				 	request.setAttribute("e", "1");
-			   		RequestDispatcher requestDispatcher = request.getRequestDispatcher("login.jsp");
-			        requestDispatcher.forward(request, response);
-					
-				}
-			break;
-
-		default:
-			request.setAttribute("e", "1");
-	   		RequestDispatcher requestDispatcher = request.getRequestDispatcher("login.jsp");
-	        requestDispatcher.forward(request, response);
-			break;
+    	  //Usuário
+   	      cliente.setNome(request.getParameter("nome"));
+   	      cliente.setCpf(request.getParameter("cpf"));
+   	      cliente.setEmail(request.getParameter("email"));
+   	      cliente.setTelefone(request.getParameter("telefone"));
+   	      cliente.setSenha(request.getParameter("senha"));
+   	      //Endereco
+   	      endereco.setCep(request.getParameter("cep"));
+   	      endereco.setLogradouro(request.getParameter("logradouro"));
+   	      endereco.setBairro(request.getParameter("bairro")); 
+   	      endereco.setEstado(request.getParameter("estado"));
+   	      endereco.setCidade(request.getParameter("cidade"));
+   	      endereco.setNumero(Integer.parseInt(request.getParameter("numero")));
+   	      endereco.setComplemento(request.getParameter("complemento"));
+   	      collection_endereco = new ArrayList<Endereco>();
+   	      collection_endereco.add(endereco);
+   	     
+   	      cliente.setEndereco(collection_endereco);
+   	      endereco.setClientes(cliente);
+   	      
+   	      try {
+   	    	model_cliente.cadastrar(cliente);
+   	    	model_endereco.cadastrar(endereco);  
+   	    	  
+   	    	
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			out.print(e);
+			e.printStackTrace();
 		}
-	   	 
-    	}catch(java.lang.NullPointerException erro){
-    		request.setAttribute("e", "1");
-	   		RequestDispatcher requestDispatcher = request.getRequestDispatcher("login.jsp");
-	        requestDispatcher.forward(request, response);
-			
+   	      
     	}
-    }
-    
+    }	
     
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-
-
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		// TODO Auto-generated method stub
 	}
-	
-		
 
 }

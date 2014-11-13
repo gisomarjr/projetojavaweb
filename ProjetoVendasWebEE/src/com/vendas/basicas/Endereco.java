@@ -32,6 +32,7 @@ public class Endereco {
 	String cep;
 	String cidade;
 	String estado;
+	 String bairro;
 
 	@OneToOne
 	@JoinColumn(name = "id_funcionario")
@@ -125,5 +126,13 @@ public class Endereco {
 
 	public void setEstado(String estado) {
 		this.estado = estado;
+	}
+
+	public String getBairro() {
+		return bairro;
+	}
+
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
 	}
 }
