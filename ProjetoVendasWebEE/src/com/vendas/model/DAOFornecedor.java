@@ -10,7 +10,6 @@ import javax.persistence.Persistence;
 import javax.persistence.TemporalType;
 import javax.swing.JOptionPane;
 
-import com.vendas.basicas.Clientes;
 import com.vendas.basicas.Endereco;
 import com.vendas.basicas.Fornecedor;
 import com.vendas.interfaces.ICliente;

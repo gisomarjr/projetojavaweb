@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 import java.util.List;
 
-import com.vendas.basicas.Clientes;
 import com.vendas.basicas.Endereco;
 import com.vendas.basicas.Pedido;
 

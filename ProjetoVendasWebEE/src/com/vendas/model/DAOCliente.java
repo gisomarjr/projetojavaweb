@@ -8,7 +8,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import com.vendas.basicas.Cliente;
-import com.vendas.basicas.Clientes;
+import com.vendas.basicas.Cliente;
 import com.vendas.basicas.Funcionario;
 import com.vendas.interfaces.ICliente;
 
@@ -58,8 +58,8 @@ public class DAOCliente implements ICliente{
     
     public void removeById(final Integer id) {
         try {
-            Clientes Clientes = consultarPorId(id);
-            excluir(Clientes);
+            Cliente Cliente = consultarPorId(id);
+            excluir(Cliente);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -79,10 +79,10 @@ public class DAOCliente implements ICliente{
 	}
 
 	@Override
-	public void editar(Clientes clientes) {
+	public void editar(Cliente Cliente) {
 		  try {
 	            entityManager.getTransaction().begin();
-	            entityManager.merge(clientes);
+	            entityManager.merge(Cliente);
 	            entityManager.getTransaction().commit();
 	        } catch (Exception ex) {
 	            ex.printStackTrace();
@@ -92,11 +92,11 @@ public class DAOCliente implements ICliente{
 	}
 
 	@Override
-	public void excluir(Clientes clientes) {
+	public void excluir(Cliente Cliente) {
 		 try {
 	            entityManager.getTransaction().begin();
-	            clientes = entityManager.find(Clientes.class, clientes.getId());
-	            entityManager.remove(clientes);
+	            Cliente = entityManager.find(Cliente.class, Cliente.getId());
+	            entityManager.remove(Cliente);
 	            entityManager.getTransaction().commit();
 	        } catch (Exception ex) {
 	            ex.printStackTrace();
@@ -106,19 +106,19 @@ public class DAOCliente implements ICliente{
 	}
 
 	@Override
-	public Clientes consultarPorId(Integer id) {
-		  return entityManager.find(Clientes.class, id);
+	public Cliente consultarPorId(Integer id) {
+		  return entityManager.find(Cliente.class, id);
 	}
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public List<Clientes> listar() {
-		return entityManager.createQuery("FROM " + Clientes.class.getName()).getResultList();
+	public List<Cliente> listar() {
+		return entityManager.createQuery("FROM " + Cliente.class.getName()).getResultList();
 	}
 	
 	
-	public List<Clientes> realizarLogin(String cpf,String senha) {
-		return entityManager.createQuery("select c from Clientes as c where c.cpf = ?1 and c.senha = ?2").
+	public List<Cliente> realizarLogin(String cpf,String senha) {
+		return entityManager.createQuery("select c from Cliente as c where c.cpf = ?1 and c.senha = ?2").
 		setParameter(1, cpf).
 		setParameter(2, senha).
 		getResultList();

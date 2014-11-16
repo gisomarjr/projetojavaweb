@@ -1,7 +1,7 @@
 package com.vendas.controller;
 
 
-import com.vendas.basicas.Clientes;
+import com.vendas.basicas.Cliente;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.swing.JOptionPane;
-
 
 import com.vendas.model.DAOCliente;
 
@@ -61,10 +60,10 @@ public class Login extends HttpServlet {
 	   	switch (Integer.parseInt(perfil)) {
 		case 1:
 			int cont =0;
-		 	for (Clientes clientes : model.realizarLogin(usuario, senha)) {
-				String nome = clientes.getNome();
-				String email = clientes.getEmail();
-				Integer id = clientes.getId();
+		 	for (Cliente cliente : model.realizarLogin(usuario, senha)) {
+				String nome = cliente.getNome();
+				String email = cliente.getEmail();
+				Integer id = cliente.getId();
 				
 				sessao.setAttribute("id", id);
 				sessao.setAttribute("usuario", nome);

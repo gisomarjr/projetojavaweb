@@ -7,7 +7,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import com.vendas.basicas.Clientes;
 import com.vendas.basicas.Departamento;
 import com.vendas.basicas.Endereco;
 import com.vendas.basicas.Fornecedor;
