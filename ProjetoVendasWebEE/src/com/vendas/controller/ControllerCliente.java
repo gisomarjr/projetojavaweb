@@ -11,51 +11,49 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.vendas.basicas.Clientes;
+import com.vendas.basicas.Cliente;
 import com.vendas.basicas.Departamento;
 import com.vendas.basicas.Endereco;
 import com.vendas.model.DAOCliente;
 import com.vendas.model.DAOEndereco;
 
 /**
- * Servlet implementation class Cliente
+ * Servlet implementation class ControllerCliente
  */
-@WebServlet("/Cliente")
-public class Cliente extends HttpServlet {
+@WebServlet("/ControllerCliente")
+public class ControllerCliente extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Cliente() {
+    public ControllerCliente() {
         super();
         // TODO Auto-generated constructor stub
     }
     
-    	  Clientes cliente = new Clientes();
+    	  Cliente cliente = new Cliente();
     	  Endereco endereco = new Endereco();
 	      DAOCliente model_cliente = new DAOCliente();
 	      DAOEndereco model_endereco = new DAOEndereco();
 	      Collection<Endereco> collection_endereco = null;
+	      PrintWriter out;
 	      
-    
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
     	
-    	PrintWriter out = response.getWriter();
+    	out = response.getWriter();
     	
        	
-    	if(request.getParameter("acao") == "login"){
-    	
-    	
-    	
-    	  //Usuário
-   	      cliente.setNome(request.getParameter("nome"));
-   	      cliente.setCpf(request.getParameter("cpf"));
-   	      cliente.setEmail(request.getParameter("email"));
-   	      cliente.setTelefone(request.getParameter("telefone"));
-   	      cliente.setSenha(request.getParameter("senha"));
+    	//if(request.getParameter("acao") == "login"){
+    		 out.print("sim");
+    	  //Usuï¿½rio
+    		 cliente.setNome(request.getParameter("nome"));
+    		 cliente.setCpf(request.getParameter("cpf"));
+    		 cliente.setEmail(request.getParameter("email"));
+    		 cliente.setTelefone(request.getParameter("telefone"));
+    		 cliente.setSenha(request.getParameter("senha"));
    	      //Endereco
    	      endereco.setCep(request.getParameter("cep"));
    	      endereco.setLogradouro(request.getParameter("logradouro"));
@@ -71,7 +69,7 @@ public class Cliente extends HttpServlet {
    	      endereco.setClientes(cliente);
    	      
    	      try {
-   	    	
+   	    	  out.print("entrei no try");
    	    	  model_cliente.cadastrar(cliente);
    	    	  model_endereco.cadastrar(endereco);  
    	    	
@@ -80,8 +78,11 @@ public class Cliente extends HttpServlet {
 			out.print(e);
 			e.printStackTrace();
 		}
-   	      
-    	}
+   	  
+    /*	}else{
+    		out.print("else");
+    		out.print(request.getParameter("acao"));
+    	}*/
     }	
     
 	/**
@@ -96,6 +97,8 @@ public class Cliente extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		out = response.getWriter();
+		out.print("deu post");
 	}
 
 }

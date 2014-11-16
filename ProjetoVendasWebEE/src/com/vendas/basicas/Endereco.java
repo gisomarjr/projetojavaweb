@@ -32,7 +32,7 @@ public class Endereco {
 	String cep;
 	String cidade;
 	String estado;
-	 String bairro;
+	String bairro;
 
 	@OneToOne
 	@JoinColumn(name = "id_funcionario")
@@ -62,14 +62,14 @@ public class Endereco {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_cliente", insertable = true, updatable = true)
 	@Fetch(FetchMode.JOIN)
-	Clientes clientes;
+	Cliente cliente;
 
-	public Clientes getClientes() {
-		return clientes;
+	public Cliente getClientes() {
+		return cliente;
 	}
 
-	public void setClientes(Clientes clientes) {
-		this.clientes = clientes;
+	public void setClientes(Cliente clientes) {
+		this.cliente = clientes;
 	}
 
 	public Integer getId() {
@@ -86,6 +86,14 @@ public class Endereco {
 
 	public void setLogradouro(String logradouro) {
 		this.logradouro = logradouro;
+	}
+	
+	public String getBairro() {
+		return bairro;
+	}
+
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
 	}
 
 	public Integer getNumero() {
@@ -126,13 +134,5 @@ public class Endereco {
 
 	public void setEstado(String estado) {
 		this.estado = estado;
-	}
-
-	public String getBairro() {
-		return bairro;
-	}
-
-	public void setBairro(String bairro) {
-		this.bairro = bairro;
 	}
 }

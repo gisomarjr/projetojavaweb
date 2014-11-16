@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import com.vendas.basicas.Cliente;
 import com.vendas.basicas.Clientes;
 import com.vendas.basicas.Funcionario;
 import com.vendas.interfaces.ICliente;
@@ -37,12 +38,12 @@ public class DAOCliente implements ICliente{
         EntityManagerFactory factory = Persistence
                 .createEntityManagerFactory("mysql");
         if (entityManager == null) {
-        	try {
+        	/*try {
     			Class.forName("com.mysql.jdbc.Driver");
     		} catch (ClassNotFoundException e) {
     			// TODO Auto-generated catch block
     			e.printStackTrace();
-    		}
+    		}*/
             entityManager = factory.createEntityManager();
         }
  
@@ -65,14 +66,14 @@ public class DAOCliente implements ICliente{
     }
 
 	@Override
-	public void cadastrar(Clientes clientes) throws Exception {
+	public void cadastrar(Cliente cliente) throws Exception {
 		try {
             entityManager.getTransaction().begin();
-            entityManager.persist(clientes);
+            entityManager.persist(cliente);
             entityManager.getTransaction().commit();
         } catch (Exception ex) {
-            //ex.printStackTrace();
-           // entityManager.getTransaction().rollback();
+            ex.printStackTrace();
+            entityManager.getTransaction().rollback();
         }
 		
 	}

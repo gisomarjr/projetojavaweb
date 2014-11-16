@@ -35,7 +35,7 @@ public class Pedido {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="id_cliente")
 	@Fetch(FetchMode.JOIN)
-	Clientes clientes;
+	Cliente cliente;
 	
 	
 	@OneToOne
@@ -61,11 +61,11 @@ public class Pedido {
 	public void setProdutos(Collection<Produto> produtos) {
 		this.produtos = produtos;
 	}
-	public Clientes getCliente() {
-		return clientes;
+	public Cliente getCliente() {
+		return cliente;
 	}
-	public void setCliente(Clientes clientes) {
-		this.clientes = clientes;
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 	public Entrega getEntrega() {
 		return entrega;
