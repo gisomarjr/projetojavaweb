@@ -20,8 +20,7 @@ import org.hibernate.annotations.FetchMode;
 public class Funcionario extends Pessoa {
 
 	String matricula;
-    String usuario;
-	String senha;
+    
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="id_loja", insertable=true,updatable=true)
@@ -57,12 +56,7 @@ public class Funcionario extends Pessoa {
 	public void setDepartamento(Departamento departamento) {
 		this.departamento = departamento;
 	}
-    public String getUsuario() {
-		return usuario;
-	}
-	public void setUsuario(String usuario) {
-		this.usuario = usuario;
-	}
+    
 	public String getSenha() {
 		return senha;
 	}
