@@ -34,19 +34,21 @@ public class DAOCliente implements ICliente{
      */
     
     private EntityManager getEntityManager() {
-    	
-        EntityManagerFactory factory = Persistence
-                .createEntityManagerFactory("mysql");
-        if (entityManager == null) {
-        	/*try {
+    
+        	try {
     			Class.forName("com.mysql.jdbc.Driver");
+    			
+    			 EntityManagerFactory factory = Persistence
+    		                .createEntityManagerFactory("mysql");
+    		        if (entityManager == null) {
+    		            entityManager = factory.createEntityManager();
+    		        }
+    			
     		} catch (ClassNotFoundException e) {
     			// TODO Auto-generated catch block
     			e.printStackTrace();
-    		}*/
-            entityManager = factory.createEntityManager();
-        }
- 
+    		}
+    	
         return entityManager;
     }
  
