@@ -47,7 +47,7 @@ public class ControllerCliente extends HttpServlet {
     	
        	
     	//if(request.getParameter("acao") == "login"){
-    		 out.print("sim");
+    		 
     	  //Usu�rio
     		 cliente.setNome(request.getParameter("nome"));
     		 cliente.setCpf(request.getParameter("cpf"));
@@ -69,7 +69,7 @@ public class ControllerCliente extends HttpServlet {
    	      endereco.setClientes(cliente);
    	      
    	      try {
-   	    	  out.print("entrei no try");
+   	    
    	    	  model_cliente.cadastrar(cliente);
    	    	  model_endereco.cadastrar(endereco);  
    	    	

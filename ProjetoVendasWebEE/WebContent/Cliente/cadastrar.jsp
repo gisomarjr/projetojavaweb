@@ -66,7 +66,7 @@
   </div>
   	<div class="panel-body">
 	
-		<form class="form-horizontal" action="../Cliente" method="post">
+		<form class="form-horizontal" action="../ControllerCliente" method="post">
 <fieldset>
 
 <!-- Form Name -->
