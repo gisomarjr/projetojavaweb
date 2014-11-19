@@ -42,8 +42,7 @@ public class Login extends HttpServlet {
 	   	 String usuario = request.getParameter("usuario");
 	   	 String perfil = request.getParameter("perfil");
 	   	 String senha = request.getParameter("senha");
-	   	 
-
+	   	
 	   	 sessao.setAttribute("cpf", usuario);
 	   	 sessao.setAttribute("perfil", perfil);
 	   	 
@@ -53,7 +52,7 @@ public class Login extends HttpServlet {
 	   	 
 	   	 /**
 	   	  * Verifica o tipo de perfil e redericiona
-	   	  * 1 - Login
+	   	  * 1 - Cliente
 	   	  * 2 - Fornecedor
 	   	  * 3 - Loja
 	   	  */

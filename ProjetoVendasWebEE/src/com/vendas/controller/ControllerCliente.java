@@ -46,7 +46,9 @@ public class ControllerCliente extends HttpServlet {
     	
     	out = response.getWriter();
     	
-       	
+       	/**
+       	 * CADASTRAR CLIENTE
+       	 */
     	if(request.getParameter("acao").equals("cadastrar")){
     		 
     	  //Usuï¿½rio
@@ -73,9 +75,9 @@ public class ControllerCliente extends HttpServlet {
    	    
    	    	  model_cliente.cadastrar(cliente);
    	    	  model_endereco.cadastrar(endereco);  
-   	    	request.setAttribute("e", "1");
-   	    	RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Cliente/cadastrar.jsp");
-   	        requestDispatcher.forward(request, response);
+	   	      request.setAttribute("e", "1");
+	   	      RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Cliente/cadastrar.jsp");
+	   	      requestDispatcher.forward(request, response);
    	    	
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -84,7 +86,7 @@ public class ControllerCliente extends HttpServlet {
 		}
    	  
     	}else{
-    		out.print("Nenhuma ação encontrada");
+    		out.print("Nenhuma aï¿½ï¿½o encontrada");
     		out.print(request.getParameter("acao"));
     		request.setAttribute("e", "");
     	}

@@ -26,14 +26,24 @@
 	<script src="../cep/script.js" ></script>	
 
 <script type="text/javascript">
-	function mensagem(){
-	/*	 $(document).ready(function(){
-			 $("#libera_mensagem").load(function() {
-				
-		 		//$("#bt_mensagem").click();
-		 	});
-		 });*/
+/**
+ * Fecha a mensagem antes do tempo - usuário quando clica em fechar
+ */
+function closeMsg(){
+	document.getElementById("modal_msg").style = "none";
+}
+/**
+ * Em um determinado tempo a mensagem fecha automaticamente
+ */
+$(document).ready(function(){
+	var myVar = setInterval(function () {myTimer()}, 6000);
+	
+	function myTimer() {
+	    var d = new Date();
+	    document.getElementById("modal_msg").style = "none";
 	}
+	
+});
 </script>
 
 <title>Cadastrar Cliente</title>
@@ -201,22 +211,25 @@
   <label class="col-md-4 control-label" for="enviar"></label>
   <div class="col-md-4">
     <button id="enviar" name="enviar" class="btn btn-primary">Enviar</button>
+     
      <% if(request.getAttribute("e") == "1"){  %>
-    <div class="modal fade bs-example-modal-sm in" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="display: block; padding-right: 17px;"><div class="modal-backdrop fade in" style="height: 679px;"></div>
-    <div class="modal-dialog modal-sm">
-      <div class="modal-content">
-
-        <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-         
-          <h4 class="modal-title" id="mySmallModalLabel">Obrigado!</h4>
-        </div>
-        <div class="modal-body">
-          Cliente Cadastrado com Sucesso!
-        </div>
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div>
+    
+			    <div id="modal_msg" class="modal fade bs-example-modal-sm in" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="display: block; padding-right: 17px;">
+			    <div class="modal-backdrop fade in" style="height: 679px;"></div>
+			    <div class="modal-dialog modal-sm">
+			      <div class="modal-content">
+			
+			        <div class="modal-header">
+			        <button type="button" onclick="closeMsg()" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+			         
+			          <h4 align="center" class="modal-title" id="mySmallModalLabel">Cliente Cadastrado com Sucesso!</h4>
+			        </div>
+			        <div class="modal-body">
+			       <div align="center"> <img src="img/sucesso.png" width="50"></div>
+			        </div>
+			      </div><!-- /.modal-content -->
+			    </div><!-- /.modal-dialog -->
+			  </div>
         <% }%>
   </div>
 </div>
