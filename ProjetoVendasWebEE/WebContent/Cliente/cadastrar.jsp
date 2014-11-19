@@ -25,9 +25,21 @@
 	<!-- CEP -->
 	<script src="../cep/script.js" ></script>	
 
+<script type="text/javascript">
+	function mensagem(){
+	/*	 $(document).ready(function(){
+			 $("#libera_mensagem").load(function() {
+				
+		 		//$("#bt_mensagem").click();
+		 	});
+		 });*/
+	}
+</script>
+
 <title>Cadastrar Cliente</title>
+
 </head>
-<body>
+<body">
 
 	
  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -188,21 +200,37 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="enviar"></label>
   <div class="col-md-4">
-    <button id="enviar" name="enviar" class="btn btn-primary"data-target=".bs-example-modal-sm">Enviar</button>
+    <button id="enviar" name="enviar" class="btn btn-primary">Enviar</button>
+     <% if(request.getAttribute("e") == "1"){  %>
+    <div class="modal fade bs-example-modal-sm in" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="display: block; padding-right: 17px;"><div class="modal-backdrop fade in" style="height: 679px;"></div>
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+
+        <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+         
+          <h4 class="modal-title" id="mySmallModalLabel">Obrigado!</h4>
+        </div>
+        <div class="modal-body">
+          Cliente Cadastrado com Sucesso!
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div>
+        <% }%>
   </div>
 </div>
-	 <input type="hidden" value="login" name="acao">
+	 <input type="hidden" value="cadastrar" name="acao">
 </fieldset>
 
-<!-- Small modal 
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Small modal</button>-->
-<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-      ...
-    </div>
-  </div>
-</div>
+
+<!--  <input id="bt_mensagem" type="hidden" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm" />
+-->
+  
+
+
+
+
 </form>
 		
 		
