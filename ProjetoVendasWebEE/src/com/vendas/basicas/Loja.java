@@ -25,6 +25,7 @@ public class Loja {
 	String cnpj;
 	String email;
 	String telefone_comercial;
+    String foto;
 	
 	@OneToMany(mappedBy="loja", fetch = FetchType.LAZY)
 	private
@@ -107,6 +108,18 @@ public class Loja {
 	}
 	public void setFuncionarios(Collection<Funcionario> funcionarios) {
 		this.funcionarios = funcionarios;
+	}
+	/**
+	 * @return the foto
+	 */
+	public String getFoto() {
+		return foto;
+	}
+	/**
+	 * @param foto the foto to set
+	 */
+	public void setFoto(String foto) {
+		this.foto = foto;
 	}
 	
 	

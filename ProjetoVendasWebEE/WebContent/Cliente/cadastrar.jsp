@@ -36,7 +36,7 @@ function closeMsg(){
  * Em um determinado tempo a mensagem fecha automaticamente
  */
 $(document).ready(function(){
-	var myVar = setInterval(function () {myTimer()}, 6000);
+	var myVar = setInterval(function () {myTimer()}, 5000);
 	
 	function myTimer() {
 	    var d = new Date();

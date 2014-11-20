@@ -85,10 +85,19 @@ public class ControllerCliente extends HttpServlet {
 			e.printStackTrace();
 		}
    	  
-    	}else{
-    		out.print("Nenhuma a��o encontrada");
-    		out.print(request.getParameter("acao"));
-    		request.setAttribute("e", "");
+    	}
+    	
+    	/**
+    	 * PERFIL USUÁRIO
+    	 * 
+    	 */
+    	else if(request.getParameter("acao").equals("perfil")){
+    		
+    		 RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Cliente/perfil.jsp");
+	   	     requestDispatcher.forward(request, response);
+    	}
+    	else {
+    		out.print("Nenhuma Ação");
     	}
     	
     	

@@ -97,7 +97,18 @@
      
         <button class="btn btn-lg btn-primary btn-block" type="submit">Realizar Login</button>
          <button class="btn btn-lg  btn-warning btn-block" type="submit">Esqueceu a Senha</button>
+ 
+         
+            <!-- android button -->
+  				<a class="btn btn-lg btn-success btn-block" href="#">
+  				<img width="50px" class="pull-left" src="http://www.userlogos.org/files/logos/jumpordie/google_play_04.png">
+  				<div class="btn-text"><small>Em Desenvolvimento</small><br><strong>Google Play</strong></div></a>
+        
+     
       </form>
+		
+		
+    
 
     </div> <!-- /container -->
 
