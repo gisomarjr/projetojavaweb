@@ -1,16 +1,25 @@
 package com.vendas.controller;
 
+import java.awt.image.BufferedImage;
 import java.io.BufferedOutputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.Iterator;
+import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.ImageIcon;
+
+import org.apache.tomcat.util.http.fileupload.FileItem;
 
 import com.vendas.basicas.Endereco;
 import com.vendas.basicas.Loja;
@@ -36,6 +45,9 @@ public class ControllerLoja extends HttpServlet {
     	Endereco endereco = new Endereco();
     	DAOEndereco model_endereco = new DAOEndereco();
     	DAOLoja model_loja = new DAOLoja();
+    	
+    	
+    	
     
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response)
@@ -53,12 +65,18 @@ public class ControllerLoja extends HttpServlet {
     		loja.setTelefone_comercial(request.getParameter("telefone"));
     		loja.setFoto(request.getParameter("logo_foto"));
     		
-    		String caminhoSalvar = "/home/gisomar/git/projetojavaweb/ProjetoVendasWebEE/WebContent/Loja/logo";  
-            File file = new File(caminhoSalvar);  
+    		/**
+    		 * UPLOAD DE FOTO
+    		 */
+    		
+    		
+    		/*String caminhoSalvar = "/home/gisomar/git/projetojavaweb/ProjetoVendasWebEE/WebContent/Loja/logo";  
+            
+    		File file = new File(caminhoSalvar);  
             BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));  
             bos.write(request.getParameter("logo_foto").getBytes());  
             bos.close();  
-    		
+    		*/
     		endereco.setCep(request.getParameter("cep"));
      	    endereco.setLogradouro(request.getParameter("logradouro"));
      	    endereco.setBairro(request.getParameter("bairro")); 
