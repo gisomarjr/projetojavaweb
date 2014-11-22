@@ -1,9 +1,12 @@
 package com.vendas.model;
 
 import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+
+import com.vendas.basicas.Cliente;
 import com.vendas.basicas.Loja;
 import com.vendas.interfaces.ILoja;
 
@@ -104,5 +107,14 @@ public class DAOLoja implements ILoja  {
 	@SuppressWarnings("unchecked")
 	public List<Loja> listar() {
 		return entityManager.createQuery("FROM " + Loja.class.getName()).getResultList();
+	}
+
+
+	public List<Loja> realizarLogin(String cnpj,String senha) {
+		return entityManager.createQuery("select l from Loja as l where l.cnpj = ?1 and l.senha = ?2").
+		setParameter(1, cnpj).
+		setParameter(2, senha).
+		getResultList();
+	
 	}
 }

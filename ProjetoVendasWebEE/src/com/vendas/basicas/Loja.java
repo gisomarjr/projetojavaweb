@@ -2,6 +2,7 @@ package com.vendas.basicas;
 
 import java.util.Collection;
 
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -25,7 +27,11 @@ public class Loja {
 	String cnpj;
 	String email;
 	String telefone_comercial;
-    String foto;
+	String senha;
+	
+	@Lob @Basic(fetch = FetchType.LAZY)
+	@Column(length=65535)
+    byte[] foto;
 	
 	@OneToMany(mappedBy="loja", fetch = FetchType.LAZY)
 	private
@@ -109,19 +115,19 @@ public class Loja {
 	public void setFuncionarios(Collection<Funcionario> funcionarios) {
 		this.funcionarios = funcionarios;
 	}
-	/**
-	 * @return the foto
-	 */
-	public String getFoto() {
-		return foto;
+	public byte[] getFoto() {
+		return this.foto;
 	}
-	/**
-	 * @param foto the foto to set
-	 */
-	public void setFoto(String foto) {
+ 
+	public void setFoto(byte[] foto) {
 		this.foto = foto;
 	}
-	
+	public String getSenha() {
+		return senha;
+	}
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
 	
 	
 	

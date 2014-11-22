@@ -2,6 +2,7 @@ package com.vendas.controller;
 
 
 import com.vendas.basicas.Cliente;
+import com.vendas.basicas.Loja;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpSession;
 import javax.swing.JOptionPane;
 
 import com.vendas.model.DAOCliente;
+import com.vendas.model.DAOLoja;
 
 /**
  * Servlet implementation class Login
@@ -48,7 +50,8 @@ public class Login extends HttpServlet {
 	   	 
 	   	 PrintWriter out = response.getWriter();
 	   
-	   	 DAOCliente model = new DAOCliente();
+	   	 DAOCliente model_cliente = new DAOCliente();
+	   	 DAOLoja model_loja = new DAOLoja();
 	   	 
 	   	 /**
 	   	  * Verifica o tipo de perfil e redericiona
@@ -59,7 +62,7 @@ public class Login extends HttpServlet {
 	   	switch (Integer.parseInt(perfil)) {
 		case 1:
 			int cont =0;
-		 	for (Cliente cliente : model.realizarLogin(usuario, senha)) {
+		 	for (Cliente cliente : model_cliente.realizarLogin(usuario, senha)) {
 				String nome = cliente.getNome();
 				String email = cliente.getEmail();
 				Integer id = cliente.getId();
@@ -67,6 +70,7 @@ public class Login extends HttpServlet {
 				sessao.setAttribute("id", id);
 				sessao.setAttribute("usuario", nome);
 				sessao.setAttribute("email", email);
+				sessao.setAttribute("perfil", "Cliente");
 				
 				cont++;
 				}
@@ -85,7 +89,37 @@ public class Login extends HttpServlet {
 					
 				}
 			break;
-
+			
+			
+			
+		case 3:
+			
+			cont = 0;
+		 	for (Loja loja : model_loja.realizarLogin(usuario, senha)) {
+		 		sessao.setAttribute("id", loja.getId());
+				sessao.setAttribute("usuario", loja.getNome());
+				sessao.setAttribute("email", loja.getEmail());
+				sessao.setAttribute("perfil", "Loja");
+				sessao.setAttribute("logo", loja.getFoto());
+				cont++;
+			}
+			if(cont >0){
+			 
+		   		request.setAttribute("e", "");
+		   		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/interno/indexLoja.jsp");
+		        requestDispatcher.forward(request, response);
+				
+			}else{
+				
+			 	request.setAttribute("e", "1");
+		   		RequestDispatcher requestDispatcher = request.getRequestDispatcher("login.jsp");
+		        requestDispatcher.forward(request, response);
+				
+			}
+			
+			break;
+				
+			
 		default:
 			request.setAttribute("e", "1");
 	   		RequestDispatcher requestDispatcher = request.getRequestDispatcher("login.jsp");
