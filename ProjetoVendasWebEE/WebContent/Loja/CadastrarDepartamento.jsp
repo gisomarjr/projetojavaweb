@@ -127,7 +127,7 @@ overflow: hidden;
                                             		        }
                                             		       
                                                         %>
-                                                            <img src="Loja/logo/logo<%=sessao.getAttribute("id")%>.gif"
+                                                            <img src="logo/logo<%=sessao.getAttribute("id")%>.gif"
                                                                 alt="IMG" class="img-responsive" />
                                                             <p class="text-center small">
                                                                 <a href="#">Alterar Foto<%=sessao.getAttribute("id")%></a></p>
@@ -173,13 +173,69 @@ overflow: hidden;
 	<!-- Inicio corpo da página e segundo Menu -->
 	
 	<p>
-	<h3><span class="glyphicon glyphicon-th-list"></span> Administração - Loja</h3>
+	<h3><span class="glyphicon glyphicon-th-list"></span>Cadastrar Departamento</h3>
 	</p>
 	<!-- Conteúdo -->
 	
-	<a href="#" class="btn btn-default btn-sm pull-left"> Cadastrar Produtos</a>
-	<a href="Loja/CadastrarDepartamento.jsp" class="btn btn-default btn-sm pull-left"> Cadastrar Departamentos</a>
-	<a href="#" class="btn btn-default btn-sm pull-left"> Cadastrar Funcionários</a>
-		
+	
+	
+	
+  <form method="post" class="form-horizontal" action="../ControllerLoja">
+<fieldset>
+
+<!--  
+<div align="center">
+	<img src="img/loja_cadastro.jpg" width="300" height="300" alt="" 
+   	class="img-thumbnail img-responsive">
+</div>
+-->   	
+   	
+<!-- Form Name 
+<legend>Cadastrar Loja</legend>-->
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="nome">Nome do Departamento</label>  
+  <div class="col-md-5">
+  <input id="nome" name="nome" type="text" placeholder="Nome do Departamento" class="form-control input-md" required="">
+    
+  </div>
+</div>
+
+
+<!-- Button -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="enviar"></label>
+  <div class="col-md-4">
+    <button id="enviar" name="enviar" class="btn btn-primary">Enviar</button>
+    <a href="../interno/indexLoja.jsp" class="btn btn-primary">Voltar</a>
+     <% if(request.getAttribute("e") == "1"){  %>
+    
+			    <div id="modal_msg" class="modal fade bs-example-modal-sm in" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="display: block; padding-right: 17px;">
+			    <div class="modal-backdrop fade in" style="height: 679px;"></div>
+			    <div class="modal-dialog modal-sm">
+			      <div class="modal-content">
+			
+			        <div class="modal-header">
+			        <button type="button" onclick="closeMsg()" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+			         
+			          <h4 align="center" class="modal-title" id="mySmallModalLabel">Departamento Cadastrado com Sucesso!</h4>
+			        </div>
+			        <div class="modal-body">
+			       <div align="center"> <img src="img/sucesso.png" width="50"></div>
+			        </div>
+			      </div><!-- /.modal-content -->
+			    </div><!-- /.modal-dialog -->
+			  </div>
+        <% }%>
+  </div>
+</div>
+<input type="hidden" value="cadastrarDepartamento" name="acao">
+<input type="hidden" value="<%=sessao.getAttribute("id")%>" name="idLoja">
+</fieldset>
+</form>
+	
+	
+	
 </body>
 </html>

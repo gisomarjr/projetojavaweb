@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
@@ -28,8 +30,10 @@ import javax.swing.ImageIcon;
 
 import org.apache.tomcat.util.http.fileupload.FileItem;
 
+import com.vendas.basicas.Departamento;
 import com.vendas.basicas.Endereco;
 import com.vendas.basicas.Loja;
+import com.vendas.model.DAODepartamento;
 import com.vendas.model.DAOEndereco;
 import com.vendas.model.DAOLoja;
 import com.vendas.util.Upload;
@@ -50,9 +54,12 @@ public class ControllerLoja extends HttpServlet {
     }
 
     	Loja loja = new Loja();
+    	Departamento departamento = new Departamento();
     	Endereco endereco = new Endereco();
     	DAOEndereco model_endereco = new DAOEndereco();
     	DAOLoja model_loja = new DAOLoja();
+    	DAODepartamento model_departamento = new DAODepartamento();
+    	Collection<Loja> lojas = new ArrayList<Loja>();
     	
      
     
@@ -79,14 +86,11 @@ public class ControllerLoja extends HttpServlet {
     		 * UPLOAD DE FOTO
     		 */
     		
-    	   
     		//save image into database
     		
             try {
             	
              File file = new File("/home/gisomar/Imagens/loja.gif");
-            
-            
              byte[] bFile = new byte[(int) file.length()];
     	     FileInputStream fileInputStream = new FileInputStream(file);
     	     
@@ -108,17 +112,40 @@ public class ControllerLoja extends HttpServlet {
      	    endereco.setLoja(loja);
      	    
      	    try {
+     	    	
 				model_loja.cadastrar(loja);
 				model_endereco.cadastrar(endereco);
 				request.setAttribute("e", "1");
-		   	      RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Loja/CadastrarLoja.jsp");
-		   	      requestDispatcher.forward(request, response);
-			} catch (Exception e) {
+		   	    RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Loja/CadastrarLoja.jsp");
+		   	    requestDispatcher.forward(request, response);
+			
+     	    } catch (Exception e) {
 				// TODO Auto-generated catch block
 				out.print(e);
 			}
-    	        
+    	
+     	/**
+    	  * CADASTRAR DEPARTAMENTO    
+    	  */
     	      
+    	} else if(request.getParameter("acao").equals("cadastrarDepartamento")){ 
+    		
+    		DAOLoja model_loja = new DAOLoja();
+        	DAODepartamento model_departamento = new DAODepartamento();
+    		
+    		departamento.setNome(request.getParameter("nome"));
+    		loja.setId(Integer.parseInt(request.getParameter("idLoja")));
+    		lojas.add(loja);
+    		departamento.setLojas(lojas);
+    		
+    		try {
+				model_departamento.cadastrar(departamento);
+				request.setAttribute("e", "1");
+		   	    RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Loja/CadastrarDepartamento.jsp");
+		   	    requestDispatcher.forward(request, response);
+			} catch (Exception e) {
+				out.print(e);
+			}
     	}
     }
     	      
