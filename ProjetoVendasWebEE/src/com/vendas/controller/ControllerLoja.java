@@ -32,9 +32,11 @@ import org.apache.tomcat.util.http.fileupload.FileItem;
 
 import com.vendas.basicas.Departamento;
 import com.vendas.basicas.Endereco;
+import com.vendas.basicas.Funcionario;
 import com.vendas.basicas.Loja;
 import com.vendas.model.DAODepartamento;
 import com.vendas.model.DAOEndereco;
+import com.vendas.model.DAOFuncionario;
 import com.vendas.model.DAOLoja;
 import com.vendas.util.Upload;
 
@@ -49,17 +51,22 @@ public class ControllerLoja extends HttpServlet {
      * @see HttpServlet#HttpServlet()
      */
     public ControllerLoja() {
-        super();
+    	 super();
+     
+      new DAOLoja();
+     
         // TODO Auto-generated constructor stub
     }
 
-    	Loja loja = new Loja();
-    	Departamento departamento = new Departamento();
-    	Endereco endereco = new Endereco();
-    	DAOEndereco model_endereco = new DAOEndereco();
-    	DAOLoja model_loja = new DAOLoja();
-    	DAODepartamento model_departamento = new DAODepartamento();
-    	Collection<Loja> lojas = new ArrayList<Loja>();
+    Loja loja = new Loja();
+    Funcionario funcionario = new Funcionario();
+	Departamento departamento = new Departamento();
+	Endereco endereco = new Endereco();
+	DAOEndereco model_endereco = new DAOEndereco();
+	DAOLoja model_loja = new DAOLoja();
+	DAOFuncionario model_funcionario = new DAOFuncionario();
+	DAODepartamento model_departamento = new DAODepartamento();
+	Collection<Loja> lojas = new ArrayList<Loja>();
     	
      
     
@@ -130,9 +137,8 @@ public class ControllerLoja extends HttpServlet {
     	      
     	} else if(request.getParameter("acao").equals("cadastrarDepartamento")){ 
     		
-    		DAOLoja model_loja = new DAOLoja();
-        	DAODepartamento model_departamento = new DAODepartamento();
-    		
+    		lojas.clear();
+    	
     		departamento.setNome(request.getParameter("nome"));
     		loja.setId(Integer.parseInt(request.getParameter("idLoja")));
     		lojas.add(loja);
@@ -146,6 +152,43 @@ public class ControllerLoja extends HttpServlet {
 			} catch (Exception e) {
 				out.print(e);
 			}
+    		/**
+    		 * Cadastrar Funcionário
+    		 */
+    	} else if(request.getParameter("acao").equals("cadastrarFuncionario")){
+    		
+    		lojas.clear();
+    		
+    		funcionario.setNome(request.getParameter("nome"));
+    		funcionario.setCpf(request.getParameter("cpf"));
+    		funcionario.setMatricula(request.getParameter("matricula"));
+    		funcionario.setEmail(request.getParameter("email"));
+    		funcionario.setTelefone(request.getParameter("telefone"));
+    	    departamento.setId(Integer.parseInt(request.getParameter("departamento")));
+    		funcionario.setDepartamento(departamento);
+    		funcionario.setSenha(request.getParameter("senha"));
+    		loja.setId(Integer.parseInt(request.getParameter("idLoja")));
+    		funcionario.setLoja(loja);
+    		
+    		endereco.setCep(request.getParameter("cep"));
+     	    endereco.setLogradouro(request.getParameter("logradouro"));
+     	    endereco.setBairro(request.getParameter("bairro")); 
+     	    endereco.setEstado(request.getParameter("estado"));
+     	    endereco.setCidade(request.getParameter("cidade"));
+     	    endereco.setNumero(Integer.parseInt(request.getParameter("numero")));
+     	    endereco.setComplemento(request.getParameter("complemento"));
+     	    endereco.setFuncionario(funcionario);
+     	    
+     	    request.setAttribute("e", "1");
+	   	    RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Loja/CadastrarFuncionario.jsp");
+	   	    requestDispatcher.forward(request, response);
+    		try {
+				model_funcionario.cadastrar(funcionario);
+				model_endereco.cadastrar(endereco);
+			} catch (Exception e) {
+				out.print(e);
+			}
+    		
     	}
     }
     	      

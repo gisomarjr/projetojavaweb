@@ -56,7 +56,7 @@ public class Login extends HttpServlet {
 	   	 /**
 	   	  * Verifica o tipo de perfil e redericiona
 	   	  * 1 - Cliente
-	   	  * 2 - Fornecedor
+	   	  * 2 - Funcionario
 	   	  * 3 - Loja
 	   	  */
 	   	switch (Integer.parseInt(perfil)) {

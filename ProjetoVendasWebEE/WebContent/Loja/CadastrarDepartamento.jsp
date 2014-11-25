@@ -77,6 +77,27 @@ overflow: hidden;
 </style>
 
 
+<script type="text/javascript">
+/**
+ * Fecha a mensagem antes do tempo - usuário quando clica em fechar
+ */
+function closeMsg(){
+	document.getElementById("modal_msg").style = "none";
+}
+/**
+ * Em um determinado tempo a mensagem fecha automaticamente
+ */
+$(document).ready(function(){
+	var myVar = setInterval(function () {myTimer()}, 5000);
+	
+	function myTimer() {
+	    var d = new Date();
+	    document.getElementById("modal_msg").style = "none";
+	}
+	
+});
+</script>
+
 </head>
 <body>
 	

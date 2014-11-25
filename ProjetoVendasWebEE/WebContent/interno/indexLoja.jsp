@@ -179,7 +179,7 @@ overflow: hidden;
 	
 	<a href="#" class="btn btn-default btn-sm pull-left"> Cadastrar Produtos</a>
 	<a href="Loja/CadastrarDepartamento.jsp" class="btn btn-default btn-sm pull-left"> Cadastrar Departamentos</a>
-	<a href="#" class="btn btn-default btn-sm pull-left"> Cadastrar Funcionários</a>
+	<a href="Loja/CadastrarFuncionario.jsp" class="btn btn-default btn-sm pull-left"> Cadastrar Funcionários</a>
 		
 </body>
 </html>

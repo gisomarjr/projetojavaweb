@@ -52,11 +52,11 @@ public class ControllerCliente extends HttpServlet {
     	if(request.getParameter("acao").equals("cadastrar")){
     		 
     	  //Usu�rio
-    		 cliente.setNome(request.getParameter("nome"));
-    		 cliente.setCpf(request.getParameter("cpf"));
-    		 cliente.setEmail(request.getParameter("email"));
-    		 cliente.setTelefone(request.getParameter("telefone"));
-    		 cliente.setSenha(request.getParameter("senha"));
+    	  cliente.setNome(request.getParameter("nome"));
+    	  cliente.setCpf(request.getParameter("cpf"));
+    	  cliente.setEmail(request.getParameter("email"));
+    	  cliente.setTelefone(request.getParameter("telefone"));
+    	  cliente.setSenha(request.getParameter("senha"));
    	      //Endereco
    	      endereco.setCep(request.getParameter("cep"));
    	      endereco.setLogradouro(request.getParameter("logradouro"));

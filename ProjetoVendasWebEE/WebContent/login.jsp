@@ -80,7 +80,7 @@
            
 			    <select id="perfil" name="perfil" class="form-control input-lg">
 			      <option value="1">Cliente</option>
-			      <option value="2">Fornecedor</option>
+			      <option value="2">Funcionario</option>
 			      <option value="3">Loja</option>
 			    </select>
 			
