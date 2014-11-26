@@ -2,6 +2,7 @@ package com.vendas.controller;
 
 
 import com.vendas.basicas.Cliente;
+import com.vendas.basicas.Funcionario;
 import com.vendas.basicas.Loja;
 
 import java.io.IOException;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpSession;
 import javax.swing.JOptionPane;
 
 import com.vendas.model.DAOCliente;
+import com.vendas.model.DAOFuncionario;
 import com.vendas.model.DAOLoja;
 
 /**
@@ -52,6 +54,7 @@ public class Login extends HttpServlet {
 	   
 	   	 DAOCliente model_cliente = new DAOCliente();
 	   	 DAOLoja model_loja = new DAOLoja();
+	   	 DAOFuncionario model_funcionario = new DAOFuncionario();
 	   	 
 	   	 /**
 	   	  * Verifica o tipo de perfil e redericiona
@@ -90,6 +93,31 @@ public class Login extends HttpServlet {
 				}
 			break;
 			
+		case 2:
+			cont = 0;
+			
+			for(Funcionario funcionario : model_funcionario.realizarLogin(usuario, senha)){
+				sessao.setAttribute("id", funcionario.getId());
+				sessao.setAttribute("usuario", funcionario.getNome());
+				sessao.setAttribute("email", funcionario.getEmail());
+				sessao.setAttribute("perfil", "Funcionario");
+				cont++;
+			}
+			if(cont >0){
+				 
+		   		request.setAttribute("e", "");
+		   		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/interno/indexFuncionario.jsp");
+		        requestDispatcher.forward(request, response);
+				
+			}else{
+				
+			 	request.setAttribute("e", "1");
+		   		RequestDispatcher requestDispatcher = request.getRequestDispatcher("login.jsp");
+		        requestDispatcher.forward(request, response);
+				
+			}
+			
+			break;
 			
 			
 		case 3:

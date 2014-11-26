@@ -1,14 +1,21 @@
+<%@page import="com.vendas.model.DAOFornecedor"%>
+<%@page import="com.vendas.basicas.Produto"%>
+<%@page import="com.vendas.basicas.Fornecedor"%>
+<%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.Collection"%>
+<%@page import="com.vendas.basicas.Departamento"%>
 <%@page import="java.io.FileOutputStream"%>
 <%@page import="com.vendas.basicas.Loja"%>
 <%@page import="com.vendas.model.DAOLoja"%>
 <%@page import="java.nio.channels.SeekableByteChannel"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>√Årea Interna</title>
+<title>¡rea Interna</title>
 
 	
 <!-- JQuery -->
@@ -27,6 +34,10 @@
 	<!-- MASCARAS -->
 	<script type="text/javascript" src="../mascara/jquery.maskedinput.js"></script>
 	<script src="../mascara/mascaras.js" ></script>
+
+	<!-- CEP -->
+	<script src="../cep/script.js" ></script>	
+
 
 <!-- Menu Interno -->
 <style type="text/css">
@@ -77,6 +88,27 @@ overflow: hidden;
 </style>
 
 
+<script type="text/javascript">
+/**
+ * Fecha a mensagem antes do tempo - usu·rio quando clica em fechar
+ */
+function closeMsg(){
+	document.getElementById("modal_msg").style = "none";
+}
+/**
+ * Em um determinado tempo a mensagem fecha automaticamente
+ */
+$(document).ready(function(){
+	var myVar = setInterval(function () {myTimer()}, 5000);
+	
+	function myTimer() {
+	    var d = new Date();
+	    document.getElementById("modal_msg").style = "none";
+	}
+	
+});
+</script>
+
 </head>
 <body>
 	
@@ -97,12 +129,12 @@ overflow: hidden;
           <ul class="nav navbar-nav">
             <li ><a href="index.jsp">Home</a></li>
             <li ><a href="sobre.jsp">Sobre</a></li>
-             <li  class="active"><a href="login.jsp">Iniciar Sess√£o</a></li>
+             <li  class="active"><a href="login.jsp">Iniciar Sess„o</a></li>
           </ul>
       
         <% 	HttpSession sessao = request.getSession(true);%>
        
-        <!-- Conta usu√°rio -->
+        <!-- Conta usu·rio -->
 	<ul class="nav navbar-nav navbar-right">
                                     <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Sua Conta
                                         <b class="caret"></b></a>
@@ -127,7 +159,7 @@ overflow: hidden;
                                             		        }
                                             		       
                                                         %>
-                                                            <img src="Loja/logo/logo<%=sessao.getAttribute("id")%>.gif"
+                                                            <img src="logo/logo<%=sessao.getAttribute("id")%>.gif"
                                                                 alt="IMG" class="img-responsive" />
                                                             <p class="text-center small">
                                                                 <a href="#">Alterar Foto<%=sessao.getAttribute("id")%></a></p>
@@ -138,7 +170,7 @@ overflow: hidden;
                                                                 <%  out.print(sessao.getAttribute("email")); %></p>
                                                             <div class="divider">
                                                             </div>
-                                                            <a href="ControllerCliente?acao=perfil"  class="btn btn-primary btn-sm active">Ver perfil</a>
+                                                            <a href="ControllerLoja?acao=perfil"  class="btn btn-primary btn-sm active">Ver perfil</a>
                                                         	
                                                         </div>
                                                     </div>
@@ -170,17 +202,115 @@ overflow: hidden;
 	<!-- Fim do Menu -->
 	<br><br><br>
 	
-	<!-- Inicio corpo da p√°gina e segundo Menu -->
+	<!-- Inicio corpo da p·gina e segundo Menu -->
 	
 	<p>
-	<h3><span class="glyphicon glyphicon-th-list"></span> Administra√ß√£o - Loja</h3>
+	<h3><span class="glyphicon glyphicon-th-list"></span>Cadastrar Produto</h3>
 	</p>
-	<!-- Conte√∫do -->
 	
-	<a href="Loja/CadastrarProduto.jsp" class="btn btn-default btn-sm pull-left"> Cadastrar Produtos</a>
-	<a href="Loja/CadastrarDepartamento.jsp" class="btn btn-default btn-sm pull-left"> Cadastrar Departamentos</a>
-	<a href="Loja/CadastrarFuncionario.jsp" class="btn btn-default btn-sm pull-left"> Cadastrar Funcion√°rios</a>
-	<a href="Loja/CadastrarProduto.jsp" class="btn btn-default btn-sm pull-left"> Cadastrar Produto</a>
-	<a href="Loja/CadastrarFornecedor.jsp" class="btn btn-default btn-sm pull-left"> Cadastrar Fornecedor</a>	
+	<form method="post" class="form-horizontal" action="../ControllerLoja"  >
+<fieldset>
+
+<!-- Form Name 
+<legend>Cadastrar Produto</legend>
+-->
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="nome">Nome do Produto</label>  
+  <div class="col-md-5">
+  <input id="nome" name="nome" placeholder="Nome do Produto" class="form-control input-md" required="" type="text">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="preco">PreÁo do Produto</label>  
+  <div class="col-md-2">
+  <input id="preco" name="preco" placeholder="PreÁo" class="form-control input-md" required="" type="text">
+    
+  </div>
+</div>
+
+<!-- Textarea -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="descricao">DescriÁ„o do Produto</label>
+  <div class="col-md-4">                     
+    <textarea class="form-control" id="descricao" name="descricao"></textarea>
+  </div>
+</div>
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="fornecedor">Fornecedor</label>
+  <div class="col-md-4">
+    <select id="fornecedor" name="fornecedor" class="form-control">
+    
+    	<%
+    	Fornecedor fornecedor = new Fornecedor();
+		
+		Collection<Fornecedor> loja_fornecedor = new ArrayList<Fornecedor>();
+		
+		loja_fornecedor = loja.getFornecedores();
+		
+		for(Fornecedor exibirFornecedor : loja_fornecedor){
+		%>
+		<option  value="<%=exibirFornecedor.getId()%>"><%=exibirFornecedor.getNomeFantasia()%></option>
+		<%		
+		}
+		%>
+    
+    </select>
+  </div>
+</div>
+
+<!-- File Button --> 
+<div class="form-group">
+  <label class="col-md-4 control-label" for="foto">Foto do Produto</label>
+  <div class="col-md-4">
+    <input id="foto" name="foto" class="input-file" type="file">
+  </div>
+</div>
+
+<!-- Button -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="enviar"></label>
+  <div class="col-md-4">
+    <button id="enviar" name="enviar" class="btn btn-primary">Enviar</button>
+    <a href="../interno/indexLoja.jsp" class="btn btn-primary">Voltar</a>
+  </div>
+</div>
+
+<input type="hidden" value="cadastrarProduto" name="acao">
+<input type="hidden" value="<%=sessao.getAttribute("id")%>" name="idLoja">
+
+</fieldset>
+</form>
+	
+	<!-- Conte˙do -->
+  <% if(request.getAttribute("e") == "1"){  %>
+    
+			    <div id="modal_msg" class="modal fade bs-example-modal-sm in" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="display: block; padding-right: 17px;">
+			    <div class="modal-backdrop fade in" style="height: 679px;"></div>
+			    <div class="modal-dialog modal-sm">
+			      <div class="modal-content">
+			
+			        <div class="modal-header">
+			        <button type="button" onclick="closeMsg()" class="close" data-dismiss="modal"><span aria-hidden="true">◊</span><span class="sr-only">Close</span></button>
+			         
+			          <h4 align="center" class="modal-title" id="mySmallModalLabel">Produto Cadastrado com Sucesso!</h4>
+			        </div>
+			        <div class="modal-body">
+			       <div align="center"> <img src="img/sucesso.png" width="50"></div>
+			        </div>
+			      </div><!-- /.modal-content -->
+			    </div><!-- /.modal-dialog -->
+			  </div>
+        <% }%>
+
+
+	
+	
 </body>
 </html>

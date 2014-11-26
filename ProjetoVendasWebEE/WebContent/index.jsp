@@ -1,3 +1,10 @@
+<%@page import="com.vendas.model.DAOFuncionario"%>
+<%@page import="com.vendas.model.DAOCliente"%>
+<%@page import="java.io.FileOutputStream"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.Collection"%>
+<%@page import="com.vendas.basicas.Loja"%>
+<%@page import="com.vendas.model.DAOLoja"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -46,16 +53,41 @@
             
             
           </div>
-
-		<a href="#"><img class="img-circle" src="http://demo.portfoliopen.com/Resources/52/571-600x600-scale.png" alt="Generic placeholder image" style="width: 140px; height: 140px;"> </a>
-		<a href="#"><img class="img-circle" src="http://www.araguaiashopping.com.br/public/uploads/34793e8b62154a60ef08c095c59a5b78.jpg" alt="Generic placeholder image" style="width: 140px; height: 140px;"></a>
-		<a href="#"><img class="img-circle" src="https://s3.amazonaws.com/cea.com.br/front/img/padrao/facebook.jpg" alt="Generic placeholder image" style="width: 140px; height: 140px;"></a>
-		<a href="#"><img class="img-circle" src="http://www.shoppingdifusora.com.br/site/repositorio/imagem/1380477763-1_esposende.png" alt="Generic placeholder image" style="width: 140px; height: 140px;"></a>
-		<a href="#"><img class="img-circle" src="http://cdn.slidesharecdn.com/ss_thumbnails/analise-arquitetura-informacao-ponto-frio-adson-130801144541-phpapp02-thumbnail-4.jpg?cb=1375386404" alt="Generic placeholder image" style="width: 140px; height: 140px;"></a>
-		<a href="#"><img class="img-circle" src="http://www.tem-aqui.com/wp-content/uploads/2011/01/Extra_Hipermercados-logo4.gif" alt="Generic placeholder image" style="width: 140px; height: 140px;"></a>
-		<a href="#"><img class="img-circle" src="http://cdn.mundodastribos.com/wp-admin/uploads/2011/04/Eletro-CasasBahia.jpg" alt="Generic placeholder image" style="width: 140px; height: 140px;"></a>
-		<a href="#"><img class="img-circle" src="http://iguatemisalvador.com.br/wp-content/uploads/2012/10/INSINUANTE.png" alt="Generic placeholder image" style="width: 140px; height: 140px;"></a>
+		
+		<%
+		//Iniciando Conexão
+		DAOCliente model_cliente = new DAOCliente();
+	   	 DAOLoja model_loja = new DAOLoja();
+	   	 DAOFuncionario model_funcionario = new DAOFuncionario();
+	   	 
+		Loja loja = new Loja();
+		Collection<Loja> lista_lojas = new ArrayList<Loja>();
+		
+		
+		lista_lojas = model_loja.listar();
+		int i = 0;
+		for(Loja a : lista_lojas){
+			i++;
+			a.getNome();
+			a.getFoto();
+			 byte[] foto = loja.getFoto();
+			try{
+	            FileOutputStream fos = new FileOutputStream("/home/gisomar/git/projetojavaweb/ProjetoVendasWebEE/WebContent/Loja/logo/logo"+a.getId()+".gif"); 
+	            fos.write(foto);
+	            fos.close();
+	        }catch(Exception e){
+	            e.printStackTrace();
+	        }
+		 %>
 			
+			<a href="#<%=a.getId()%>"><img class="img-circle" src="Loja/logo/logo<%=a.getId()%>.gif" alt="<%=a.getNome()%>" style="width: 140px; height: 140px;"> </a>
+		 <%
+		}
+		if(i <= 0){
+		 %><br><br><h1 class="cover-heading">Nenhuma Empressa Cadastrada!!! :(</h1><%
+		}%>
+		
+		
 		<br clear="all"><br clear="all"><br clear="all">
 		
 		<a href="Loja/CadastrarLoja.jsp" class="btn btn-lg btn-default">Cadastre sua Loja Aqui</a>

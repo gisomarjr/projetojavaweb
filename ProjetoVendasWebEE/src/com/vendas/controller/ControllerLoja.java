@@ -32,12 +32,17 @@ import org.apache.tomcat.util.http.fileupload.FileItem;
 
 import com.vendas.basicas.Departamento;
 import com.vendas.basicas.Endereco;
+import com.vendas.basicas.Fornecedor;
 import com.vendas.basicas.Funcionario;
 import com.vendas.basicas.Loja;
+import com.vendas.basicas.Produto;
+import com.vendas.model.DAOCliente;
 import com.vendas.model.DAODepartamento;
 import com.vendas.model.DAOEndereco;
+import com.vendas.model.DAOFornecedor;
 import com.vendas.model.DAOFuncionario;
 import com.vendas.model.DAOLoja;
+import com.vendas.model.DAOProduto;
 import com.vendas.util.Upload;
 
 /**
@@ -52,20 +57,23 @@ public class ControllerLoja extends HttpServlet {
      */
     public ControllerLoja() {
     	 super();
-     
-      new DAOLoja();
-     
+    	 
         // TODO Auto-generated constructor stub
     }
 
+    DAOEndereco model_endereco = new DAOEndereco();
+	DAOLoja model_loja = new DAOLoja();
+    DAOFuncionario model_funcionario = new DAOFuncionario();
+	DAODepartamento model_departamento = new DAODepartamento();
+	DAOProduto model_produto = new DAOProduto();
+	DAOFornecedor model_fornecedor = new DAOFornecedor();
+	
     Loja loja = new Loja();
+    Produto produto = new Produto();
     Funcionario funcionario = new Funcionario();
 	Departamento departamento = new Departamento();
 	Endereco endereco = new Endereco();
-	DAOEndereco model_endereco = new DAOEndereco();
-	DAOLoja model_loja = new DAOLoja();
-	DAOFuncionario model_funcionario = new DAOFuncionario();
-	DAODepartamento model_departamento = new DAODepartamento();
+	Fornecedor fornecedor = new Fornecedor();
 	Collection<Loja> lojas = new ArrayList<Loja>();
     	
      
@@ -136,9 +144,8 @@ public class ControllerLoja extends HttpServlet {
     	  */
     	      
     	} else if(request.getParameter("acao").equals("cadastrarDepartamento")){ 
-    		
-    		lojas.clear();
-    	
+    		lojas.remove(loja);
+    	   	 
     		departamento.setNome(request.getParameter("nome"));
     		loja.setId(Integer.parseInt(request.getParameter("idLoja")));
     		lojas.add(loja);
@@ -189,7 +196,63 @@ public class ControllerLoja extends HttpServlet {
 				out.print(e);
 			}
     		
-    	}
+    	} 
+    	/**
+    	 * Cadastrar Produto
+    	 * 
+    	 */
+    	 else if(request.getParameter("acao").equals("cadastrarProduto")){
+     		
+     		lojas.clear();
+     		
+     		produto.setNome(request.getParameter("nome"));
+     		produto.setDescricao(request.getParameter("descricao"));
+     	    fornecedor.setId(Integer.parseInt(request.getParameter("fornecedor")));
+     		produto.setPreco_produto(Double.parseDouble(request.getParameter("preco")));
+     		produto.setFornecedor(fornecedor);
+     		loja.setId(Integer.parseInt(request.getParameter("idLoja")));
+     		lojas.add(loja);
+    		funcionario.setLoja(loja);
+     		produto.setLojas(lojas);
+      	    
+      	    request.setAttribute("e", "1");
+ 	   	    RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Loja/CadastrarProduto.jsp");
+ 	   	    requestDispatcher.forward(request, response);
+     		try {
+ 				model_produto.cadastrar(produto);
+ 				
+ 			} catch (Exception e) {
+ 				out.print(e);
+ 			}
+     		
+     	} 
+    	
+    	/**
+    	 * CADASTRAR FORNECEDOR
+    	 */
+    	 else if(request.getParameter("acao").equals("cadastrarFornecedor")){
+      		DAOCliente c = new DAOCliente();
+      		lojas.clear();
+      		
+      		fornecedor.setCnpj(request.getParameter("cnpj"));
+      		fornecedor.setNomeFantasia(request.getParameter("nome_fantasia"));
+      		fornecedor.setRazaoSocial(request.getParameter("nome"));
+      		loja.setId(Integer.parseInt(request.getParameter("idLoja")));
+      		lojas.add(loja);
+      	    fornecedor.setLojas(lojas);
+       	    
+       	    request.setAttribute("e", "1");
+  	   	    RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Loja/CadastrarFornecedor.jsp");
+  	   	    requestDispatcher.forward(request, response);
+      		try {
+  				model_fornecedor.cadastrar(fornecedor);
+  				
+  			} catch (Exception e) {
+  				out.print(e);
+  			}
+      		
+      	} 
+    	
     }
     	      
     

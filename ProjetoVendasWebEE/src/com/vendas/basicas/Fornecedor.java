@@ -7,6 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -19,6 +22,13 @@ public class Fornecedor {
 	String razaoSocial;
 	String nomeFantasia;
 	String cnpj;
+	
+	@ManyToMany(fetch=FetchType.LAZY)
+	@JoinTable(name="fornecedor_loja", 
+	joinColumns=@JoinColumn(name="id_fornecedor"),
+	inverseJoinColumns=@JoinColumn(name="id_loja"))
+	Collection<Loja> lojas;
+	
 	
 	@OneToMany(mappedBy="fornecedor", fetch = FetchType.LAZY)
 	Collection<Produto> produtos;
@@ -52,6 +62,18 @@ public class Fornecedor {
 	}
 	public void setProdutos(Collection<Produto> produtos) {
 		this.produtos = produtos;
+	}
+	/**
+	 * @return the lojas
+	 */
+	public Collection<Loja> getLojas() {
+		return lojas;
+	}
+	/**
+	 * @param lojas the lojas to set
+	 */
+	public void setLojas(Collection<Loja> lojas) {
+		this.lojas = lojas;
 	}
  	
 }

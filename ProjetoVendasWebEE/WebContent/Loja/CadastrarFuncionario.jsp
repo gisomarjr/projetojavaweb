@@ -1,15 +1,18 @@
-<%@page import="com.vendas.model.DAOCliente"%>
+<%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.Collection"%>
+<%@page import="com.vendas.basicas.Departamento"%>
 <%@page import="java.io.FileOutputStream"%>
 <%@page import="com.vendas.basicas.Loja"%>
 <%@page import="com.vendas.model.DAOLoja"%>
 <%@page import="java.nio.channels.SeekableByteChannel"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>√Årea Interna</title>
+<title>¡rea Interna</title>
 
 	
 <!-- JQuery -->
@@ -28,6 +31,10 @@
 	<!-- MASCARAS -->
 	<script type="text/javascript" src="../mascara/jquery.maskedinput.js"></script>
 	<script src="../mascara/mascaras.js" ></script>
+
+	<!-- CEP -->
+	<script src="../cep/script.js" ></script>	
+
 
 <!-- Menu Interno -->
 <style type="text/css">
@@ -80,7 +87,7 @@ overflow: hidden;
 
 <script type="text/javascript">
 /**
- * Fecha a mensagem antes do tempo - usu√°rio quando clica em fechar
+ * Fecha a mensagem antes do tempo - usu·rio quando clica em fechar
  */
 function closeMsg(){
 	document.getElementById("modal_msg").style = "none";
@@ -119,12 +126,12 @@ $(document).ready(function(){
           <ul class="nav navbar-nav">
             <li ><a href="index.jsp">Home</a></li>
             <li ><a href="sobre.jsp">Sobre</a></li>
-             <li  class="active"><a href="login.jsp">Iniciar Sess√£o</a></li>
+             <li  class="active"><a href="login.jsp">Iniciar Sess„o</a></li>
           </ul>
       
         <% 	HttpSession sessao = request.getSession(true);%>
        
-        <!-- Conta usu√°rio -->
+        <!-- Conta usu·rio -->
 	<ul class="nav navbar-nav navbar-right">
                                     <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Sua Conta
                                         <b class="caret"></b></a>
@@ -137,7 +144,6 @@ $(document).ready(function(){
                                                     	 //Get image from database
                                             		        Loja loja = new Loja();
                                                     	 	DAOLoja model_loja = new DAOLoja();
-                                                    	 	DAOCliente model_cliente = new DAOCliente();
                                                         	loja = model_loja.consultarPorId(Integer.parseInt(sessao.getAttribute("id").toString()));
                                             		        byte[] bAvatar = loja.getFoto();
                                             		 
@@ -161,7 +167,7 @@ $(document).ready(function(){
                                                                 <%  out.print(sessao.getAttribute("email")); %></p>
                                                             <div class="divider">
                                                             </div>
-                                                            <a href="ControllerCliente?acao=perfil"  class="btn btn-primary btn-sm active">Ver perfil</a>
+                                                            <a href="ControllerLoja?acao=perfil"  class="btn btn-primary btn-sm active">Ver perfil</a>
                                                         	
                                                         </div>
                                                     </div>
@@ -193,12 +199,12 @@ $(document).ready(function(){
 	<!-- Fim do Menu -->
 	<br><br><br>
 	
-	<!-- Inicio corpo da p√°gina e segundo Menu -->
+	<!-- Inicio corpo da p·gina e segundo Menu -->
 	
 	<p>
-	<h3><span class="glyphicon glyphicon-th-list"></span>Cadastrar Departamento</h3>
+	<h3><span class="glyphicon glyphicon-th-list"></span>Cadastrar Funcion·rio</h3>
 	</p>
-	<!-- Conte√∫do -->
+	<!-- Conte˙do -->
 	
 	
 	
@@ -206,32 +212,170 @@ $(document).ready(function(){
   <form method="post" class="form-horizontal" action="../ControllerLoja">
 <fieldset>
 
-<!--  
-<div align="center">
-	<img src="img/loja_cadastro.jpg" width="300" height="300" alt="" 
-   	class="img-thumbnail img-responsive">
-</div>
--->   	
-   	
 <!-- Form Name 
-<legend>Cadastrar Loja</legend>-->
-
+<legend>Cadastrar Funcion·rio</legend>
+-->
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="nome">Nome do Departamento</label>  
+  <label class="col-md-4 control-label" for="nome">Nome do Funcion·rio</label>  
   <div class="col-md-5">
-  <input id="nome" name="nome" type="text" placeholder="Nome do Departamento" class="form-control input-md" required="">
+  <input id="nome" name="nome" placeholder="Nome do Funcion·rio" class="form-control input-md" required="" type="text">
     
   </div>
 </div>
 
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="cpf">CPF</label>  
+  <div class="col-md-4">
+  <input id="cpf" name="cpf" type="text" placeholder="CPF" class="form-control input-md" required="">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="matricula">Matricula</label>  
+  <div class="col-md-2">
+  <input id="matricula" name="matricula" placeholder="Matricula" class="form-control input-md" required="" type="text">
+    
+  </div>
+</div>
+
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="email">Informe seu Email</label>  
+  <div class="col-md-6">
+  <input id="email" name="email" type="text" placeholder="Email" class="form-control input-md" required="">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="telefone">Telefone / Celular</label>  
+  <div class="col-md-4">
+  <input id="telefone" name="telefone" type="text" placeholder="Contato" class="form-control input-md" required="">
+    
+  </div>
+</div>
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="departamento">Departamento</label>
+  <div class="col-md-5">
+    <select id="departamento" name="departamento" class="form-control">
+    	<%
+    	Departamento departamento = new Departamento();
+		Collection<Departamento> departamento_loja = new ArrayList<Departamento>();
+    	
+		departamento_loja = loja.getDepartamentos();
+		
+		for(Departamento exibirDepartamento : departamento_loja){
+		%>
+		<option  value="<%=exibirDepartamento.getId()%>"><%=exibirDepartamento.getNome()%></option>
+		<%		
+		}
+		%>
+    	
+    	
+    </select>
+  </div>
+</div>
+
+<!-- Password input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="senha">Senha</label>
+  <div class="col-md-4">
+    <input id="senha" name="senha" placeholder="Senha de Acesso" class="form-control input-md" required="" type="password">
+    
+  </div>
+</div>
+
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="cep">CEP</label>  
+  <div class="col-md-4">
+  <input id="cep" name="cep" type="text" placeholder="CEP" class="form-control input-md" required="">
+  <input type="button" class="btn btn-default" id="getEndereco" value="Procurar EndereÁo" name="procurar"> 
+ 
+ <h5 id="loadingCep"></h5>
+ 
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="logradouro">Logradouro</label>  
+  <div class="col-md-6">
+  <input id="logradouro" name="logradouro" type="text" placeholder="Logradouro" class="form-control input-md" required="">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="logradouro">Bairro</label>  
+  <div class="col-md-6">
+  <input id="bairro" name="bairro" type="text" placeholder="Bairro" class="form-control input-md" required="">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="estado">Estado</label>  
+  <div class="col-md-4">
+  <input id="estado" name="estado" type="text" placeholder="Estado" class="form-control input-md" required="">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="cidade">Cidade</label>  
+  <div class="col-md-4">
+  <input id="cidade" name="cidade" type="text" placeholder="Cidade" class="form-control input-md" required="">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="numero">N˙mero</label>  
+  <div class="col-md-2">
+  <input id="numero" name="numero" type="text" placeholder="N∫" class="form-control input-md">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="complemento">Complemento</label>  
+  <div class="col-md-5">
+  <input id="complemento" name="complemento" type="text" placeholder="Complemento" class="form-control input-md" required="">
+    
+  </div>
+</div>
 
 <!-- Button -->
 <div class="form-group">
   <label class="col-md-4 control-label" for="enviar"></label>
   <div class="col-md-4">
     <button id="enviar" name="enviar" class="btn btn-primary">Enviar</button>
-    <a href="../interno/indexLoja.jsp" class="btn btn-primary">Voltar</a>
+ 	<a href="../interno/indexLoja.jsp" class="btn btn-primary">Voltar</a>
+  </div>
+</div>
+<input type="hidden" value="cadastrarFuncionario" name="acao">
+<input type="hidden" value="<%=sessao.getAttribute("id")%>" name="idLoja">
+
+	
+</fieldset>
+</form>
+
+  
      <% if(request.getAttribute("e") == "1"){  %>
     
 			    <div id="modal_msg" class="modal fade bs-example-modal-sm in" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="display: block; padding-right: 17px;">
@@ -240,9 +384,9 @@ $(document).ready(function(){
 			      <div class="modal-content">
 			
 			        <div class="modal-header">
-			        <button type="button" onclick="closeMsg()" class="close" data-dismiss="modal"><span aria-hidden="true">√ó</span><span class="sr-only">Close</span></button>
+			        <button type="button" onclick="closeMsg()" class="close" data-dismiss="modal"><span aria-hidden="true">◊</span><span class="sr-only">Close</span></button>
 			         
-			          <h4 align="center" class="modal-title" id="mySmallModalLabel">Departamento Cadastrado com Sucesso!</h4>
+			          <h4 align="center" class="modal-title" id="mySmallModalLabel">Funcion·rio Cadastrado com Sucesso!</h4>
 			        </div>
 			        <div class="modal-body">
 			       <div align="center"> <img src="img/sucesso.png" width="50"></div>
@@ -251,13 +395,8 @@ $(document).ready(function(){
 			    </div><!-- /.modal-dialog -->
 			  </div>
         <% }%>
-  </div>
-</div>
-<input type="hidden" value="cadastrarDepartamento" name="acao">
-<input type="hidden" value="<%=sessao.getAttribute("id")%>" name="idLoja">
-</fieldset>
-</form>
-	
+
+
 	
 	
 </body>

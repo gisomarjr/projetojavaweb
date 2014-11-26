@@ -114,7 +114,7 @@ public class DAOFuncionario implements IFuncionario {
 	 * @return
 	 */
 	public List<Funcionario> realizarLogin(String usuario,String senha) {
-		return entityManager.createQuery("select f from Funcionario as f where f.usuario = ?1 and f.senha = ?2").
+		return entityManager.createQuery("select f from Funcionario as f where f.cpf = ?1 and f.senha = ?2").
 		setParameter(1, usuario).
 		setParameter(2, senha).
 		getResultList();

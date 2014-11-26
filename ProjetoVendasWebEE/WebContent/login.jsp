@@ -31,7 +31,7 @@
 	   $("#usuario").mask("999.999.999-99");
 	   
 	   $('#perfil').change(function() {
-	   if ($(this).val() == 1) {
+	   if ($(this).val() != 3) {
 	    	$("#usuario").mask("999.999.999-99");
 	   }else{
 			$("#usuario").mask("99.999.999/9999-99");

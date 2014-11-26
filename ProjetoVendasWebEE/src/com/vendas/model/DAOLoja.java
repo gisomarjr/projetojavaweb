@@ -106,6 +106,7 @@ public class DAOLoja implements ILoja  {
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<Loja> listar() {
+		
 		return entityManager.createQuery("FROM " + Loja.class.getName()).getResultList();
 	}
 

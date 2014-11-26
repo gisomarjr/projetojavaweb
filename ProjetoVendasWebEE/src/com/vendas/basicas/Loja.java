@@ -33,8 +33,13 @@ public class Loja {
 	@Column(length=65535)
     byte[] foto;
 	
+	@ManyToMany(fetch=FetchType.LAZY)
+	@JoinTable(name="fornecedor_loja",
+	joinColumns= {@JoinColumn(name="id_loja")},
+	inverseJoinColumns = {@JoinColumn(name="id_fornecedor")})
+	Collection<Fornecedor> fornecedores;	
+	
 	@OneToMany(mappedBy="loja", fetch = FetchType.LAZY)
-	private
 	Collection<Funcionario> funcionarios;
 	
 	@OneToOne(mappedBy="loja")
@@ -127,6 +132,18 @@ public class Loja {
 	}
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+	/**
+	 * @return the fornecedores
+	 */
+	public Collection<Fornecedor> getFornecedores() {
+		return fornecedores;
+	}
+	/**
+	 * @param fornecedores the fornecedores to set
+	 */
+	public void setFornecedores(Collection<Fornecedor> fornecedores) {
+		this.fornecedores = fornecedores;
 	}
 	
 	
