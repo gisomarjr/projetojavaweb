@@ -232,7 +232,7 @@ $(document).ready(function(){
   <label class="col-md-4 control-label" for="enviar"></label>
   <div class="col-md-4">
     <button id="enviar" name="enviar" class="btn btn-primary">Enviar</button>
-    <a href="../interno/indexLoja.jsp" class="btn btn-primary">Voltar</a>
+    <a href="<%=request.getContextPath()%>/interno/indexLoja.jsp" class="btn btn-primary">Voltar</a>
      <% if(request.getAttribute("e") == "1"){  %>
     
 			    <div id="modal_msg" class="modal fade bs-example-modal-sm in" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="display: block; padding-right: 17px;">

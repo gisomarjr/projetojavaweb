@@ -158,9 +158,13 @@ public class ControllerLoja extends HttpServlet {
     		try {
 				model_departamento.cadastrar(dl);
 				request.setAttribute("e", "1");
+				 
 				//response.sendRedirect("Loja/CadastrarDepartamento.jsp");
 		   	    RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Loja/CadastrarDepartamento.jsp");
-		   	    requestDispatcher.forward(request, response);
+		   	  	requestDispatcher.forward(request, response);  
+				//response.sendRedirect(request.getContextPath() + "/Loja/CadastrarDepartamento.jsp" ); 
+				
+		   	  	
 			} catch (Exception e) {
 				out.print(e);
 			}
