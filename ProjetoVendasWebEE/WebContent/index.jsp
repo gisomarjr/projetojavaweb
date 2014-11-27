@@ -80,7 +80,7 @@
 	        }
 		 %>
 			
-			<a href="#<%=a.getId()%>"><img class="img-circle" src="Loja/logo/logo<%=a.getId()%>.gif" alt="<%=a.getNome()%>" style="width: 140px; height: 140px;"> </a>
+			<a href="Loja/index.jsp?l=<%=a.getId()%>"><img class="img-circle" src="Loja/logo/logo<%=a.getId()%>.gif" alt="<%=a.getNome()%>" style="width: 140px; height: 140px;"> </a>
 		 <%
 		}
 		if(i <= 0){

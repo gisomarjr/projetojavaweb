@@ -135,9 +135,10 @@ $(document).ready(function(){
                                                         <div class="col-md-5">
                                                         <%
                                                     	 //Get image from database
-                                            		        Loja loja = new Loja();
+                                            		       /* Loja loja = new Loja();
                                                     	 	DAOLoja model_loja = new DAOLoja();
                                                     	 	DAOCliente model_cliente = new DAOCliente();
+                                                    	 	
                                                         	loja = model_loja.consultarPorId(Integer.parseInt(sessao.getAttribute("id").toString()));
                                             		        byte[] bAvatar = loja.getFoto();
                                             		 
@@ -148,7 +149,7 @@ $(document).ready(function(){
                                             		        }catch(Exception e){
                                             		            e.printStackTrace();
                                             		        }
-                                            		       
+                                            		       */
                                                         %>
                                                             <img src="logo/logo<%=sessao.getAttribute("id")%>.gif"
                                                                 alt="IMG" class="img-responsive" />

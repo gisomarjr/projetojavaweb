@@ -113,7 +113,7 @@ overflow: hidden;
                                                         <div class="col-md-5">
                                                         <%
                                                     	 //Get image from database
-                                            		        Loja loja = new Loja();
+                                            		    /*    Loja loja = new Loja();
                                                     	 	DAOLoja model_loja = new DAOLoja();
                                                         	loja = model_loja.consultarPorId(Integer.parseInt(sessao.getAttribute("id").toString()));
                                             		        byte[] bAvatar = loja.getFoto();
@@ -124,7 +124,7 @@ overflow: hidden;
                                             		            fos.close();
                                             		        }catch(Exception e){
                                             		            e.printStackTrace();
-                                            		        }
+                                            		        }*/
                                             		       
                                                         %>
                                                             <img src="Loja/logo/logo<%=sessao.getAttribute("id")%>.gif"

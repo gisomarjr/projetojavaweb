@@ -144,16 +144,21 @@ public class ControllerLoja extends HttpServlet {
     	  */
     	      
     	} else if(request.getParameter("acao").equals("cadastrarDepartamento")){ 
-    		lojas.remove(loja);
+    		DAOCliente c = new DAOCliente();
+    		Loja ld = new Loja();
+    		Departamento dl = new Departamento();
+    		Collection<Loja> lojasd = new ArrayList<Loja>();
+    		lojasd.remove(ld);
     	   	 
-    		departamento.setNome(request.getParameter("nome"));
-    		loja.setId(Integer.parseInt(request.getParameter("idLoja")));
-    		lojas.add(loja);
-    		departamento.setLojas(lojas);
+    		dl.setNome(request.getParameter("nome"));
+    		ld.setId(Integer.parseInt(request.getParameter("idLoja")));
+    		lojasd.add(ld);
+    		dl.setLojas(lojasd);
     		
     		try {
-				model_departamento.cadastrar(departamento);
+				model_departamento.cadastrar(dl);
 				request.setAttribute("e", "1");
+				//response.sendRedirect("Loja/CadastrarDepartamento.jsp");
 		   	    RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Loja/CadastrarDepartamento.jsp");
 		   	    requestDispatcher.forward(request, response);
 			} catch (Exception e) {
