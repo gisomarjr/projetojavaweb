@@ -56,6 +56,7 @@ public class DAOLoja implements ILoja  {
             entityManager.getTransaction().begin();
             entityManager.persist(loja);
             entityManager.getTransaction().commit();
+            entityManager.close();
         } catch (Exception ex) {
             ex.printStackTrace();
             entityManager.getTransaction().rollback();
@@ -69,6 +70,7 @@ public class DAOLoja implements ILoja  {
 	            entityManager.getTransaction().begin();
 	            entityManager.merge(loja);
 	            entityManager.getTransaction().commit();
+	            entityManager.close();
 	        } catch (Exception ex) {
 	            //ex.printStackTrace();
 	            //entityManager.getTransaction().rollback();
@@ -84,6 +86,7 @@ public class DAOLoja implements ILoja  {
 	            loja = entityManager.find(Loja.class, loja.getId());
 	            entityManager.remove(loja);
 	            entityManager.getTransaction().commit();
+	            entityManager.close();
 	        } catch (Exception ex) {
 	            ex.printStackTrace();
 	            entityManager.getTransaction().rollback();

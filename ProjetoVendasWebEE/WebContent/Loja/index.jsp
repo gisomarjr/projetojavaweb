@@ -238,36 +238,35 @@ $(document).ready(function(){
             <li ><a href="sobre.jsp">Sobre</a></li>
              <li  class="active"><a href="login.jsp">Iniciar Sessão</a></li>
           </ul>
-      
-        <% 	HttpSession sessao = request.getSession(true);%>
-       
-        <!-- Conta usuário -->
+         <!-- Carrinho do Usuário -->
 	<ul class="nav navbar-nav navbar-right">
-                                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Sua Conta
+        <% 	HttpSession sessao = request.getSession(true);
+        ArrayList<Produto> lista_produtos_s = new ArrayList<Produto>();
+         try{
+          
+         lista_produtos_s.addAll((ArrayList<Produto>) sessao.getAttribute("qtdCarrinho"));
+         %>
+     
+ 
+	
+	<%}catch(NullPointerException e){
+          sessao.setAttribute("qtdCarrinho", lista_produtos_s);
+       }
+    %>
+             <li class="dropdown"><a href="<%=request.getContextPath()%>/Loja/Carrinho.jsp" class="fa fa-shopping-cart"><span class="badge"> <%=lista_produtos_s.size()%></span></a>
+                                    
+                                     </li>
+                                     
+                                     
+                                     <!-- Conta do Usuário -->
+                                      <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Sua Conta
                                         <b class="caret"></b></a>
                                         <ul class="dropdown-menu">
                                             <li>
                                                 <div class="navbar-content">
                                                     <div class="row">
                                                         <div class="col-md-5">
-                                                        <%
-                                                    	 //Get image from database
-                                            		       /* Loja loja = new Loja();
-                                                    	 	DAOLoja model_loja = new DAOLoja();
-                                                    	 	DAOCliente model_cliente = new DAOCliente();
-                                                    	 	
-                                                        	loja = model_loja.consultarPorId(Integer.parseInt(sessao.getAttribute("id").toString()));
-                                            		        byte[] bAvatar = loja.getFoto();
-                                            		 
-                                            		        try{
-                                            		            FileOutputStream fos = new FileOutputStream("/home/gisomar/git/projetojavaweb/ProjetoVendasWebEE/WebContent/Loja/logo/logo"+sessao.getAttribute("id")+".gif"); 
-                                            		            fos.write(bAvatar);
-                                            		            fos.close();
-                                            		        }catch(Exception e){
-                                            		            e.printStackTrace();
-                                            		        }
-                                            		       */
-                                                        %>
+                                                        
                                                             <img src="logo/logo<%=sessao.getAttribute("id")%>.gif"
                                                                 alt="IMG" class="img-responsive" />
                                                             <p class="text-center small">
@@ -300,12 +299,13 @@ $(document).ready(function(){
                                             </li>
                                        </ul>
                                      </li>
+                                   
                               </ul>
       </div>
+      
+      
       </div><!--/.nav-collapse -->
     </nav>
-	
-	
 	
 	
 	<!-- Fim do Menu -->
@@ -354,6 +354,7 @@ $(document).ready(function(){
 		
 	if(produtos.size() > 0){	
 		for(Produto p : produtos){
+			produto.setId(p.getId());
 			produto.setNome(p.getNome());
 			produto.setDescricao(p.getDescricao());
 			produto.setFornecedor(p.getFornecedor());
@@ -369,9 +370,11 @@ $(document).ready(function(){
                                     <div class="row">
                                         <div class="price col-md-6">
                                             <h5>
-                                                <%=produto.getNome() %></h5>
+                                            
+                                            
+                                                <%=produto.getNome()%></h5>
                                             <h5 class="price-text-color">
-                                                $<%=produto.getPreco_produto() %></h5>
+                                                R$<%=produto.getPreco_produto() %></h5>
                                         </div>
                                         <div class="rating hidden-sm col-md-6">
                                             <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
@@ -381,7 +384,7 @@ $(document).ready(function(){
                                     </div>
                                     <div class="separator clear-left">
                                         <p class="btn-add">
-                                            <i class="fa fa-shopping-cart"></i><a href="http://www.jquery2dotnet.com" class="hidden-sm">Adicionar ao Carrinho</a></p>
+                                            <i class="fa fa-shopping-cart"></i><a href="<%=request.getContextPath()%>/Carrinho?l=<%=idLoja%>&p=<%=produto.getId()%>" class="hidden-sm">Adicionar ao Carrinho</a></p>
                                         <p class="btn-details">
                                             <i class="fa fa-list"></i><a href="http://www.jquery2dotnet.com" class="hidden-sm">Mais Detalhes</a></p>
                                     </div>
@@ -398,8 +401,8 @@ $(document).ready(function(){
 	}
 		
 	}catch(Exception e){
-		 response.sendRedirect("../index.jsp");
-		
+	   response.sendRedirect("../index.jsp");
+		//out.print(e);
 	}
 	%>
 	</div>

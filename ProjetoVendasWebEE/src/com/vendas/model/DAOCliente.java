@@ -25,9 +25,6 @@ public class DAOCliente implements ICliente{
     public DAOCliente() {
         entityManager = getEntityManager();
     }
-    
-    
-    
     /**
      * Verificando se já existe a conexão com o banco
      * @return
@@ -86,6 +83,7 @@ public class DAOCliente implements ICliente{
 	            entityManager.getTransaction().begin();
 	            entityManager.merge(Cliente);
 	            entityManager.getTransaction().commit();
+	            entityManager.close();
 	        } catch (Exception ex) {
 	            ex.printStackTrace();
 	            entityManager.getTransaction().rollback();
@@ -100,6 +98,7 @@ public class DAOCliente implements ICliente{
 	            Cliente = entityManager.find(Cliente.class, Cliente.getId());
 	            entityManager.remove(Cliente);
 	            entityManager.getTransaction().commit();
+	            entityManager.close();
 	        } catch (Exception ex) {
 	            ex.printStackTrace();
 	            entityManager.getTransaction().rollback();

@@ -61,6 +61,7 @@ public class DAOFuncionario implements IFuncionario {
             entityManager.getTransaction().begin();
             entityManager.persist(funcionario);
             entityManager.getTransaction().commit();
+            entityManager.close();
         } catch (Exception ex) {
         	throw new Exception(ex.getMessage());
         }
@@ -73,6 +74,7 @@ public class DAOFuncionario implements IFuncionario {
 	            entityManager.getTransaction().begin();
 	            entityManager.merge(funcionario);
 	            entityManager.getTransaction().commit();
+	            entityManager.close();
 	        } catch (Exception ex) {
 	          
 	        }
@@ -86,6 +88,7 @@ public class DAOFuncionario implements IFuncionario {
 	            funcionario = entityManager.find(Funcionario.class, funcionario.getId());
 	            entityManager.remove(funcionario);
 	            entityManager.getTransaction().commit();
+	            entityManager.close();
 	        } catch (Exception ex) {
 	            ex.printStackTrace();
 	            entityManager.getTransaction().rollback();

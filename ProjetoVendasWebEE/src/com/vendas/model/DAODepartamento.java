@@ -53,6 +53,7 @@ public class DAODepartamento implements IDepartamento  {
             entityManager.getTransaction().begin();
             entityManager.persist(departamento);
             entityManager.getTransaction().commit();
+            entityManager.close();
         } catch (Exception ex) {
             ex.printStackTrace();
             entityManager.getTransaction().rollback();
@@ -66,6 +67,7 @@ public class DAODepartamento implements IDepartamento  {
 	            entityManager.getTransaction().begin();
 	            entityManager.merge(departamento);
 	            entityManager.getTransaction().commit();
+	            entityManager.close();
 	        } catch (Exception ex) {
 	            //ex.printStackTrace();
 	            //entityManager.getTransaction().rollback();
@@ -81,6 +83,7 @@ public class DAODepartamento implements IDepartamento  {
 	            departamento = entityManager.find(Departamento.class, departamento.getId());
 	            entityManager.remove(departamento);
 	            entityManager.getTransaction().commit();
+	            entityManager.close();
 	        } catch (Exception ex) {
 	            ex.printStackTrace();
 	            entityManager.getTransaction().rollback();

@@ -61,6 +61,7 @@ public class DAOPedido implements IPedido  {
             entityManager.getTransaction().begin();
             entityManager.persist(pedido);
             entityManager.getTransaction().commit();
+            entityManager.close();
         } catch (Exception ex) {
             //ex.printStackTrace();
            // entityManager.getTransaction().rollback();
@@ -74,6 +75,7 @@ public class DAOPedido implements IPedido  {
 	            entityManager.getTransaction().begin();
 	            entityManager.merge(pedido);
 	            entityManager.getTransaction().commit();
+	            entityManager.close();
 	        } catch (Exception ex) {
 	            ex.printStackTrace();
 	            entityManager.getTransaction().rollback();
@@ -88,6 +90,7 @@ public class DAOPedido implements IPedido  {
 	            pedido = entityManager.find(Pedido.class, pedido.getId());
 	            entityManager.remove(pedido);
 	            entityManager.getTransaction().commit();
+	            entityManager.close();
 	        } catch (Exception ex) {
 	            ex.printStackTrace();
 	            entityManager.getTransaction().rollback();

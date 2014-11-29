@@ -75,7 +75,7 @@ public class ControllerLoja extends HttpServlet {
 	Endereco endereco = new Endereco();
 	Fornecedor fornecedor = new Fornecedor();
 	Collection<Loja> lojas = new ArrayList<Loja>();
-    	
+    ArrayList<Produto>	produtoCarrinho = new ArrayList<Produto>();
      
     
     @Override
@@ -260,7 +260,9 @@ public class ControllerLoja extends HttpServlet {
   				out.print(e);
   			}
       		
-      	} 
+      	} else if(request.getParameter("acao").equals("carrinho")){
+      		
+      	}
     	
     }
     	      

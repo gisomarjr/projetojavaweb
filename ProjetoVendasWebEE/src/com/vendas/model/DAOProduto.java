@@ -58,6 +58,7 @@ public class DAOProduto implements IProduto{
             entityManager.getTransaction().begin();
             entityManager.persist(produto);
             entityManager.getTransaction().commit();
+            entityManager.close();
         } catch (Exception ex) {
             //ex.printStackTrace();
            // entityManager.getTransaction().rollback();
@@ -71,6 +72,7 @@ public class DAOProduto implements IProduto{
 	            entityManager.getTransaction().begin();
 	            entityManager.merge(produto);
 	            entityManager.getTransaction().commit();
+	            entityManager.close();
 	        } catch (Exception ex) {
 	            ex.printStackTrace();
 	            entityManager.getTransaction().rollback();
@@ -85,6 +87,7 @@ public class DAOProduto implements IProduto{
 	            produto = entityManager.find(Produto.class, produto.getId());
 	            entityManager.remove(produto);
 	            entityManager.getTransaction().commit();
+	            entityManager.close();
 	        } catch (Exception ex) {
 	            ex.printStackTrace();
 	            entityManager.getTransaction().rollback();

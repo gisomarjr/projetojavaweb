@@ -59,6 +59,7 @@ public class DAOEndereco implements IEndereco  {
             entityManager.getTransaction().begin();
             entityManager.persist(endereco);
             entityManager.getTransaction().commit();
+            entityManager.close();
         } catch (Exception ex) {
            
         }
@@ -69,6 +70,7 @@ public class DAOEndereco implements IEndereco  {
 	            entityManager.getTransaction().begin();
 	            entityManager.merge(endereco);
 	            entityManager.getTransaction().commit();
+	            entityManager.close();
 	        } catch (Exception ex) {
 	            ex.printStackTrace();
 	            entityManager.getTransaction().rollback();
@@ -83,6 +85,7 @@ public class DAOEndereco implements IEndereco  {
 	            endereco = entityManager.find(Endereco.class, endereco.getId());
 	            entityManager.remove(endereco);
 	            entityManager.getTransaction().commit();
+	            entityManager.close();
 	        } catch (Exception ex) {
 	            ex.printStackTrace();
 	            entityManager.getTransaction().rollback();
