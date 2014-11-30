@@ -211,8 +211,13 @@ public class ControllerLoja extends HttpServlet {
     	 * 
     	 */
     	 else if(request.getParameter("acao").equals("cadastrarProduto")){
+     		DAOProduto model_produto = new DAOProduto();
+     		Produto produto = new Produto();
+     		Fornecedor fornecedor  = new Fornecedor();
+     		Funcionario funcionario = new Funcionario();
+     		Loja loja = new Loja();
+     		Collection<Loja> lojas = new ArrayList<Loja>();
      		
-     		lojas.clear();
      		
      		produto.setNome(request.getParameter("nome"));
      		produto.setDescricao(request.getParameter("descricao"));

@@ -132,7 +132,7 @@ public class ControllerCliente extends HttpServlet {
 				model_pedido.cadastrar(pedido);
 				
 				
-				response.sendRedirect("/ProjetoVendasWebEE/Login?perfil=1");
+				response.sendRedirect("/ProjetoVendasWebEE/Login");
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
