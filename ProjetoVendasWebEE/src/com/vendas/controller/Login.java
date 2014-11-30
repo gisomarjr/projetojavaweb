@@ -41,6 +41,15 @@ public class Login extends HttpServlet {
     throws ServletException, IOException {
     	
     	HttpSession sessao = request.getSession(true);
+    	try{
+    	if(sessao.getAttribute("perfil").equals("Cliente")){
+    		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/interno/index.jsp");
+	        requestDispatcher.forward(request, response);
+    	}
+    	}catch(Exception e){
+    		
+    		
+    	}
     	
     	try{
 	   	 String usuario = request.getParameter("usuario");

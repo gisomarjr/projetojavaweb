@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -21,6 +22,10 @@ public class Entrega {
 	@OneToOne(mappedBy="entrega")
 	Pedido pedido;
 	
+	@OneToOne
+	@JoinColumn(name = "id_endereco")
+	
+	Endereco endereco;
 	
 	public Integer getId() {
 		return id;
@@ -45,6 +50,18 @@ public class Entrega {
 	}
 	public void setPedido(Pedido pedido) {
 		this.pedido = pedido;
+	}
+	/**
+	 * @return the endereco
+	 */
+	public Endereco getEndereco() {
+		return endereco;
+	}
+	/**
+	 * @param endereco the endereco to set
+	 */
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
 	}
 	
 

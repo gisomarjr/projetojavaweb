@@ -37,6 +37,12 @@ public class Endereco {
 	@OneToOne
 	@JoinColumn(name = "id_funcionario")
 	Funcionario funcionario;
+	
+	
+	@OneToOne(mappedBy="endereco")
+	
+	Entrega entrega;
+	
 
 	@OneToOne
 	@JoinColumn(name = "id_loja")
@@ -134,5 +140,19 @@ public class Endereco {
 
 	public void setEstado(String estado) {
 		this.estado = estado;
+	}
+
+	/**
+	 * @return the entrega
+	 */
+	public Entrega getEntrega() {
+		return entrega;
+	}
+
+	/**
+	 * @param entrega the entrega to set
+	 */
+	public void setEntrega(Entrega entrega) {
+		this.entrega = entrega;
 	}
 }

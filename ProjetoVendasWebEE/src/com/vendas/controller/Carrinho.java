@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.vendas.basicas.Produto;
+import com.vendas.model.DAOProduto;
 
 /**
  * Servlet implementation class Carrinho
@@ -51,8 +52,13 @@ public class Carrinho extends HttpServlet {
 		
 		 
 	     lista_produtos.addAll((ArrayList<Produto>) sessao.getAttribute("qtdCarrinho"));
-		 Produto p = new Produto();
-		 p.setId(idProduto);
+		 
+	     Produto p = new Produto();
+		 DAOProduto model_produto = new DAOProduto();
+		 
+		 p = model_produto.consultarPorId(idProduto);
+	     
+		 
 		 lista_produtos.add(p);
 		 
 		/* for(Produto pro: lista_produtos){

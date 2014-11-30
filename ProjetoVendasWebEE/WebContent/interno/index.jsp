@@ -1,3 +1,10 @@
+<%@page import="com.vendas.basicas.Cliente"%>
+<%@page import="com.vendas.model.DAOCliente"%>
+<%@page import="com.vendas.basicas.Endereco"%>
+<%@page import="java.util.Collection"%>
+<%@page import="com.vendas.model.DAOEndereco"%>
+<%@page import="com.vendas.basicas.Produto"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.nio.channels.SeekableByteChannel"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -220,9 +227,152 @@ overflow: hidden;
 		<div class="container">
 			
 				<div class="page-header">
-	<h3><span class="glyphicon glyphicon-th-list"></span> Navigation</h3>
+	<h3><span class="glyphicon glyphicon-th-list"></span> Pagina Inicial - Cliente</h3>
 </div>
-	<!-- Conteúdo -->
+	
+	<%
+	try{
+	 ArrayList<Produto> lista_produtos_s = new ArrayList<Produto>();
+     lista_produtos_s.addAll((ArrayList<Produto>) sessao.getAttribute("qtdCarrinho"));
+	 if(lista_produtos_s.size() >0){ %>
+		
+	 *Escolha seu Endereço para Entrega
+	 
+	 
+	 	<!-- Inicio Endereço -->
+
+<form action="ControllerCliente" method="post">
+	<div class="container">
+	<div class="row">
+		
+        
+        <div class="col-md-12">
+        <h4>Catálogo de Endereços</h4>
+        <div class="table-responsive">
+        
+                
+              <table id="mytable" class="table table-bordred table-striped">
+                   
+                   <thead>
+                   
+                   <th></th>
+                   <th>Logradouro</th>
+                    <th>Cidade</th>
+                     <th>Estado</th>
+                     <th>cidade</th>
+                     <th>Bairro</th>
+                      <th>CEP</th>
+                     <th>Complemento</th>
+                     <th>Número</th>
+                      <th>Editar</th>
+                       <th>Excluir</th>
+                   </thead>
+    <tbody>
+   <% 
+   /**
+   * Lista de Endereço
+   **/
+   DAOCliente model_cliente = new DAOCliente();
+   Cliente c = new Cliente();
+   c = model_cliente.consultarPorId(Integer.parseInt(sessao.getAttribute("id").toString()));
+   DAOEndereco model_endereco = new DAOEndereco();
+   Collection<Endereco> collection_endereco = null;
+   for (Endereco endereco : c.getEndereco()) {   %> 
+    <tr>
+    <td><input type="checkbox" name="idEndereco" value="<%=endereco.getId()%>" class="checkthis" /></td>
+    <td><%=endereco.getLogradouro()%></td>
+    <td><%=endereco.getCidade()%></td>
+    <td><%=endereco.getEstado()%></td>
+    <td><%=endereco.getCidade()%></td>
+    <td><%=endereco.getBairro()%></td>
+    <td><%=endereco.getCep()%></td>
+    <td><%=endereco.getComplemento()%></td>
+    <td><%=endereco.getNumero()%></td>
+    <td><p><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" data-placement="top" rel="tooltip"><span class="glyphicon glyphicon-pencil"></span></button></p></td>
+    <td><p><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" data-placement="top" rel="tooltip"><span class="glyphicon glyphicon-trash"></span></button></p></td>
+    </tr>
+  <%} %>
+    </tbody>
+        
+</table>
+
+
+        </div>
+	</div>
+</div>
+
+<!-- Modal para Editar -->
+
+<div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+      <div class="modal-dialog">
+    <div class="modal-content">
+          <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title custom_align" id="Heading">Edite seu Endereço</h4>
+      </div>
+          <div class="modal-body">
+          <div class="form-group">
+        <input class="form-control " type="text" placeholder="...">
+        </div>
+        <div class="form-group">
+        
+        <input class="form-control " type="text" placeholder="...">
+        </div>
+        <div class="form-group">
+        <textarea rows="2" class="form-control" placeholder="..."></textarea>
+    
+        
+        </div>
+      </div>
+          <div class="modal-footer ">
+        <button type="button" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Atualizar</button>
+      </div>
+        </div>
+    <!-- /.modal-content --> 
+  </div>
+      <!-- /.modal-dialog --> 
+    </div>
+    
+<!-- Fim do Modal Editar -->    
+    
+    
+    <!-- Inicio Modal Excluir -->
+    
+    <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+      <div class="modal-dialog">
+    <div class="modal-content">
+          <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title custom_align" id="Heading">Excluir seu Endereço</h4>
+      </div>
+          <div class="modal-body">
+       
+       <div class="alert alert-warning"><span class="glyphicon glyphicon-warning-sign"></span> 
+Tem certeza de que deseja excluir este endereço?</div>
+       
+      </div>
+        <div class="modal-footer ">
+        <button type="button" class="btn btn-success" ><span class="glyphicon glyphicon-ok-sign"></span> Sim</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Não</button>
+      </div>
+        </div>
+    <!-- /.modal-content --> 
+  </div>
+	
+	<!-- Fim modal Excluir -->
+	
+	
+</div>
+	</div>
+	 <input type="hidden" name = "acao" value="finalizarPedido" />
+	 <input class="btn btn-primary" type="submit" value="Finalizar Pedido" />
+     		
+	<%}
+	
+	}catch(NullPointerException nulo){
+		
+	}%>
+</form>	
 </div>
 	</div>
 </div>

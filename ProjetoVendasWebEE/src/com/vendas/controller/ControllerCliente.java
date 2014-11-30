@@ -11,12 +11,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.vendas.basicas.Cliente;
 import com.vendas.basicas.Departamento;
 import com.vendas.basicas.Endereco;
+import com.vendas.basicas.Entrega;
+import com.vendas.basicas.Pedido;
+import com.vendas.basicas.Produto;
 import com.vendas.model.DAOCliente;
 import com.vendas.model.DAOEndereco;
+import com.vendas.model.DAOEntrega;
+import com.vendas.model.DAOPedido;
 
 /**
  * Servlet implementation class ControllerCliente
@@ -96,6 +102,44 @@ public class ControllerCliente extends HttpServlet {
     		 RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Cliente/perfil.jsp");
 	   	     requestDispatcher.forward(request, response);
     	}
+    	/**
+    	 * Cliente Finaliza Pedido
+    	 */
+    	else if(request.getParameter("acao").equals("finalizarPedido")){
+    		 
+    		HttpSession sessao = request.getSession(true);
+    		 ArrayList<Produto> lista_produtos_s = new ArrayList<Produto>();
+    	     lista_produtos_s.addAll((ArrayList<Produto>) sessao.getAttribute("qtdCarrinho"));
+    		
+    	    Entrega entrega = new Entrega();
+    		Endereco endereco = new Endereco();
+    		Pedido pedido = new Pedido();
+    		Cliente cliente = new Cliente();
+    		
+    		DAOEntrega model_entrega = new DAOEntrega();
+    		DAOPedido model_pedido = new DAOPedido();
+    		
+    		endereco.setId(Integer.parseInt(request.getParameter("idEndereco")));
+    		pedido.setProdutos(lista_produtos_s);
+    		cliente.setId(Integer.parseInt(sessao.getAttribute("id").toString()));
+    		pedido.setCliente(cliente);
+    		entrega.setEndereco(endereco);
+    		pedido.setEntrega(entrega);
+    		
+    		
+    		try {
+				model_entrega.cadastrar(entrega);
+				model_pedido.cadastrar(pedido);
+				
+				
+				response.sendRedirect("/ProjetoVendasWebEE/Login?perfil=1");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    		
+   		
+   	}
     	else {
     		out.print("Nenhuma Ação");
     	}
