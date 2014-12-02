@@ -102,9 +102,9 @@ overflow: hidden;
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li ><a href="index.jsp">Home</a></li>
-            <li ><a href="sobre.jsp">Sobre</a></li>
-             <li  class="active"><a href="login.jsp">Iniciar Sessão</a></li>
+            <li ><a href="../index.jsp">Home</a></li>
+            <li ><a href="../sobre.jsp">Sobre</a></li>
+             <li  class="active"><a href="../login.jsp">Iniciar Sessão</a></li>
           </ul>
       
         <% 	HttpSession sessao = request.getSession(true);%>
@@ -129,7 +129,7 @@ overflow: hidden;
                                                                 <%  out.print(sessao.getAttribute("email")); %></p>
                                                             <div class="divider">
                                                             </div>
-                                                            <a href="ControllerCliente?acao=perfil"  class="btn btn-primary btn-sm active">Ver perfil</a>
+                                                            <a href="../ControllerCliente?acao=perfil"  class="btn btn-primary btn-sm active">Ver perfil</a>
                                                         	
                                                         </div>
                                                     </div>
@@ -141,7 +141,7 @@ overflow: hidden;
                                                                 <a href="#" class="btn btn-default btn-sm">Alterar Senha</a>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <a href="Sair" class="btn btn-default btn-sm pull-right">Sair</a>
+                                                                <a href="../Sair" class="btn btn-default btn-sm pull-right">Sair</a>
                                                                 <input type="hidden" name="sair" value="true"/>
                                                            </div>
                                                            </div>
@@ -283,11 +283,12 @@ overflow: hidden;
    -->
     </tr>
   <%} %>
+  
     </tbody>
         
 </table>
 
-
+<a href="<%=request.getContextPath()%>/interno" class="btn btn-primary">Voltar</a>
         </div>
 	</div>
 </div>
@@ -353,6 +354,7 @@ Tem certeza de que deseja excluir este endereço?</div>
 	<!-- Fim modal Excluir -->
 	
 	
+    
 </div>
 	</div>
 </div>

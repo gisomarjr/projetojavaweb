@@ -95,9 +95,9 @@ overflow: hidden;
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li ><a href="index.jsp">Home</a></li>
-            <li ><a href="sobre.jsp">Sobre</a></li>
-             <li  class="active"><a href="login.jsp">Iniciar Sessão</a></li>
+            <li ><a href="../index.jsp">Home</a></li>
+            <li ><a href="../sobre.jsp">Sobre</a></li>
+             <li  class="active"><a href="../login.jsp">Iniciar Sessão</a></li>
           </ul>
       
         <% 	HttpSession sessao = request.getSession(true);%>
@@ -138,7 +138,7 @@ overflow: hidden;
                                                                 <%  out.print(sessao.getAttribute("email")); %></p>
                                                             <div class="divider">
                                                             </div>
-                                                            <a href="ControllerCliente?acao=perfil"  class="btn btn-primary btn-sm active">Ver perfil</a>
+                                                            <a href="../ControllerCliente?acao=perfil"  class="btn btn-primary btn-sm active">Ver perfil</a>
                                                         	
                                                         </div>
                                                     </div>
@@ -150,7 +150,7 @@ overflow: hidden;
                                                                 <a href="#" class="btn btn-default btn-sm">Alterar Senha</a>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <a href="Sair" class="btn btn-default btn-sm pull-right">Sair</a>
+                                                                <a href="../Sair" class="btn btn-default btn-sm pull-right">Sair</a>
                                                                 <input type="hidden" name="sair" value="true"/>
                                                            </div>
                                                            </div>
@@ -175,12 +175,12 @@ overflow: hidden;
 	<p>
 	<h3><span class="glyphicon glyphicon-th-list"></span> Administração - Loja</h3>
 	</p>
-	<!-- Conteúdo -->
+	<!-- Conteúdo
 	
-	<a href="Loja/CadastrarProduto.jsp" class="btn btn-default btn-sm pull-left"> Cadastrar Produtos</a>
-	<a href="Loja/CadastrarDepartamento.jsp" class="btn btn-default btn-sm pull-left"> Cadastrar Departamentos</a>
-	<a href="Loja/CadastrarFuncionario.jsp" class="btn btn-default btn-sm pull-left"> Cadastrar Funcionários</a>
-	<a href="Loja/CadastrarProduto.jsp" class="btn btn-default btn-sm pull-left"> Cadastrar Produto</a>
-	<a href="Loja/CadastrarFornecedor.jsp" class="btn btn-default btn-sm pull-left"> Cadastrar Fornecedor</a>	
+	<a href="../Loja/CadastrarProduto.jsp" class="btn btn-default btn-sm pull-left"> Cadastrar Produtos</a>
+	 --><a href="../Loja/CadastrarDepartamento.jsp" class="btn btn-default btn-sm pull-left"> Cadastrar Departamentos</a>
+	<a href="../Loja/CadastrarFuncionario.jsp" class="btn btn-default btn-sm pull-left"> Cadastrar Funcionários</a>
+	<a href="../Loja/CadastrarProduto.jsp" class="btn btn-default btn-sm pull-left"> Cadastrar Produto</a>
+	<a href="../Loja/CadastrarFornecedor.jsp" class="btn btn-default btn-sm pull-left"> Cadastrar Fornecedor</a>	
 </body>
 </html>

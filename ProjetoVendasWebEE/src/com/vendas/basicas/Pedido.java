@@ -32,7 +32,7 @@ public class Pedido {
 	inverseJoinColumns = {@JoinColumn(name="id_produto")})
 	Collection<Produto> produtos;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="id_cliente")
 	@Fetch(FetchMode.JOIN)
 	Cliente cliente;

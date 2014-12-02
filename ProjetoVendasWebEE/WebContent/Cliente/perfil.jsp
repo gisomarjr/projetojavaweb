@@ -138,7 +138,7 @@ overflow: hidden;
                                                                 <a href="#" class="btn btn-default btn-sm">Alterar Senha</a>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <a href="Sair" class="btn btn-default btn-sm pull-right">Sair</a>
+                                                                <a href="../Sair" class="btn btn-default btn-sm pull-right">Sair</a>
                                                                 <input type="hidden" name="sair" value="true"/>
                                                            </div>
                                                            </div>
@@ -322,6 +322,7 @@ overflow: hidden;
         
 </table>
 
+<a href="<%=request.getContextPath()%>/interno" class="btn btn-primary">Voltar</a>
 
         </div>
 	</div>

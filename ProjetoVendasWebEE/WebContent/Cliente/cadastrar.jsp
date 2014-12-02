@@ -212,7 +212,10 @@ $(document).ready(function(){
   <div class="col-md-4">
     <button id="enviar" name="enviar" class="btn btn-primary">Enviar</button>
      
-     <% if(request.getAttribute("e") == "1"){  %>
+     <% 
+     HttpSession sessao = request.getSession(true);
+     try{
+		  if(sessao.getAttribute("finalizado").equals("ok")){  %>
     
 			    <div id="modal_msg" class="modal fade bs-example-modal-sm in" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="display: block; padding-right: 17px;">
 			    <div class="modal-backdrop fade in" style="height: 679px;"></div>
@@ -225,12 +228,17 @@ $(document).ready(function(){
 			          <h4 align="center" class="modal-title" id="mySmallModalLabel">Cliente Cadastrado com Sucesso!</h4>
 			        </div>
 			        <div class="modal-body">
-			       <div align="center"> <img src="img/sucesso.png" width="50"></div>
+			       <div align="center"> <img src="../img/sucesso.png" width="50"></div>
 			        </div>
 			      </div><!-- /.modal-content -->
 			    </div><!-- /.modal-dialog -->
 			  </div>
-        <% }%>
+        <% } sessao.removeAttribute("finalizado");
+     }catch(Exception e){
+    	 
+    	 
+     }
+        %>
   </div>
 </div>
 	 <input type="hidden" value="cadastrar" name="acao">

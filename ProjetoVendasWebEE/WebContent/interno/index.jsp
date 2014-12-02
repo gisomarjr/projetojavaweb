@@ -147,7 +147,7 @@ $(document).ready(function(){
                                                                 <%  out.print(sessao.getAttribute("email")); %></p>
                                                             <div class="divider">
                                                             </div>
-                                                            <a href="ControllerCliente?acao=perfil"  class="btn btn-primary btn-sm active">Ver perfil</a>
+                                                            <a href="../ControllerCliente?acao=perfil"  class="btn btn-primary btn-sm active">Ver perfil</a>
                                                         	
                                                         </div>
                                                     </div>
@@ -159,7 +159,7 @@ $(document).ready(function(){
                                                                 <a href="#" class="btn btn-default btn-sm">Alterar Senha</a>
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <a href="Sair" class="btn btn-default btn-sm pull-right">Sair</a>
+                                                                <a href="../Sair" class="btn btn-default btn-sm pull-right">Sair</a>
                                                                 <input type="hidden" name="sair" value="true"/>
                                                            </div>
                                                            </div>
@@ -250,7 +250,7 @@ $(document).ready(function(){
 				<div class="page-header">
 	<h3><span class="glyphicon glyphicon-th-list"></span> Pagina Inicial - Cliente</h3>
 </div>
-	<form action="ControllerCliente" method="post">
+	<form action="../ControllerCliente" method="post">
 	<%
 	try{
 	 ArrayList<Produto> lista_produtos_s = new ArrayList<Produto>();
@@ -285,8 +285,7 @@ $(document).ready(function(){
                       <th>CEP</th>
                      <th>Complemento</th>
                      <th>Número</th>
-                      <th>Editar</th>
-                       <th>Excluir</th>
+                     
                    </thead>
     <tbody>
    <% 
@@ -301,6 +300,13 @@ $(document).ready(function(){
    for (Endereco endereco : c.getEndereco()) { %> 
     <tr>
     <td><input type="checkbox" name="idEndereco" value="<%=endereco.getId()%>" class="checkthis" /></td>
+    <input type="hidden" name="logradouro" value="<%=endereco.getLogradouro()%>"/>
+    <input type="hidden" name="cidade" value="<%=endereco.getCidade()%>"/>
+    <input type="hidden" name="estado" value="<%=endereco.getEstado()%>"/>
+    <input type="hidden" name="bairro" value="<%=endereco.getBairro()%>"/>
+    <input type="hidden" name="cep" value="<%=endereco.getCep()%>"/>
+    <input type="hidden" name="complemento" value="<%=endereco.getComplemento()%>"/>
+    <input type="hidden" name="numero" value="<%=endereco.getNumero()%>"/>
     <td><%=endereco.getLogradouro()%></td>
     <td><%=endereco.getCidade()%></td>
     <td><%=endereco.getEstado()%></td>
@@ -309,8 +315,6 @@ $(document).ready(function(){
     <td><%=endereco.getCep()%></td>
     <td><%=endereco.getComplemento()%></td>
     <td><%=endereco.getNumero()%></td>
-    <td><p><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" data-placement="top" rel="tooltip"><span class="glyphicon glyphicon-pencil"></span></button></p></td>
-    <td><p><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" data-placement="top" rel="tooltip"><span class="glyphicon glyphicon-trash"></span></button></p></td>
     </tr>
   <%} %>
     </tbody>
@@ -410,7 +414,7 @@ $(document).ready(function(){
 	          <h4 align="center" class="modal-title" id="mySmallModalLabel">Pedido Realizado com Sucesso!</h4>
 	        </div>
 	        <div class="modal-body">
-	       <div align="center"> <img src="img/sucesso.png" width="50"></div>
+	       <div align="center"> <img src="../img/sucesso.png" width="50"></div>
 	        </div>
 	      </div><!-- /.modal-content -->
 	    </div><!-- /.modal-dialog -->
@@ -422,7 +426,7 @@ $(document).ready(function(){
 		
 	}
 	%>
-	<a href="Cliente/gerenciarPedidos.jsp" class="btn btn-primary">Gerenciar Pedidos</a>
+	<a href="../Cliente/gerenciarPedidos.jsp" class="btn btn-primary">Gerenciar Pedidos</a>
 </form>
 </div>
 	</div>

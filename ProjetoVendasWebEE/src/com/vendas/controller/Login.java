@@ -41,10 +41,12 @@ public class Login extends HttpServlet {
     throws ServletException, IOException {
     	
     	HttpSession sessao = request.getSession(true);
+    	//Verifica se o Cliente está Logado
     	try{
     	if(sessao.getAttribute("perfil").equals("Cliente")){
-    		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/interno/index.jsp");
-	        requestDispatcher.forward(request, response);
+    		
+    		response.sendRedirect("interno/index.jsp");
+	        
     	}
     	}catch(Exception e){
     		
@@ -87,18 +89,10 @@ public class Login extends HttpServlet {
 				cont++;
 				}
 				if(cont >0){
-				
-					 
-			   		request.setAttribute("e", "");
-			   		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/interno/index.jsp");
-			        requestDispatcher.forward(request, response);
-					
+	  	 		    response.sendRedirect("interno/index.jsp");
 				}else{
-					
-				 	request.setAttribute("e", "1");
-			   		RequestDispatcher requestDispatcher = request.getRequestDispatcher("login.jsp");
-			        requestDispatcher.forward(request, response);
-					
+					sessao.setAttribute("finalizado", "ok");
+	  	 		    response.sendRedirect("login.jsp");
 				}
 			break;
 			
@@ -113,16 +107,10 @@ public class Login extends HttpServlet {
 				cont++;
 			}
 			if(cont >0){
-				 
-		   		request.setAttribute("e", "");
-		   		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/interno/indexFuncionario.jsp");
-		        requestDispatcher.forward(request, response);
-				
+				response.sendRedirect("interno/indexFuncionario.jsp");
 			}else{
-				
-			 	request.setAttribute("e", "1");
-		   		RequestDispatcher requestDispatcher = request.getRequestDispatcher("login.jsp");
-		        requestDispatcher.forward(request, response);
+				sessao.setAttribute("finalizado", "ok");
+  	 		    response.sendRedirect("login.jsp");
 				
 			}
 			
@@ -142,32 +130,27 @@ public class Login extends HttpServlet {
 			}
 			if(cont >0){
 			 
-		   		request.setAttribute("e", "");
-		   		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/interno/indexLoja.jsp");
-		        requestDispatcher.forward(request, response);
+				response.sendRedirect("interno/indexLoja.jsp");
 				
 			}else{
 				
-			 	request.setAttribute("e", "1");
-		   		RequestDispatcher requestDispatcher = request.getRequestDispatcher("login.jsp");
-		        requestDispatcher.forward(request, response);
-				
+				sessao.setAttribute("finalizado", "ok");
+  	 		    response.sendRedirect("login.jsp");
+			 	
 			}
 			
 			break;
 				
 			
 		default:
-			request.setAttribute("e", "1");
-	   		RequestDispatcher requestDispatcher = request.getRequestDispatcher("login.jsp");
-	        requestDispatcher.forward(request, response);
+			sessao.setAttribute("finalizado", "ok");
+	 		response.sendRedirect("login.jsp");
 			break;
 		}
 	   	 
     	}catch(java.lang.NullPointerException erro){
-    		request.setAttribute("e", "1");
-	   		RequestDispatcher requestDispatcher = request.getRequestDispatcher("login.jsp");
-	        requestDispatcher.forward(request, response);
+    		sessao.setAttribute("finalizado", "ok");
+	 		response.sendRedirect("login.jsp");
 			
     	}
     }

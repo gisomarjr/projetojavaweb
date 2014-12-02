@@ -39,8 +39,8 @@ public class Endereco {
 	Funcionario funcionario;
 	
 	
-	@OneToOne(mappedBy="endereco")
-	
+	@OneToOne
+	@JoinColumn(name = "id_entrega")
 	Entrega entrega;
 	
 
@@ -64,18 +64,19 @@ public class Endereco {
 		this.loja = loja;
 	}
 
-	// dominante
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_cliente", insertable = true, updatable = true)
-	@Fetch(FetchMode.JOIN)
-	Cliente cliente;
+	
+	@ManyToMany(fetch=FetchType.EAGER)
+	@JoinTable(name="cliente_endereco", 
+	joinColumns=@JoinColumn(name="id_endereco"),
+	inverseJoinColumns=@JoinColumn(name="id_cliente"))
+	Collection<Cliente> clientes;
 
-	public Cliente getClientes() {
-		return cliente;
+	public Collection<Cliente> getClientes() {
+		return clientes;
 	}
 
-	public void setClientes(Cliente clientes) {
-		this.cliente = clientes;
+	public void setClientes(Collection<Cliente> clientes) {
+		this.clientes = clientes;
 	}
 
 	public Integer getId() {

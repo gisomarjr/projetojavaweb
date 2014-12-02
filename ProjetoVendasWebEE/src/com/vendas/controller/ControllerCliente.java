@@ -45,19 +45,23 @@ public class ControllerCliente extends HttpServlet {
 	      DAOCliente model_cliente = new DAOCliente();
 	      DAOEndereco model_endereco = new DAOEndereco();
 	      Collection<Endereco> collection_endereco = null;
+	      Collection<Cliente> collection_cliente = null;
 	      PrintWriter out;
 	      
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-    	
+    	HttpSession sessao = request.getSession(true);
     	out = response.getWriter();
     	
        	/**
        	 * CADASTRAR CLIENTE
        	 */
     	if(request.getParameter("acao").equals("cadastrar")){
-    		 
+    		DAOCliente model_cliente = new DAOCliente();
+  	        DAOEndereco model_endereco = new DAOEndereco();
+	  	      Cliente cliente = new Cliente();
+	    	  Endereco endereco = new Endereco();
     	  //Usu�rio
     	  cliente.setNome(request.getParameter("nome"));
     	  cliente.setCpf(request.getParameter("cpf"));
@@ -72,19 +76,23 @@ public class ControllerCliente extends HttpServlet {
    	      endereco.setCidade(request.getParameter("cidade"));
    	      endereco.setNumero(Integer.parseInt(request.getParameter("numero")));
    	      endereco.setComplemento(request.getParameter("complemento"));
+   	      
    	      collection_endereco = new ArrayList<Endereco>();
+   	      collection_cliente = new ArrayList<Cliente>();
    	      collection_endereco.add(endereco);
    	     
-   	      cliente.setEndereco(collection_endereco);
-   	      endereco.setClientes(cliente);
+   	     
+   	      collection_cliente.add(cliente);
+   	     
+   	      endereco.setClientes(collection_cliente);
    	      
    	      try {
    	    
    	    	  model_cliente.cadastrar(cliente);
    	    	  model_endereco.cadastrar(endereco);  
-	   	      request.setAttribute("e", "1");
-	   	      RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Cliente/cadastrar.jsp");
-	   	      requestDispatcher.forward(request, response);
+   	    	  
+   	    	sessao.setAttribute("finalizado", "ok");
+			response.sendRedirect("Cliente/cadastrar.jsp");
    	    	
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -100,18 +108,18 @@ public class ControllerCliente extends HttpServlet {
     	 */
     	else if(request.getParameter("acao").equals("perfil")){
     		
-    		 RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Cliente/perfil.jsp");
-	   	     requestDispatcher.forward(request, response);
+    		response.sendRedirect("Cliente/perfil.jsp");
     	}
     	/**
     	 * Cliente Finaliza Pedido
     	 */
     	else if(request.getParameter("acao").equals("finalizarPedido")){
     		 
-    		HttpSession sessao = request.getSession(true);
+    		
     		ArrayList<Produto> lista_produtos_s = new ArrayList<Produto>();
     	    lista_produtos_s.addAll((ArrayList<Produto>) sessao.getAttribute("qtdCarrinho"));
-    		
+    		Collection<Cliente> lista_cliente = new ArrayList<Cliente>();
+    	    
     	    Entrega entrega = new Entrega();
     		Endereco endereco = new Endereco();
     		Pedido pedido = new Pedido();
@@ -119,25 +127,40 @@ public class ControllerCliente extends HttpServlet {
     		
     		DAOEntrega model_entrega = new DAOEntrega();
     		DAOPedido model_pedido = new DAOPedido();
+    		DAOEndereco model_edereco = new DAOEndereco();
     		
     		endereco.setId(Integer.parseInt(request.getParameter("idEndereco")));
+    		endereco.setBairro(request.getParameter("bairro"));
+    		endereco.setCep(request.getParameter("cep"));
+    		endereco.setCidade(request.getParameter("cidade"));
+    		endereco.setComplemento(request.getParameter("complemento"));
+    		endereco.setEstado(request.getParameter("estado"));
+    		endereco.setLogradouro(request.getParameter("logradouro"));
+    		endereco.setNumero(Integer.parseInt(request.getParameter("numero")));
+    		
+    		
     		pedido.setProdutos(lista_produtos_s);
+    		
     		cliente.setId(Integer.parseInt(sessao.getAttribute("id").toString()));
     		pedido.setCliente(cliente);
+    		lista_cliente.add(cliente);
+    		endereco.setClientes(lista_cliente);
     	    entrega.setSituacao("Pedido Realizado");
     	    Date data = new Date();
     	    pedido.setData_pedido(data);
-    		entrega.setEndereco(endereco);
+    	    endereco.setEntrega(entrega);
+    		
     		pedido.setEntrega(entrega);
     		
     		
     		try {
     			model_entrega.cadastrar(entrega);
     			model_pedido.cadastrar(pedido);
+    			model_edereco.editar(endereco);
 				
 				sessao.setAttribute("finalizado", "ok");
 				sessao.removeAttribute("qtdCarrinho");
-				response.sendRedirect("/ProjetoVendasWebEE/Login");
+				response.sendRedirect("/ProjetoVendasWebEE/interno/");
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

@@ -90,9 +90,17 @@
           </label>
         </div>
         
-        <% if(request.getAttribute("e") == "1"){  %>
+         <% 
+         	HttpSession sessao = request.getSession(true);
+     try{
+		  if(sessao.getAttribute("finalizado").equals("ok")){  %>
         		<div align="center"><label>Atenção Login ou Senha Inválida!</label></div>
-        <% }%>
+       <% } sessao.removeAttribute("finalizado");
+     }catch(Exception e){
+    	 
+    	 
+     }
+        %>
        
      
         <button class="btn btn-lg btn-primary btn-block" type="submit">Realizar Login</button>

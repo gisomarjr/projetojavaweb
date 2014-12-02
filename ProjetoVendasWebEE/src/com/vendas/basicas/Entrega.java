@@ -22,10 +22,9 @@ public class Entrega {
 	@OneToOne(mappedBy="entrega")
 	Pedido pedido;
 	
-	@OneToOne
-	@JoinColumn(name = "id_endereco")
-	
+	@OneToOne(mappedBy="entrega")
 	Endereco endereco;
+	
 	
 	public Integer getId() {
 		return id;

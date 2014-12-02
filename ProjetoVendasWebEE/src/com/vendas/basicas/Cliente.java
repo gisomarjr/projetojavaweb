@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -19,9 +21,12 @@ import org.hibernate.annotations.FetchMode;
 @DiscriminatorValue("CLI")
 public class Cliente extends Pessoa {
 
-	@OneToMany(mappedBy = "cliente", fetch = FetchType.EAGER)
-	@Cascade(CascadeType.ALL)
-	Collection<Endereco> endereco;
+	
+	@ManyToMany(fetch=FetchType.LAZY)
+	@JoinTable(name="cliente_endereco",
+	joinColumns= {@JoinColumn(name="id_cliente")},
+	inverseJoinColumns = {@JoinColumn(name="id_endereco")})
+	Collection<Endereco> endereco;	
 
 	@OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY)
 	Collection<Pedido> pedido;

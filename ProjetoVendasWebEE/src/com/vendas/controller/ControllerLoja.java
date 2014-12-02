@@ -25,6 +25,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import javax.swing.ImageIcon;
 
@@ -61,33 +62,23 @@ public class ControllerLoja extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-    DAOEndereco model_endereco = new DAOEndereco();
-	DAOLoja model_loja = new DAOLoja();
-    DAOFuncionario model_funcionario = new DAOFuncionario();
-	DAODepartamento model_departamento = new DAODepartamento();
-	DAOProduto model_produto = new DAOProduto();
-	DAOFornecedor model_fornecedor = new DAOFornecedor();
-	
-    Loja loja = new Loja();
-    Produto produto = new Produto();
-    Funcionario funcionario = new Funcionario();
-	Departamento departamento = new Departamento();
-	Endereco endereco = new Endereco();
-	Fornecedor fornecedor = new Fornecedor();
-	Collection<Loja> lojas = new ArrayList<Loja>();
-    ArrayList<Produto>	produtoCarrinho = new ArrayList<Produto>();
+   
      
     
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-    	
+    	HttpSession sessao = request.getSession(true);
     	PrintWriter out = response.getWriter();
     	
     	/**
     	 * CADASTRAR LOJA
     	 */
     	if(request.getParameter("acao").equals("cadastrar")){
+    		DAOEndereco model_endereco = new DAOEndereco();
+    		DAOLoja model_loja = new DAOLoja();
+    		Endereco endereco = new Endereco();
+    	    Loja loja = new Loja();
     		
     		loja.setCnpj(request.getParameter("cnpj"));
     		loja.setEmail(request.getParameter("Email"));
@@ -130,9 +121,9 @@ public class ControllerLoja extends HttpServlet {
      	    	
 				model_loja.cadastrar(loja);
 				model_endereco.cadastrar(endereco);
-				request.setAttribute("e", "1");
-		   	    RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Loja/CadastrarLoja.jsp");
-		   	    requestDispatcher.forward(request, response);
+				
+				sessao.setAttribute("finalizado", "ok");
+				response.sendRedirect("Loja/CadastrarLoja.jsp");
 			
      	    } catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -149,6 +140,7 @@ public class ControllerLoja extends HttpServlet {
     		Departamento dl = new Departamento();
     		Collection<Loja> lojasd = new ArrayList<Loja>();
     		lojasd.remove(ld);
+    		DAODepartamento model_departamento = new DAODepartamento();
     	   	 
     		dl.setNome(request.getParameter("nome"));
     		ld.setId(Integer.parseInt(request.getParameter("idLoja")));
@@ -157,14 +149,10 @@ public class ControllerLoja extends HttpServlet {
     		
     		try {
 				model_departamento.cadastrar(dl);
-				request.setAttribute("e", "1");
-				 
-				//response.sendRedirect("Loja/CadastrarDepartamento.jsp");
-		   	    RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Loja/CadastrarDepartamento.jsp");
-		   	  	requestDispatcher.forward(request, response);  
-				//response.sendRedirect(request.getContextPath() + "/Loja/CadastrarDepartamento.jsp" ); 
 				
-		   	  	
+				sessao.setAttribute("finalizado", "ok");
+				response.sendRedirect("Loja/CadastrarDepartamento.jsp");
+		   	    
 			} catch (Exception e) {
 				out.print(e);
 			}
@@ -172,7 +160,13 @@ public class ControllerLoja extends HttpServlet {
     		 * Cadastrar Funcionário
     		 */
     	} else if(request.getParameter("acao").equals("cadastrarFuncionario")){
-    		
+    		 DAOFuncionario model_funcionario = new DAOFuncionario();
+    		 DAOEndereco model_endereco = new DAOEndereco();
+    		 Funcionario funcionario = new Funcionario();
+    		 Endereco endereco = new Endereco();
+    		 Departamento departamento = new Departamento();
+    		 Collection<Loja> lojas = new ArrayList<Loja>();
+    		 Loja loja = new Loja();
     		lojas.clear();
     		
     		funcionario.setNome(request.getParameter("nome"));
@@ -195,13 +189,16 @@ public class ControllerLoja extends HttpServlet {
      	    endereco.setComplemento(request.getParameter("complemento"));
      	    endereco.setFuncionario(funcionario);
      	    
-     	    request.setAttribute("e", "1");
-	   	    RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Loja/CadastrarFuncionario.jsp");
-	   	    requestDispatcher.forward(request, response);
+     	  
+	   	    
     		try {
 				model_funcionario.cadastrar(funcionario);
 				model_endereco.cadastrar(endereco);
-			} catch (Exception e) {
+				
+				sessao.setAttribute("finalizado", "ok");
+				response.sendRedirect("Loja/CadastrarFuncionario.jsp");
+			
+    		} catch (Exception e) {
 				out.print(e);
 			}
     		
@@ -229,12 +226,12 @@ public class ControllerLoja extends HttpServlet {
     		funcionario.setLoja(loja);
      		produto.setLojas(lojas);
       	    
-      	    request.setAttribute("e", "1");
- 	   	    RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Loja/CadastrarProduto.jsp");
- 	   	    requestDispatcher.forward(request, response);
      		try {
  				model_produto.cadastrar(produto);
  				
+ 				sessao.setAttribute("finalizado", "ok");
+ 	  		    response.sendRedirect("Loja/CadastrarProduto.jsp");
+ 	  		    
  			} catch (Exception e) {
  				out.print(e);
  			}
@@ -245,8 +242,12 @@ public class ControllerLoja extends HttpServlet {
     	 * CADASTRAR FORNECEDOR
     	 */
     	 else if(request.getParameter("acao").equals("cadastrarFornecedor")){
-      		DAOCliente c = new DAOCliente();
-      		lojas.clear();
+    		 
+    		 Collection<Loja> lojas = new ArrayList<Loja>();
+    		 Fornecedor fornecedor = new Fornecedor();
+    		 Loja loja = new Loja();
+    		 DAOFornecedor model_fornecedor = new DAOFornecedor();
+      		 lojas.clear();
       		
       		fornecedor.setCnpj(request.getParameter("cnpj"));
       		fornecedor.setNomeFantasia(request.getParameter("nome_fantasia"));
@@ -255,12 +256,14 @@ public class ControllerLoja extends HttpServlet {
       		lojas.add(loja);
       	    fornecedor.setLojas(lojas);
        	    
-       	    request.setAttribute("e", "1");
-  	   	    RequestDispatcher requestDispatcher = request.getRequestDispatcher("/Loja/CadastrarFornecedor.jsp");
-  	   	    requestDispatcher.forward(request, response);
+      	    
+       	    
       		try {
   				model_fornecedor.cadastrar(fornecedor);
   				
+  				sessao.setAttribute("finalizado", "ok");
+  	 		    response.sendRedirect("Loja/CadastrarFornecedor.jsp");
+  	 		    
   			} catch (Exception e) {
   				out.print(e);
   			}
