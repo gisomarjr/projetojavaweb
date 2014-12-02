@@ -33,16 +33,20 @@ import org.apache.tomcat.util.http.fileupload.FileItem;
 
 import com.vendas.basicas.Departamento;
 import com.vendas.basicas.Endereco;
+import com.vendas.basicas.Entrega;
 import com.vendas.basicas.Fornecedor;
 import com.vendas.basicas.Funcionario;
 import com.vendas.basicas.Loja;
+import com.vendas.basicas.Pedido;
 import com.vendas.basicas.Produto;
 import com.vendas.model.DAOCliente;
 import com.vendas.model.DAODepartamento;
 import com.vendas.model.DAOEndereco;
+import com.vendas.model.DAOEntrega;
 import com.vendas.model.DAOFornecedor;
 import com.vendas.model.DAOFuncionario;
 import com.vendas.model.DAOLoja;
+import com.vendas.model.DAOPedido;
 import com.vendas.model.DAOProduto;
 import com.vendas.util.Upload;
 
@@ -268,8 +272,32 @@ public class ControllerLoja extends HttpServlet {
   				out.print(e);
   			}
       		
-      	} else if(request.getParameter("acao").equals("carrinho")){
+      	} else if(request.getParameter("acao").equals("alterarSituacaoPedido")){
       		
+      		
+      		
+      		DAOEntrega model_entrega = new DAOEntrega();
+      		DAOPedido model_pedido = new DAOPedido();
+      		Entrega entrega = new Entrega();
+      		Pedido pedido = new Pedido();
+      		String idS = request.getParameter("idPedido");
+      		Integer id = Integer.parseInt(idS);
+      		
+      		pedido = model_pedido.consultarPorId(id);
+      		
+      		pedido.setId(id);
+      		entrega.setId(pedido.getEntrega().getId());
+      		entrega = model_entrega.consultarPorId(pedido.getEntrega().getId());
+      	    entrega.setPedido(pedido);
+      		entrega.setSituacao(request.getParameter("novaSituacao"));
+      		
+			try {
+				model_entrega.editar(entrega);
+				response.sendRedirect("Loja/gerenciarPedidos.jsp");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
       	}
     	
     }

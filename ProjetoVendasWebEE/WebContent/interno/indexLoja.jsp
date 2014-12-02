@@ -175,10 +175,10 @@ overflow: hidden;
 	<p>
 	<h3><span class="glyphicon glyphicon-th-list"></span> Administração - Loja</h3>
 	</p>
-	<!-- Conteúdo
+	<!-- Conteúdo -->
 	
-	<a href="../Loja/CadastrarProduto.jsp" class="btn btn-default btn-sm pull-left"> Cadastrar Produtos</a>
-	 --><a href="../Loja/CadastrarDepartamento.jsp" class="btn btn-default btn-sm pull-left"> Cadastrar Departamentos</a>
+	<a href="../Loja/gerenciarPedidos.jsp" class="btn btn-default btn-sm pull-left"> Gerenciar Pedidos</a>
+	<a href="../Loja/CadastrarDepartamento.jsp" class="btn btn-default btn-sm pull-left"> Cadastrar Departamentos</a>
 	<a href="../Loja/CadastrarFuncionario.jsp" class="btn btn-default btn-sm pull-left"> Cadastrar Funcionários</a>
 	<a href="../Loja/CadastrarProduto.jsp" class="btn btn-default btn-sm pull-left"> Cadastrar Produto</a>
 	<a href="../Loja/CadastrarFornecedor.jsp" class="btn btn-default btn-sm pull-left"> Cadastrar Fornecedor</a>	

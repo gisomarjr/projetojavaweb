@@ -22,7 +22,8 @@ public class Entrega {
 	@OneToOne(mappedBy="entrega")
 	Pedido pedido;
 	
-	@OneToOne(mappedBy="entrega")
+	@OneToOne
+	@JoinColumn(name = "id_endereco")
 	Endereco endereco;
 	
 	

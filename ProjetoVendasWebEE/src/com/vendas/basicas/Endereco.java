@@ -38,9 +38,7 @@ public class Endereco {
 	@JoinColumn(name = "id_funcionario")
 	Funcionario funcionario;
 	
-	
-	@OneToOne
-	@JoinColumn(name = "id_entrega")
+	@OneToOne(mappedBy="endereco")
 	Entrega entrega;
 	
 

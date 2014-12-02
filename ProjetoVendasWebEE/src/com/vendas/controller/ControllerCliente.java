@@ -115,15 +115,16 @@ public class ControllerCliente extends HttpServlet {
     	 */
     	else if(request.getParameter("acao").equals("finalizarPedido")){
     		 
-    		
+    	try {
     		ArrayList<Produto> lista_produtos_s = new ArrayList<Produto>();
     	    lista_produtos_s.addAll((ArrayList<Produto>) sessao.getAttribute("qtdCarrinho"));
     		Collection<Cliente> lista_cliente = new ArrayList<Cliente>();
-    	    
+    		Collection<Endereco> lista_endereco = new ArrayList<Endereco>();
     	    Entrega entrega = new Entrega();
     		Endereco endereco = new Endereco();
     		Pedido pedido = new Pedido();
     		Cliente cliente = new Cliente();
+    		DAOCliente model_cliente = new DAOCliente();
     		
     		DAOEntrega model_entrega = new DAOEntrega();
     		DAOPedido model_pedido = new DAOPedido();
@@ -141,22 +142,29 @@ public class ControllerCliente extends HttpServlet {
     		
     		pedido.setProdutos(lista_produtos_s);
     		
-    		cliente.setId(Integer.parseInt(sessao.getAttribute("id").toString()));
+    		//cliente.setId(Integer.parseInt(sessao.getAttribute("id").toString()));
+    		cliente = model_cliente.consultarPorId(Integer.parseInt(sessao.getAttribute("id").toString()));
     		pedido.setCliente(cliente);
     		lista_cliente.add(cliente);
+    		
     		endereco.setClientes(lista_cliente);
     	    entrega.setSituacao("Pedido Realizado");
+    	    
     	    Date data = new Date();
     	    pedido.setData_pedido(data);
-    	    endereco.setEntrega(entrega);
-    		
+    	    
+    	    entrega.setEndereco(endereco);
+    	    lista_endereco.add(endereco);
+    	    cliente.setEndereco(lista_endereco);
     		pedido.setEntrega(entrega);
     		
     		
-    		try {
+    		
     			model_entrega.cadastrar(entrega);
     			model_pedido.cadastrar(pedido);
+    			model_cliente.editar(cliente);
     			model_edereco.editar(endereco);
+    			
 				
 				sessao.setAttribute("finalizado", "ok");
 				sessao.removeAttribute("qtdCarrinho");
