@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -108,8 +109,8 @@ public class ControllerCliente extends HttpServlet {
     	else if(request.getParameter("acao").equals("finalizarPedido")){
     		 
     		HttpSession sessao = request.getSession(true);
-    		 ArrayList<Produto> lista_produtos_s = new ArrayList<Produto>();
-    	     lista_produtos_s.addAll((ArrayList<Produto>) sessao.getAttribute("qtdCarrinho"));
+    		ArrayList<Produto> lista_produtos_s = new ArrayList<Produto>();
+    	    lista_produtos_s.addAll((ArrayList<Produto>) sessao.getAttribute("qtdCarrinho"));
     		
     	    Entrega entrega = new Entrega();
     		Endereco endereco = new Endereco();
@@ -123,15 +124,19 @@ public class ControllerCliente extends HttpServlet {
     		pedido.setProdutos(lista_produtos_s);
     		cliente.setId(Integer.parseInt(sessao.getAttribute("id").toString()));
     		pedido.setCliente(cliente);
+    	    entrega.setSituacao("Pedido Realizado");
+    	    Date data = new Date();
+    	    pedido.setData_pedido(data);
     		entrega.setEndereco(endereco);
     		pedido.setEntrega(entrega);
     		
     		
     		try {
-				model_entrega.cadastrar(entrega);
-				model_pedido.cadastrar(pedido);
+    			model_entrega.cadastrar(entrega);
+    			model_pedido.cadastrar(pedido);
 				
-				
+				sessao.setAttribute("finalizado", "ok");
+				sessao.removeAttribute("qtdCarrinho");
 				response.sendRedirect("/ProjetoVendasWebEE/Login");
 			} catch (Exception e) {
 				// TODO Auto-generated catch block

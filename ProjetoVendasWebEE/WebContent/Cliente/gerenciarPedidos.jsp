@@ -1,10 +1,12 @@
-<%@page import="com.vendas.basicas.Cliente"%>
-<%@page import="com.vendas.model.DAOCliente"%>
-<%@page import="com.vendas.basicas.Endereco"%>
+<%@page import="com.vendas.basicas.Entrega"%>
+<%@page import="com.vendas.basicas.Pedido"%>
+<%@page import="com.vendas.model.DAOPedido"%>
+<%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@page import="java.util.Collection"%>
 <%@page import="com.vendas.model.DAOEndereco"%>
-<%@page import="com.vendas.basicas.Produto"%>
-<%@page import="java.util.ArrayList"%>
+<%@page import="com.vendas.basicas.Endereco"%>
+<%@page import="com.vendas.basicas.Cliente"%>
+<%@page import="com.vendas.model.DAOCliente"%>
 <%@page import="java.nio.channels.SeekableByteChannel"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -78,28 +80,8 @@ margin-right: 15px !important;
 padding: 0px;
 overflow: hidden;
 }
-</style>
 
-<script type="text/javascript">
-/**
- * Fecha a mensagem antes do tempo - usuário quando clica em fechar
- */
-function closeMsg(){
-	document.getElementById("modal_msg").style = "none";
-}
-/**
- * Em um determinado tempo a mensagem fecha automaticamente
- */
-$(document).ready(function(){
-	var myVar = setInterval(function () {myTimer()}, 5000);
-	
-	function myTimer() {
-	    var d = new Date();
-	    document.getElementById("modal_msg").style = "none";
-	}
-	
-});
-</script>
+</style>
 
 
 </head>
@@ -248,27 +230,18 @@ $(document).ready(function(){
 		<div class="container">
 			
 				<div class="page-header">
-	<h3><span class="glyphicon glyphicon-th-list"></span> Pagina Inicial - Cliente</h3>
+	<h3><span class="glyphicon glyphicon-th-list"></span> Gerenciar Pedidos</h3>
 </div>
-	<form action="ControllerCliente" method="post">
-	<%
-	try{
-	 ArrayList<Produto> lista_produtos_s = new ArrayList<Produto>();
-     lista_produtos_s.addAll((ArrayList<Produto>) sessao.getAttribute("qtdCarrinho"));
-	 if(lista_produtos_s.size() >0 ){ %>
-		
-	 *Escolha seu Endereço para Entrega
-	 
-	 
-	 	<!-- Inicio Endereço -->
-
-
+	
+	<!-- Inicio Pedidos -->
+	
+	
 	<div class="container">
 	<div class="row">
 		
         
         <div class="col-md-12">
-        <h4>Catálogo de Endereços</h4>
+        <h4>Gerenciador de Pedidos</h4>
         <div class="table-responsive">
         
                 
@@ -276,41 +249,38 @@ $(document).ready(function(){
                    
                    <thead>
                    
-                   <th></th>
-                   <th>Logradouro</th>
-                    <th>Cidade</th>
-                     <th>Estado</th>
-                     <th>cidade</th>
-                     <th>Bairro</th>
-                      <th>CEP</th>
-                     <th>Complemento</th>
-                     <th>Número</th>
-                      <th>Editar</th>
-                       <th>Excluir</th>
+                   <th>Nº Pedido</th>
+                   <th>Cliente</th>
+                    <th>Data do Pedido</th>
+                    <th>Status do Pedido</th>
+                   
                    </thead>
     <tbody>
    <% 
    /**
-   * Lista de Endereço
+   * Lista de Pedidos
    **/
+   DAOEndereco model_endereco = new DAOEndereco();
+   
+   DAOPedido model_pedido = new DAOPedido();
    DAOCliente model_cliente = new DAOCliente();
+   Pedido pedido = new Pedido();
+   Cliente cliente = new Cliente();
    
-   Cliente c = new Cliente();
-   c = model_cliente.consultarPorId(Integer.parseInt(sessao.getAttribute("id").toString()));
+   cliente = model_cliente.consultarPorId(Integer.parseInt(sessao.getAttribute("id").toString()));
+ 
+   for (Pedido p : cliente.getPedido()) {   %> 
    
-   for (Endereco endereco : c.getEndereco()) { %> 
     <tr>
-    <td><input type="checkbox" name="idEndereco" value="<%=endereco.getId()%>" class="checkthis" /></td>
-    <td><%=endereco.getLogradouro()%></td>
-    <td><%=endereco.getCidade()%></td>
-    <td><%=endereco.getEstado()%></td>
-    <td><%=endereco.getCidade()%></td>
-    <td><%=endereco.getBairro()%></td>
-    <td><%=endereco.getCep()%></td>
-    <td><%=endereco.getComplemento()%></td>
-    <td><%=endereco.getNumero()%></td>
+    <td><%=p.getId()%></td>
+    <td><%=p.getCliente().getNome()%></td>
+   	<td><%=p.getData_pedido()%></td>
+   	<td><%=p.getEntrega().getSituacao()%></td>
+    
+    <!-- 
     <td><p><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" data-placement="top" rel="tooltip"><span class="glyphicon glyphicon-pencil"></span></button></p></td>
     <td><p><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" data-placement="top" rel="tooltip"><span class="glyphicon glyphicon-trash"></span></button></p></td>
+   -->
     </tr>
   <%} %>
     </tbody>
@@ -369,7 +339,7 @@ $(document).ready(function(){
           <div class="modal-body">
        
        <div class="alert alert-warning"><span class="glyphicon glyphicon-warning-sign"></span> 
- Tem certeza de que deseja excluir este endereço?</div>
+Tem certeza de que deseja excluir este endereço?</div>
        
       </div>
         <div class="modal-footer ">
@@ -383,47 +353,6 @@ $(document).ready(function(){
 	<!-- Fim modal Excluir -->
 	
 	
-</div>
-	</div>
-	 <input type="hidden" name = "acao" value="finalizarPedido" />
-	 <input class="btn btn-primary" type="submit" value="Finalizar Pedido" />
-     		
-	<%}
-	
-	}catch(NullPointerException nulo){
-		
-	}%>
-	
-	<%
-	try{
-	if(sessao.getAttribute("finalizado").equals("ok")){
-	 %>	
-		
-		<div id="modal_msg" class="modal fade bs-example-modal-sm in" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="display: block; padding-right: 17px;">
-	    <div class="modal-backdrop fade in" style="height: 679px;"></div>
-	    <div class="modal-dialog modal-sm">
-	      <div class="modal-content">
-	
-	        <div class="modal-header">
-	        <button type="button" onclick="closeMsg()" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-	         
-	          <h4 align="center" class="modal-title" id="mySmallModalLabel">Pedido Realizado com Sucesso!</h4>
-	        </div>
-	        <div class="modal-body">
-	       <div align="center"> <img src="img/sucesso.png" width="50"></div>
-	        </div>
-	      </div><!-- /.modal-content -->
-	    </div><!-- /.modal-dialog -->
-	  </div>
-		
-	<%	sessao.removeAttribute("finalizado");
-	}
-	}catch(Exception e){
-		
-	}
-	%>
-	<a href="Cliente/gerenciarPedidos.jsp" class="btn btn-primary">Gerenciar Pedidos</a>
-</form>
 </div>
 	</div>
 </div>

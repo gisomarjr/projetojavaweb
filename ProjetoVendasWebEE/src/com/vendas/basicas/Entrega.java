@@ -17,7 +17,7 @@ public class Entrega {
 	Integer id;
 	
 	Date data_entrega;
-	Integer situacao;
+	String situacao;
 	
 	@OneToOne(mappedBy="entrega")
 	Pedido pedido;
@@ -39,10 +39,10 @@ public class Entrega {
 	public void setData_entrega(Date data_entrega) {
 		this.data_entrega = data_entrega;
 	}
-	public Integer getSituacao() {
+	public String getSituacao() {
 		return situacao;
 	}
-	public void setSituacao(Integer situacao) {
+	public void setSituacao(String situacao) {
 		this.situacao = situacao;
 	}
 	public Pedido getPedido() {

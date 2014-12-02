@@ -110,12 +110,14 @@ public class DAOCliente implements ICliente{
 	public Cliente consultarPorId(Integer id) {
 		  return entityManager.find(Cliente.class, id);
 	}
+	
 
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<Cliente> listar() {
 		return entityManager.createQuery("FROM " + Cliente.class.getName()).getResultList();
 	}
+	
 	
 	
 	public List<Cliente> realizarLogin(String cpf,String senha) {
